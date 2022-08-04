@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSArray *)heapSortWith:(NSArray *) arr;
 
 +(void) quickSortHelperWith:(NSMutableArray *)arr andWith:(int)first andWith:(int)last;
++(void) heapifyWith:(NSMutableArray *)arr andWith:(int)rootIndex andWith:(int)size;
++(void) heapSortHelperWith:(NSMutableArray *)arr andWith:(int)size;
 
 +(void)performDemo;
 @end

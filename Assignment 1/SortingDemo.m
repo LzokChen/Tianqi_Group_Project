@@ -59,17 +59,57 @@
     return resArr;
 }
 
++(void) heapifyWith:(NSMutableArray *)arr andWith:(int)rootIndex andWith:(int)size {
+    int largestIndex = rootIndex;
+    int leftIndex = 2 * rootIndex + 1;
+    int rightIndex = 2 * rootIndex + 2;
+    
+    if (leftIndex < size && [arr[leftIndex] isGreaterThan:arr[largestIndex]]) {
+        largestIndex = leftIndex;
+    }
+    
+    if (rightIndex < size && [arr[rightIndex] isGreaterThan:arr[largestIndex]]) {
+        largestIndex = rightIndex;
+    }
+    
+    // If root is not the largest, keep swapping
+    if (largestIndex != rootIndex) {
+        [arr exchangeObjectAtIndex:rootIndex withObjectAtIndex:largestIndex];
+        [SortingDemo heapifyWith:arr andWith:largestIndex andWith:size];
+    }
+}
+
++(void) heapSortHelperWith:(NSMutableArray *)arr andWith:(int)size {
+    if (size < 2) return;
+    
+    // Build a max heap
+    for (int parentIndex = size / 2 - 1; parentIndex >= 0; parentIndex--) {
+        [SortingDemo heapifyWith:arr andWith:parentIndex andWith:size];
+    }
+    
+    // Perform heap sort
+    for (int index = size - 1; index >= 0; index--) {
+        [arr exchangeObjectAtIndex:0 withObjectAtIndex:index];
+        [SortingDemo heapifyWith:arr andWith:0 andWith:index];
+    }
+}
+
 +(NSArray *)heapSortWith:(NSArray *) arr{
     NSMutableArray * resArr = [arr mutableCopy];
+    
+    int size = (int)[resArr count];
+    [SortingDemo heapSortHelperWith:resArr andWith:size];
+    
     return resArr;
 }
 
 +(void)performDemo{
-    NSArray * initArr = @[@(4), @(5), @(4.3), @(2), @(-1)];
+    NSArray * initArr = @[@(4), @(5), @(4.3), @(2), @(-1), @(-4.3), @(-2), @(3.3), @(2.5)];
     NSLog(@"before sorting: %@", initArr);
     
     NSLog(@"After selection sort: %@",[SortingDemo selectionSortWith:initArr]);
     NSLog(@"After quick sort: %@",[SortingDemo quickSortWith:initArr]);
+    NSLog(@"After heap sort: %@",[SortingDemo heapSortWith:initArr]);
 }
 
 @end
