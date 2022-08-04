@@ -9,9 +9,7 @@
 
 @implementation BlockAndContainerDemo
 
-
-+(void)perfromBlockDemoUsage{
-    
++(void)performBlockDemoUsage{
     //block declearation and implementation
     int (^production)(int,int) = ^(int num1, int num2){
         return num1 * num2;
@@ -30,10 +28,9 @@
     NSLog(@" 3 * 5 = %d.", production(3,5));
     NSLog(@" 3 + 5 = %d.", addition(3,5));
     NSLog(@" 3 - 5 = %d.", subtraction(3,5));
-    
 }
 
-+(void)perfromBlockDemoVariableCapture{
++(void)performBlockDemoVariableCapture{
     //
     int val = 1;
     void (^block1)(void) = ^{ //init: the block already capture the val = 1 here
@@ -52,7 +49,6 @@
     blockVal = 2;
     block2(); // 2
     NSLog(@"blockVal = %d", blockVal); //3
-    
     
     //
     NSNumber *nsVal = @(1);
@@ -73,10 +69,9 @@
     blockDemo.propertyVal = @(2);
     block4(); //2
     NSLog(@"propertyVal = %@", blockDemo.propertyVal); //2
-    
 }
 
-+(void)perfromContainerDemoNSArray{
++(void)performContainerDemoNSArray{
     NSArray* arr = [NSArray array]; //empty array
     arr = @[]; //empty array;
     arr = @[@(1), @"1"]; //create array with value
@@ -101,11 +96,9 @@
     
     NSLog(@"new numArr: %@", mutableNumArr);
     [mutableNumArr removeAllObjects];
-    
-    
-    
 }
-+(void)perfromContinerDemoNSDictionary{
+
++(void)performContainerDemoNSDictionary{
     NSDictionary *dict = @{@"key1": @"val1", @"key2":@"val2"};
     NSLog(@"dict: %@", dict);
     
@@ -122,7 +115,6 @@
         NSLog(@"%@'s grade: %@", key, [studentGrades objectForKey:key]);
     }];
     
-    
     NSMutableDictionary *mutableStudentGrades = [[NSMutableDictionary alloc] initWithDictionary:studentGrades];
     [mutableStudentGrades setValue:@(100) forKey:@"Luca"];
     mutableStudentGrades[@"Peter"] = @(99);
@@ -131,4 +123,5 @@
     
     [mutableStudentGrades removeAllObjects];
 }
+
 @end

@@ -17,7 +17,7 @@
     return self;
 }
 
-+(void) perfromDemo{
++(void) performDemo{
     PropertyDemo *propertyDemo = [PropertyDemo new];
     
     //demo: readWrite vs. readOnly
@@ -30,7 +30,6 @@
        && [propertyDemo respondsToSelector:@selector(strReadOnly)]){
         NSLog(@"the readOnly property has a getter method but no setter method");
     }
-    
     
     //demo NonNull vs. Nullable
     //propertyDemo.strNonNull = NULL; //warning

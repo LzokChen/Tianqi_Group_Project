@@ -9,7 +9,6 @@
 
 @implementation SortingDemo
 
-
 +(NSArray *)selectionSortWith:(NSArray *) arr{
     NSMutableArray * resArr = [[NSMutableArray alloc] initWithArray:arr];
     long size = [resArr count];
@@ -25,9 +24,7 @@
     return resArr;
 }
 
-
 +(void) quickSortHelperWith:(NSMutableArray *)arr andWith:(int)first andWith:(int)last {
-    
     int (^partition)(NSMutableArray*, int, int) = ^(NSMutableArray* arr, int low, int high){
         int pi = low;
         NSObject * pivot = arr[pi];
@@ -46,7 +43,6 @@
     };
     
     if (last - first >= 1){
-        
         int pivotIndex = partition(arr, first, last);
         
         [SortingDemo quickSortHelperWith:arr andWith:first andWith:pivotIndex-1];
@@ -62,6 +58,7 @@
 
     return resArr;
 }
+
 +(NSArray *)heapSortWith:(NSArray *) arr{
     NSMutableArray * resArr = [arr mutableCopy];
     return resArr;

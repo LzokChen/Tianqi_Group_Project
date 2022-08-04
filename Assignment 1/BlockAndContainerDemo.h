@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy) NSNumber * propertyVal;
 
-+(void)perfromBlockDemoUsage;
-+(void)perfromBlockDemoVariableCapture;
++(void)performBlockDemoUsage;
++(void)performBlockDemoVariableCapture;
 
-+(void)perfromContainerDemoNSArray;
-+(void)perfromContinerDemoNSDictionary;
++(void)performContainerDemoNSArray;
++(void)performContainerDemoNSDictionary;
 
 @end
 

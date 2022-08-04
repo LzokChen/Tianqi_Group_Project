@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 //assign
 //@property (assign) int intAssign;
 
-+(void) perfromDemo;
++(void) performDemo;
 
 
 
