@@ -13,12 +13,12 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-//        [PropertyDemo perfromDemo];
+//       [PropertyDemo performDemo];
         
-//        [BlockAndContainerDemo perfromBlockDemoUsage];
-//        [BlockAndContainerDemo perfromBlockDemoVariableCapture];
-//        [BlockAndContainerDemo perfromContainerDemoNSArray];
-//        [BlockAndContainerDemo perfromContinerDemoNSDictionary];
+//        [BlockAndContainerDemo performBlockDemoUsage];
+//        [BlockAndContainerDemo performBlockDemoVariableCapture];
+//        [BlockAndContainerDemo performContainerDemoNSArray];
+//        [BlockAndContainerDemo performContainerDemoNSDictionary];
         
         
         [SortingDemo performDemo];
