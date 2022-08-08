@@ -26,8 +26,8 @@
      */
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    XZTabBarController *mainTBC = [[XZTabBarController alloc] init];
-    self.window.rootViewController = mainTBC;
+    XZTabBarController *tbc = [[XZTabBarController alloc] init];
+    self.window.rootViewController = tbc;
     
     [self.window makeKeyAndVisible];
     
