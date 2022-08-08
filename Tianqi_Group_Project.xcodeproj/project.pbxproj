@@ -11,6 +11,16 @@
 		52FBB546289B6AA80079D684 /* BlockAndContainerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB541289B6AA80079D684 /* BlockAndContainerDemo.m */; };
 		52FBB547289B6AA80079D684 /* PropertyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB542289B6AA80079D684 /* PropertyDemo.m */; };
 		52FBB548289B6AA80079D684 /* SortingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB544289B6AA80079D684 /* SortingDemo.m */; };
+		A9DDDEA728A0D673000DD495 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEA628A0D673000DD495 /* AppDelegate.m */; };
+		A9DDDEAA28A0D673000DD495 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEA928A0D673000DD495 /* SceneDelegate.m */; };
+		A9DDDEAD28A0D673000DD495 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEAC28A0D673000DD495 /* ViewController.m */; };
+		A9DDDEB028A0D673000DD495 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DDDEAE28A0D673000DD495 /* Main.storyboard */; };
+		A9DDDEB228A0D673000DD495 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9DDDEB128A0D673000DD495 /* Assets.xcassets */; };
+		A9DDDEB528A0D673000DD495 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9DDDEB328A0D673000DD495 /* LaunchScreen.storyboard */; };
+		A9DDDEB828A0D673000DD495 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEB728A0D673000DD495 /* main.m */; };
+		A9DDDEC028A0D751000DD495 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEBF28A0D751000DD495 /* WeatherViewController.m */; };
+		A9DDDEC328A0D764000DD495 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEC228A0D764000DD495 /* CitiesViewController.m */; };
+		A9DDDEC628A0D787000DD495 /* XZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9DDDEC528A0D787000DD495 /* XZTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,10 +44,35 @@
 		52FBB543289B6AA80079D684 /* SortingDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortingDemo.h; sourceTree = "<group>"; };
 		52FBB544289B6AA80079D684 /* SortingDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingDemo.m; sourceTree = "<group>"; };
 		52FBB545289B6AA80079D684 /* PropertyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDemo.h; sourceTree = "<group>"; };
+		A9DDDEA328A0D673000DD495 /* SimpliedWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpliedWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9DDDEA528A0D673000DD495 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A9DDDEA628A0D673000DD495 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A9DDDEA828A0D673000DD495 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		A9DDDEA928A0D673000DD495 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		A9DDDEAB28A0D673000DD495 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A9DDDEAC28A0D673000DD495 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A9DDDEAF28A0D673000DD495 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9DDDEB128A0D673000DD495 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9DDDEB428A0D673000DD495 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9DDDEB628A0D673000DD495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9DDDEB728A0D673000DD495 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A9DDDEBE28A0D751000DD495 /* WeatherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		A9DDDEBF28A0D751000DD495 /* WeatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
+		A9DDDEC128A0D764000DD495 /* CitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CitiesViewController.h; sourceTree = "<group>"; };
+		A9DDDEC228A0D764000DD495 /* CitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CitiesViewController.m; sourceTree = "<group>"; };
+		A9DDDEC428A0D787000DD495 /* XZTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZTabBarController.h; sourceTree = "<group>"; };
+		A9DDDEC528A0D787000DD495 /* XZTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		52FBB536289B6A970079D684 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9DDDEA028A0D673000DD495 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -51,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				52FBB53A289B6A970079D684 /* Assignment 1 */,
+				A9DDDEA428A0D673000DD495 /* SimpliedWeather */,
 				52FBB50A2890B8320079D684 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				52FBB539289B6A970079D684 /* Assignment 1 */,
+				A9DDDEA328A0D673000DD495 /* SimpliedWeather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +112,62 @@
 				52FBB544289B6AA80079D684 /* SortingDemo.m */,
 			);
 			path = "Assignment 1";
+			sourceTree = "<group>";
+		};
+		A9DDDEA428A0D673000DD495 /* SimpliedWeather */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEBC28A0D6FF000DD495 /* AppDelegate */,
+				A9DDDEBD28A0D70F000DD495 /* SceneDelegate */,
+				A9DDDEAB28A0D673000DD495 /* ViewController.h */,
+				A9DDDEAC28A0D673000DD495 /* ViewController.m */,
+				A9DDDEAE28A0D673000DD495 /* Main.storyboard */,
+				A9DDDEB128A0D673000DD495 /* Assets.xcassets */,
+				A9DDDEB328A0D673000DD495 /* LaunchScreen.storyboard */,
+				A9DDDEB628A0D673000DD495 /* Info.plist */,
+				A9DDDEB728A0D673000DD495 /* main.m */,
+				A9DDDEC728A0D797000DD495 /* Weather */,
+				A9DDDEC828A0D7A6000DD495 /* Cities */,
+				A9DDDEC428A0D787000DD495 /* XZTabBarController.h */,
+				A9DDDEC528A0D787000DD495 /* XZTabBarController.m */,
+			);
+			path = SimpliedWeather;
+			sourceTree = "<group>";
+		};
+		A9DDDEBC28A0D6FF000DD495 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEA528A0D673000DD495 /* AppDelegate.h */,
+				A9DDDEA628A0D673000DD495 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		A9DDDEBD28A0D70F000DD495 /* SceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEA828A0D673000DD495 /* SceneDelegate.h */,
+				A9DDDEA928A0D673000DD495 /* SceneDelegate.m */,
+			);
+			path = SceneDelegate;
+			sourceTree = "<group>";
+		};
+		A9DDDEC728A0D797000DD495 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEBE28A0D751000DD495 /* WeatherViewController.h */,
+				A9DDDEBF28A0D751000DD495 /* WeatherViewController.m */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		A9DDDEC828A0D7A6000DD495 /* Cities */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEC128A0D764000DD495 /* CitiesViewController.h */,
+				A9DDDEC228A0D764000DD495 /* CitiesViewController.m */,
+			);
+			path = Cities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +190,23 @@
 			productReference = 52FBB539289B6A970079D684 /* Assignment 1 */;
 			productType = "com.apple.product-type.tool";
 		};
+		A9DDDEA228A0D673000DD495 /* SimpliedWeather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9DDDEB928A0D673000DD495 /* Build configuration list for PBXNativeTarget "SimpliedWeather" */;
+			buildPhases = (
+				A9DDDE9F28A0D673000DD495 /* Sources */,
+				A9DDDEA028A0D673000DD495 /* Frameworks */,
+				A9DDDEA128A0D673000DD495 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpliedWeather;
+			productName = SimpliedWeather;
+			productReference = A9DDDEA328A0D673000DD495 /* SimpliedWeather.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -107,6 +217,9 @@
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					52FBB538289B6A970079D684 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					A9DDDEA228A0D673000DD495 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
 				};
@@ -125,9 +238,23 @@
 			projectRoot = "";
 			targets = (
 				52FBB538289B6A970079D684 /* Assignment 1 */,
+				A9DDDEA228A0D673000DD495 /* SimpliedWeather */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9DDDEA128A0D673000DD495 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DDDEB528A0D673000DD495 /* LaunchScreen.storyboard in Resources */,
+				A9DDDEB228A0D673000DD495 /* Assets.xcassets in Resources */,
+				A9DDDEB028A0D673000DD495 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52FBB535289B6A970079D684 /* Sources */ = {
@@ -141,7 +268,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9DDDE9F28A0D673000DD495 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9DDDEC628A0D787000DD495 /* XZTabBarController.m in Sources */,
+				A9DDDEAD28A0D673000DD495 /* ViewController.m in Sources */,
+				A9DDDEC328A0D764000DD495 /* CitiesViewController.m in Sources */,
+				A9DDDEA728A0D673000DD495 /* AppDelegate.m in Sources */,
+				A9DDDEB828A0D673000DD495 /* main.m in Sources */,
+				A9DDDEC028A0D751000DD495 /* WeatherViewController.m in Sources */,
+				A9DDDEAA28A0D673000DD495 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A9DDDEAE28A0D673000DD495 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DDDEAF28A0D673000DD495 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A9DDDEB328A0D673000DD495 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9DDDEB428A0D673000DD495 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		52FBB50E2890B8320079D684 /* Debug */ = {
@@ -269,6 +429,65 @@
 			};
 			name = Release;
 		};
+		A9DDDEBA28A0D673000DD495 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G9Y82PTG3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpliedWeather/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuzheng.SimpliedWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A9DDDEBB28A0D673000DD495 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2G9Y82PTG3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpliedWeather/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuzheng.SimpliedWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -286,6 +505,15 @@
 			buildConfigurations = (
 				52FBB53E289B6A970079D684 /* Debug */,
 				52FBB53F289B6A970079D684 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9DDDEB928A0D673000DD495 /* Build configuration list for PBXNativeTarget "SimpliedWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9DDDEBA28A0D673000DD495 /* Debug */,
+				A9DDDEBB28A0D673000DD495 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
