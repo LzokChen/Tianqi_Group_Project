@@ -12,12 +12,12 @@ class HourlyForecastModel{
         pname : String, //省份名称 （省）
         secondaryName : String //上级城市名称 （市）
     
-    let condition : String,
+    let condition : String, //气象
         conditionId : String,
         iconDay : String, //白天icon
         iconNight : String, //夜间icon
-        date : String,
-        hour : String,
+        date : String, //日期
+        hour : String, //小时
         pop : String, //降水概率 百分比
         realFeel : String, //体感温度
         temperature : String //实际温度

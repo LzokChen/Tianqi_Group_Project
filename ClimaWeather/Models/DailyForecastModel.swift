@@ -12,11 +12,11 @@ class DailyForecastModel{
         pname : String, //省份名称 （省）
         secondaryName : String //上级城市名称 （市）
     
-    let conditionDay : String,
-        conditionNight : String,
+    let conditionDay : String, //白天气象
+        conditionNight : String, //夜间气象
         conditionIdDay : String, //白天icon
         conditionIdNight : String, //夜间icon
-        date : String,
+        date : String, //日期
         pop : String, //降水概率 百分比
         tempDay : String, //白天温度，最高温度
         tempNight : String //夜晚温度，最低温度
