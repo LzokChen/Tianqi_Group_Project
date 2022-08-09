@@ -7,9 +7,9 @@
 
 import Foundation
 
+//for json parsing
 struct HourlyForecastsData : Codable{
     let data : hData
-    
 }
 
 struct hData: Codable{

@@ -7,7 +7,7 @@
 
 import Foundation
 
-//the variable names must match with the json file
+//for json parsing
 struct LocationData: Codable {   //Codable = Decodable, Encodable
     let geocodes : [Geocodes]
 }

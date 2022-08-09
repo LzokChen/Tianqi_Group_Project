@@ -13,7 +13,7 @@ class HourlyForecastModel{
         secondaryName : String //上级城市名称 （市）
     
     let condition : String,
-        conditionId : Int,
+        conditionId : String,
         iconDay : String, //白天icon
         iconNight : String, //夜间icon
         date : String,
@@ -28,7 +28,7 @@ class HourlyForecastModel{
         self.pname = pname
         self.secondaryName = secondaryName
         self.condition = condiction
-        self.conditionId = Int(conditionId)!
+        self.conditionId = conditionId
         self.iconDay = iconDay
         self.iconNight = iconNight
         self.date = date

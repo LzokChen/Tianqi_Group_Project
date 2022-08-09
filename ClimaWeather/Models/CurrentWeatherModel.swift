@@ -28,8 +28,8 @@ class CurrentWeatherModel {
         windSpeed : String,
         tips : String
     
-    let sunRise : Date?,
-        sunSet : Date?
+    let sunRise : String,
+        sunSet : String
     
     init(name: String, pname: String, secondaryName: String, condition: String, conditionId: String, humidity: String,
          weatherIcon: String, pressure: String, realFeel: String, temperature: String, uvi: String, vis: String,
@@ -51,21 +51,8 @@ class CurrentWeatherModel {
         self.windLevel = windLevel
         self.windSpeed = windSpeed
         self.tips = tips
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.sunRise = dateFormatter.date(from: sunRise)
-        self.sunSet = dateFormatter.date(from: sunSet)
-        
-        
     
-        
-        
-        
+        self.sunRise = sunRise
+        self.sunSet = sunSet
     }
-
-    
-    
-    
-    
 }
