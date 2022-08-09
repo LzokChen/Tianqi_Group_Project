@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View, WeatherManagerDelegate {
-    
-    
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         let curWeatherModel = weather as! CurrentWeatherModel
@@ -21,7 +20,8 @@ struct ContentView: View, WeatherManagerDelegate {
     var body: some View {
         let wm = WeatherManager()
         let _ = print(wm.delegate = self)
-        let _ = wm.requestCurrentWeather(latitude: 39.91488908, longitude: 116.40387397)
+        let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
+        let _ = wm.fetchCurrentWeather(address: "上海虹桥机场")
         
         
         
