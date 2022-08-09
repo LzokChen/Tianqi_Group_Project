@@ -19,9 +19,9 @@ struct wData: Codable{
 }
 
 struct City: Codable {
-    let name : String, //城市名称
-        pname : String, //省份名称
-        secondaryname : String //上级城市名称
+    let name : String, //城市名称 （区）
+        pname : String, //省份名称 （省）
+        secondaryname : String //上级城市名称 （市）
 }
 
 struct Condition: Codable {

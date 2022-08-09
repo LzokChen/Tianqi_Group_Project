@@ -7,19 +7,16 @@
 
 import Foundation
 
-class WeatherModel{
-    
-}
 
-class CurrentWeatherModel: WeatherModel {
-    let name : String, //城市名称
-        pname : String, //省份名称
-        secondaryName : String //上级城市名称
+class CurrentWeatherModel {
+    let name : String, //城市名称 （区）
+        pname : String, //省份名称 （省）
+        secondaryName : String //上级城市名称 （市）
     
     let condition : String,
         conditionId : Int,
         humidity : String,
-        weatherIcon : Int,
+        weatherIcon : String,
         pressure : String,
         realFeel : String,
         temperature : String,
@@ -43,7 +40,7 @@ class CurrentWeatherModel: WeatherModel {
         self.condition = condition
         self.conditionId = Int(conditionId)!
         self.humidity = humidity
-        self.weatherIcon = Int(weatherIcon)!
+        self.weatherIcon = weatherIcon
         self.pressure = pressure
         self.realFeel = realFeel
         self.temperature = temperature

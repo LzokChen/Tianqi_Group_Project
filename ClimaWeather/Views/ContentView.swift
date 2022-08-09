@@ -10,18 +10,31 @@ import CoreLocation
 
 struct ContentView: View, WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        let curWeatherModel = weather as! CurrentWeatherModel
-        print(curWeatherModel.name, curWeatherModel.temperature)
-        print(curWeatherModel.tips)
+    func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel) {
+        
+        print(weather.pname, weather.secondaryName, weather.name, weather.temperature)
+        print(weather.tips)
+    }
+    
+    func didUpdate24HourForcasts(_ weatherManager: WeatherManager, forcasts: [HourlyForcastModel]) {
+        var temps : [String] = []
+        for forcast in forcasts {
+            temps.append(forcast.temperature)
+        }
+        
+        print(forcasts[0].secondaryName, temps)
     }
     
     
     var body: some View {
         let wm = WeatherManager()
         let _ = print(wm.delegate = self)
-        let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
-        let _ = wm.fetchCurrentWeather(address: "上海虹桥机场")
+//        let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
+//        let _ = wm.fetchCurrentWeather(address: "上海")
+//        let _ = wm.fetch24HoursForcast(address: "上海")
+        
+        
+        
         
         
         
