@@ -7,8 +7,8 @@
 //使用UITBC作为系统的主框架
 
 #import "XZTabBarController.h"
-#import "Weather/WeatherViewController.h"
-#import "Cities/CitiesViewController.h"
+#import "WeatherViewController.h"
+#import "CitiesViewController.h"
 
 @interface XZTabBarController ()
 

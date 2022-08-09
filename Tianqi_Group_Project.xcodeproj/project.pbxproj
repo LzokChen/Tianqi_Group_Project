@@ -82,6 +82,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5239AEB528A1EEF9001250BE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9DDDEAE28A0D673000DD495 /* Main.storyboard */,
+				A9DDDEB328A0D673000DD495 /* LaunchScreen.storyboard */,
+			);
+			name = Views;
+			path = SimpliedWeather/Views;
+			sourceTree = SOURCE_ROOT;
+		};
+		5239AEB628A1EFE1001250BE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		52FBB5002890B8320079D684 = {
 			isa = PBXGroup;
 			children = (
@@ -119,17 +136,12 @@
 			children = (
 				A9DDDEBC28A0D6FF000DD495 /* AppDelegate */,
 				A9DDDEBD28A0D70F000DD495 /* SceneDelegate */,
-				A9DDDEAB28A0D673000DD495 /* ViewController.h */,
-				A9DDDEAC28A0D673000DD495 /* ViewController.m */,
-				A9DDDEAE28A0D673000DD495 /* Main.storyboard */,
 				A9DDDEB128A0D673000DD495 /* Assets.xcassets */,
-				A9DDDEB328A0D673000DD495 /* LaunchScreen.storyboard */,
 				A9DDDEB628A0D673000DD495 /* Info.plist */,
 				A9DDDEB728A0D673000DD495 /* main.m */,
-				A9DDDEC728A0D797000DD495 /* Weather */,
-				A9DDDEC828A0D7A6000DD495 /* Cities */,
-				A9DDDEC428A0D787000DD495 /* XZTabBarController.h */,
-				A9DDDEC528A0D787000DD495 /* XZTabBarController.m */,
+				5239AEB628A1EFE1001250BE /* Models */,
+				5239AEB528A1EEF9001250BE /* Views */,
+				A9DDDEC728A0D797000DD495 /* Controllers */,
 			);
 			path = SimpliedWeather;
 			sourceTree = "<group>";
@@ -152,22 +164,19 @@
 			path = SceneDelegate;
 			sourceTree = "<group>";
 		};
-		A9DDDEC728A0D797000DD495 /* Weather */ = {
+		A9DDDEC728A0D797000DD495 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A9DDDEAB28A0D673000DD495 /* ViewController.h */,
+				A9DDDEAC28A0D673000DD495 /* ViewController.m */,
+				A9DDDEC128A0D764000DD495 /* CitiesViewController.h */,
+				A9DDDEC228A0D764000DD495 /* CitiesViewController.m */,
+				A9DDDEC428A0D787000DD495 /* XZTabBarController.h */,
+				A9DDDEC528A0D787000DD495 /* XZTabBarController.m */,
 				A9DDDEBE28A0D751000DD495 /* WeatherViewController.h */,
 				A9DDDEBF28A0D751000DD495 /* WeatherViewController.m */,
 			);
-			path = Weather;
-			sourceTree = "<group>";
-		};
-		A9DDDEC828A0D7A6000DD495 /* Cities */ = {
-			isa = PBXGroup;
-			children = (
-				A9DDDEC128A0D764000DD495 /* CitiesViewController.h */,
-				A9DDDEC228A0D764000DD495 /* CitiesViewController.m */,
-			);
-			path = Cities;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,7 +367,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -409,7 +418,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -417,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5Q92T34UB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -425,6 +435,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L5Q92T34UB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -436,7 +447,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2G9Y82PTG3;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimpliedWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -450,11 +461,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xuzheng.SimpliedWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianqi.SimpliedWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -465,7 +476,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2G9Y82PTG3;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SimpliedWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,11 +490,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xuzheng.SimpliedWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianqi.SimpliedWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
