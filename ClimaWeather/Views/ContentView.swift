@@ -16,22 +16,22 @@ struct ContentView: View, WeatherManagerDelegate {
         print(weather.tips)
     }
     
-    func didUpdate24HourForcasts(_ weatherManager: WeatherManager, forcasts: [HourlyForcastModel]) {
+    func didUpdate24HourForecasts(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel]) {
         var temps : [String] = []
-        for forcast in forcasts {
-            temps.append(forcast.temperature)
+        for forecast in forecasts {
+            temps.append(forecast.temperature)
         }
         
-        print(forcasts[0].secondaryName, temps)
+        print(forecasts[0].secondaryName, temps)
     }
     
     
     var body: some View {
         let wm = WeatherManager()
         let _ = print(wm.delegate = self)
-//        let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
-//        let _ = wm.fetchCurrentWeather(address: "上海")
-//        let _ = wm.fetch24HoursForcast(address: "上海")
+        let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
+        let _ = wm.fetchCurrentWeather(address: "上海")
+        let _ = wm.fetch24HoursForecast(address: "上海")
         
         
         

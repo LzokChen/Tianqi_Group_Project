@@ -13,19 +13,19 @@ import Alamofire
 protocol WeatherManagerDelegate {
     func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel)
     
-    func didUpdate24HourForcasts(_ weatherManager: WeatherManager, forcasts: [HourlyForcastModel])
+    func didUpdate24HourForecasts(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel])
     //func didFailWithError(error : Error)
 }
 
 extension WeatherManagerDelegate{
     func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel){print("no didUpdateCurrentWeather")}
-    func didUpdate24HourForcasts(_ weatherManager: WeatherManager, forcasts: [HourlyForcastModel]){print("no didUpdate24HourForcasts")}
+    func didUpdate24HourForecasts(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel]){print("no didUpdate24HourForecasts")}
 }
 
 
 class WeatherManager {
     let curWeatherURL = "http://aliv8.data.moji.com/whapi/json/aliweather/condition"
-    let hourlyForcastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast24hours"
+    let hourlyForecastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast24hours"
     let mojiHeaders = ["Authorization": "APPCODE 1bb40f32e8384e04bef97ae3d628274e", "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"]
     
     let getLocationURL = "http://restapi.amap.com/v3/geocode/geo?parameters"
@@ -53,17 +53,17 @@ class WeatherManager {
         }
     }
     
-    func fetch24HoursForcast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
-        self.request24HoursForcast(latitude: latitude, longitude: longitude)
+    func fetch24HoursForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        self.request24HoursForecast(latitude: latitude, longitude: longitude)
     }
     
-    func fetch24HoursForcast(address: String){
+    func fetch24HoursForecast(address: String){
         let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
         AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
             switch response.result {
                 case .success(let data):
                     if let location = self.parseLocationData(data){
-                        self.request24HoursForcast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                        self.request24HoursForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                     }else{
                         print("Error: Fail to parse location JSON")
                     }
@@ -96,21 +96,21 @@ class WeatherManager {
         }
     }
     
-    private func request24HoursForcast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+    private func request24HoursForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
         let params = [
                 "lat": String(latitude),
                 "lon": String(longitude),
                 "token": "1b89050d9f64191d494c806f78e8ea36"
             ]
             
-        AF.request(hourlyForcastURL, method: .post, parameters: params, encoding: URLEncoding.queryString, headers: HTTPHeaders(mojiHeaders)).validate(statusCode: 200 ..< 299).responseData { response in
+        AF.request(hourlyForecastURL, method: .post, parameters: params, encoding: URLEncoding.queryString, headers: HTTPHeaders(mojiHeaders)).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
                 case .success(let data):
-                    if let hourlyForcasts = self.parseHourlyForcastsData(data){
-                        self.delegate?.didUpdate24HourForcasts(self, forcasts: hourlyForcasts)
+                    if let hourlyForecasts = self.parseHourlyForecastsData(data){
+                        self.delegate?.didUpdate24HourForecasts(self, forecasts: hourlyForecasts)
    
                     }else{
-                        print("Error: Fail to convert JSON data to hourlyForcastModels")
+                        print("Error: Fail to convert JSON data to hourlyForecastModels")
                     }
                 case .failure(let error):
                     print(error)
@@ -150,21 +150,21 @@ class WeatherManager {
         }
     }
     
-    private func parseHourlyForcastsData(_ forcastData: Data) -> [HourlyForcastModel]?{
+    private func parseHourlyForecastsData(_ forecastData: Data) -> [HourlyForecastModel]?{
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(HourlyForcastsData.self, from: forcastData)
+            let decodedData = try decoder.decode(HourlyForecastsData.self, from: forecastData)
             let city = decodedData.data.city
-            let forcasts = decodedData.data.hourly
+            let forecasts = decodedData.data.hourly
             
-            var forcastModels : [HourlyForcastModel] = []
+            var forecastModels : [HourlyForecastModel] = []
             
-            for forcast in forcasts {
-                let model = HourlyForcastModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname, condiction: forcast.condition, conditionId: forcast.conditionId, iconDay: forcast.iconDay, iconNight: forcast.iconNight, date: forcast.date, hour: forcast.hour, pop: forcast.pop, realFeel: forcast.realFeel, temp: forcast.temp)
-                forcastModels.append(model)
+            for forecast in forecasts {
+                let model = HourlyForecastModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname, condiction: forecast.condition, conditionId: forecast.conditionId, iconDay: forecast.iconDay, iconNight: forecast.iconNight, date: forecast.date, hour: forecast.hour, pop: forecast.pop, realFeel: forecast.realFeel, temp: forecast.temp)
+                forecastModels.append(model)
             }
             
-            return forcastModels
+            return forecastModels
         } catch {
             print(error.localizedDescription)
             return nil

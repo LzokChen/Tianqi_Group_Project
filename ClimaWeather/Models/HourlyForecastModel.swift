@@ -1,5 +1,5 @@
 //
-//  HourlyForcastsData.swift
+//  HourlyForecastsData.swift
 //  ClimaWeather
 //
 //  Created by Xiaojian Chen on 8/9/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HourlyForcastModel{
+class HourlyForecastModel{
     let name : String, //城市名称 （区）
         pname : String, //省份名称 （省）
         secondaryName : String //上级城市名称 （市）

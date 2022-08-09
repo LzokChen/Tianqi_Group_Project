@@ -1,5 +1,5 @@
 //
-//  HourlyForcastsData.swift
+//  HourlyForecastsData.swift
 //  ClimaWeather
 //
 //  Created by Xiaojian Chen on 8/9/22.
@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct HourlyForcastsData : Codable{
+struct HourlyForecastsData : Codable{
     let data : hData
     
 }
 
 struct hData: Codable{
     let city : City
-    let hourly : [HourlyForcast]
+    let hourly : [HourlyForecast]
 }
 
-struct HourlyForcast : Codable{
+struct HourlyForecast : Codable{
     let condition : String,
         conditionId : String,
         iconDay : String, //白天icon
