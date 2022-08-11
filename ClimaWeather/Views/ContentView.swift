@@ -45,8 +45,19 @@ struct ContentView: View, WeatherManagerDelegate {
         
         
         
-        Text("Hello, world!")
-            .padding()
+        TabView{
+            Temperature()
+                .tabItem{
+                    Image(systemName: "cloud.fill")
+                    Text("天气预报")
+                }
+            WeatherDetail()
+                .tabItem{
+                    Image(systemName: "wind")
+                    Text("空气质量")
+                }
+            
+        }
     }
     
     
