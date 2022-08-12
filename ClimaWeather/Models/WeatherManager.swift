@@ -236,7 +236,8 @@ class WeatherManager {
                                                conditionDay: forecast.conditionDay, conditionNight: forecast.conditionNight,
                                                conditionIdDay: forecast.conditionIdDay, conditionIdNight: forecast.conditionIdNight,
                                                date: forecast.predictDate,
-                                               pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight)
+                                               pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight,
+                                               windDirDay: forecast.windDirDay, windDirNight: forecast.windDirNight, windLevelDay: forecast.windLevelDay, windLevelNight: forecast.windLevelNight)
                 forecastModels.append(model)
             }
             return forecastModels
