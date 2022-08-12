@@ -33,8 +33,11 @@ class WeatherManager {
     
     let mojiHeaders = ["Authorization": "APPCODE 1bb40f32e8384e04bef97ae3d628274e", "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"]
     
-    var delegate : WeatherManagerDelegate?
+    private var delegate : WeatherManagerDelegate?
     
+    func setDelegate(delegate : WeatherManagerDelegate){
+        self.delegate = delegate
+    }
     
     //MARK: - Fetch functions
     func fetchCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){

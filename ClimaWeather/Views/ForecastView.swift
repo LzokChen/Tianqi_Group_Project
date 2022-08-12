@@ -108,7 +108,7 @@ struct ForecastView: View, WeatherManagerDelegate {
     var body: some View {
         //MARK: - Usage: create weatherManager and setup the delegate
         let wm = WeatherManager()
-        let _ = print(wm.delegate = self)
+        let _ = wm.setDelegate(delegate: self)
         
         if (!hasUpdatedCurrentWeather) {
             //let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
