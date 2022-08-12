@@ -16,5 +16,6 @@ target 'ClimaWeather' do
   # Pods for ClimaWeather
 
 pod 'Alamofire'
+pod 'lottie-ios'
 
 end

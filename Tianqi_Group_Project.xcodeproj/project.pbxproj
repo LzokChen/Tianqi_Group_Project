@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05B1598B28A601B900CC047D /* load.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B1598A28A601B900CC047D /* load.json */; };
+		05B1598D28A602CC00CC047D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B1598C28A602CC00CC047D /* LottieView.swift */; };
 		35700439A64347DECB5A2F1C /* Pods_Assignment_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9AAC14B65F1839C56C1A47 /* Pods_Assignment_1.framework */; };
 		5239AEC528A21320001250BE /* ClimaWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239AEC428A21320001250BE /* ClimaWeatherApp.swift */; };
 		5239AEC728A21320001250BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239AEC628A21320001250BE /* ContentView.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05B1598A28A601B900CC047D /* load.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = load.json; sourceTree = "<group>"; };
+		05B1598C28A602CC00CC047D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		22D3E38096C001AD59F28EB4 /* Pods-Assignment 1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment 1.debug.xcconfig"; path = "Target Support Files/Pods-Assignment 1/Pods-Assignment 1.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0F40A1C5B656933ECD7802 /* Pods-ClimaWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimaWeather.debug.xcconfig"; path = "Target Support Files/Pods-ClimaWeather/Pods-ClimaWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		41500E0F9848E24E4326C703 /* Pods-ClimaWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimaWeather.release.xcconfig"; path = "Target Support Files/Pods-ClimaWeather/Pods-ClimaWeather.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		5239AEC328A21320001250BE /* ClimaWeather */ = {
 			isa = PBXGroup;
 			children = (
+				05B1598A28A601B900CC047D /* load.json */,
 				5292A4A528A2536300A25F50 /* Info.plist */,
 				5239AEC428A21320001250BE /* ClimaWeatherApp.swift */,
 				5239AED028A21336001250BE /* Views */,
@@ -123,6 +128,7 @@
 				523D63D128A5F1DD00C2F1D2 /* ForecastView.swift */,
 				523D63D228A5F1DD00C2F1D2 /* WeatherDetailView.swift */,
 				5239AEC628A21320001250BE /* ContentView.swift */,
+				05B1598C28A602CC00CC047D /* LottieView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 			files = (
 				5239AECC28A21323001250BE /* Preview Assets.xcassets in Resources */,
 				5239AEC928A21323001250BE /* Assets.xcassets in Resources */,
+				05B1598B28A601B900CC047D /* load.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +369,7 @@
 				5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */,
 				523D63D328A5F1DE00C2F1D2 /* ForecastView.swift in Sources */,
 				5292A48128A2199500A25F50 /* CurrentWeatherModel.swift in Sources */,
+				05B1598D28A602CC00CC047D /* LottieView.swift in Sources */,
 				5292A4B728A308DB00A25F50 /* HourlyForecastsData.swift in Sources */,
 				523D63D428A5F1DE00C2F1D2 /* WeatherDetailView.swift in Sources */,
 				5239AEC728A21320001250BE /* ContentView.swift in Sources */,

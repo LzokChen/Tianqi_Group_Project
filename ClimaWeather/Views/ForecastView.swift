@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct CurrentWeather:Hashable {
     let city : String
@@ -227,8 +228,12 @@ struct ForecastView: View, WeatherManagerDelegate {
                 .padding(.horizontal)
             }
         } else {
-            Text("Fetching the weather details...")
-                .frame(maxWidth: .infinity, alignment: .center)
+            VStack{
+                LottieView(lottieFile: "load.json")
+                    .frame(width: 300, height: 300)
+                Text("Fetching the weather details...")
+                    .frame(alignment: .center)
+            }
         }
     }
 }
