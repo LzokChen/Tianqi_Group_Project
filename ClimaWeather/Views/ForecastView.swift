@@ -19,7 +19,7 @@ struct CurrentWeather:Hashable {
 }
 
 struct DailyWeather:Hashable {
-    let day : String
+    let day: String
     let date : String
     let temperature: String
     let icon : String
@@ -41,21 +41,8 @@ struct ForecastView: View, WeatherManagerDelegate {
     @State private var hourlyWeathers = [HourlyWeather]()
     @State private var hasUpdatedHourlyWeather = false
     
-    /*
-     let dailyWeahter : [DailyWeather] = [
-     DailyWeather(day: "8月12日", date: "明日", temperature: "23º", icon: "sun.min"),
-     DailyWeather(day: "8月13日", date: "星期一", temperature: "23º", icon: "sun.min.fill"),
-     DailyWeather(day: "8月14日", date: "星期二", temperature: "23º", icon: "sun.max"),
-     DailyWeather(day: "8月15日", date: "星期三", temperature: "23º", icon: "sun.max.fill"),
-     DailyWeather(day: "8月16日", date: "星期四", temperature: "23º", icon: "cloud.drizzle"),
-     DailyWeather(day: "8月17日", date: "星期五", temperature: "23º", icon: "cloud.drizzle.fill"),
-     DailyWeather(day: "8月18日", date: "星期六", temperature: "23º", icon: "cloud.rain"),
-     DailyWeather(day: "8月19日", date: "星期日", temperature: "23º", icon: "cloud.rain.fill"),
-     DailyWeather(day: "8月20日", date: "星期一", temperature: "23º", icon: "cloud.snow"),
-     DailyWeather(day: "8月21日", date: "星期二", temperature: "23º", icon: "cloud.snow.fill")
-     ]*/
-    
     //MARK: - WeatherManagerDelegate functions
+    /* Fetch current weather details - for the upper container */
     func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel) {
         // Get the current date and time
         let currentDateTime = Date()
@@ -69,11 +56,12 @@ struct ForecastView: View, WeatherManagerDelegate {
                                         description: weather.condition,
                                         pressure: weather.pressure + "hpa",
                                         humidity: weather.humidity + "%",
-                                        windSpeed: weather.windSpeed + "km/h")
+                                        windSpeed: weather.windSpeed + "m/s")
         hasUpdatedCurrentWeather = true
         print(currentWeather ?? "")
     }
     
+    /* Fetch hourly weather forecasts - for the middle container */
     func didUpdate24HoursForecast(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel]) {
         hourlyWeathers.removeAll()
         
@@ -90,16 +78,48 @@ struct ForecastView: View, WeatherManagerDelegate {
         print(forecasts[0].secondaryName, "24小时温度: ", hourlyWeathers)
     }
     
-    /* Still have to update all the fields correspondingly. */
+    /* Return the day of week of any date */
+    func getDayNameBy(_ stringDate: String) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "YYYY-MM-dd"
+        let date = df.date(from: stringDate)!
+        df.dateFormat = "EEEE"
+        let dayInEng = df.string(from: date)
+        
+        func getDayInChn(_ var1: String) -> String {
+            switch var1 {
+            case "Monday":
+                return "周一"
+            case "Tuesday":
+                return "周二"
+            case "Wednesday":
+                return "周三"
+            case "Thursday":
+                return "周四"
+            case "Friday":
+                return "周五"
+            case "Saturday":
+                return "周六"
+            case "Sunday":
+                return "周日"
+            default:
+                return "未知"
+            }
+        }
+        
+        return getDayInChn(dayInEng)
+    }
+    
+    /* Fetch daily weather forecasts - for the bottom container */
     func didUpdate15DaysForecast(_ weatherManager: WeatherManager, forecasts: [DailyForecastModel]) {
         dailyWeathers.removeAll()
         
-        for forecast in forecasts {
+        for (index, forecast) in forecasts.enumerated() {
             dailyWeathers.append(
-                DailyWeather(day: "The day",
-                             date: forecast.date,
-                             temperature: forecast.tempDay + "º " + forecast.tempNight + "º",
-                             icon: "W1")
+                DailyWeather(day: getDayNameBy(forecast.date) + (index == 0 ? " (今天)" : index == 1 ? " (明天)" : index == 2 ? " (后天)" : ""),
+                             date: String((forecast.date).suffix(5)),
+                             temperature: forecast.tempDay + "º ~ " + forecast.tempNight + "º",
+                             icon: "W" + forecast.conditionIdDay)
             )
         }
         hasUpdatedDailyWeather = true
@@ -124,7 +144,14 @@ struct ForecastView: View, WeatherManagerDelegate {
             let _ = wm.fetch24HoursForecast(address: "上海")
         }
         
-        if (hasUpdatedCurrentWeather && hasUpdatedHourlyWeather && hasUpdatedDailyWeather) {
+        if (!hasUpdatedCurrentWeather || !hasUpdatedHourlyWeather || !hasUpdatedDailyWeather) {
+            VStack{
+                LottieView(lottieFile: "load.json")
+                    .frame(width: 300, height: 300)
+                Text("Fetching the weather details...")
+                    .frame(alignment: .center)
+            }
+        } else {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack{
                     // Weather Card
@@ -189,9 +216,7 @@ struct ForecastView: View, WeatherManagerDelegate {
                                         .font(.system(size: 14, weight: .bold))
                                     Spacer().frame(height: 5)
                                     Image(weather.icon)
-                                        .renderingMode(.template)
                                         .frame(width: 60, height: 60)
-                                        .foregroundColor(.secondary)
                                         .scaledToFill()
                                     Spacer().frame(height: 7)
                                     Text(weather.temperature + "º")
@@ -226,13 +251,6 @@ struct ForecastView: View, WeatherManagerDelegate {
                     }
                 }
                 .padding(.horizontal)
-            }
-        } else {
-            VStack{
-                LottieView(lottieFile: "load.json")
-                    .frame(width: 300, height: 300)
-                Text("Fetching the weather details...")
-                    .frame(alignment: .center)
             }
         }
     }
