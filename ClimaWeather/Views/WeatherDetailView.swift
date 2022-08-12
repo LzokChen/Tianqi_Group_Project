@@ -21,18 +21,22 @@ struct WeatherDetail:Hashable {
     let realFeelTip: String
 }
 
+/* The View for "实习天气" screen. */
 struct WeatherDetailView: View, WeatherManagerDelegate {
     @State private var weatherDetail: WeatherDetail? = nil
     @State private var hasUpdatedWeatherDetail = false
     
+    /* Fetch current weather details */
     func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel) {
         let uvi = (Int)(weather.uvi) ?? 0
         let uviDescription = (uvi <= 2 ? "最弱" : uvi <= 4 ? "弱" : uvi <= 6 ? "中等" : uvi <= 9 ? "强" : "很强")
         
+        // Convert the unit of weather.vis from m to km and round to keep 1 decimal place
         var visibility = (Double)(weather.vis) ?? 0
         visibility = round(visibility / 100) / 10.0
         let visibilityDescription = (String)(visibility) + "公里"
         
+        // Convert the unit of weather.pressure from hpa to kpa and round to nearest Int
         let pressure = (Double)(weather.pressure) ?? 0
         let pressureDescription = String(Int(round(pressure / 10))) + "kPa"
         
@@ -49,7 +53,6 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
                                       realFeelTip: weather.tips
         )
         hasUpdatedWeatherDetail = true
-        print(weatherDetail ?? "")
     }
     
     var body: some View {
@@ -62,49 +65,56 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
             let _ = wm.fetchCurrentWeather(address: "上海")
         }
         
+        // When data hasn't been fetched, show the loading animation.
         if (!hasUpdatedWeatherDetail) {
             VStack{
                 LottieView(lottieFile: "load.json")
-                    .frame(width: 300, height: 300)
+                    .frame(width: 300, height: 180)
                 Text("Fetching the weather details...")
                     .frame(alignment: .center)
             }
         } else {
-            ScrollView(.vertical, showsIndicators: false){
-                VStack{
-                    // City Weather
+            RefreshableScrollView {
+                ScrollView(.vertical, showsIndicators: false){
                     VStack{
-                        Text(weatherDetail?.city ?? "Unknown City")
-                            .font(.system(size: 35, weight: .bold, design: .monospaced))
-                        Text(weatherDetail?.temperature ?? " ")
-                            .fontWeight(.bold)
-                    }
-                    Spacer().frame(height: 35)
-                    VStack{
-                        HStack{
-                            DetailCard(icon: "sun.max.fill",detailText: "紫外线指数", detailDescripe: (weatherDetail?.ultravioletIndex ?? "N/A"), singleDescripe:"")
-                            DetailCard(icon: "sunrise",detailText: "日出", detailDescripe: (weatherDetail?.sunRise ?? "N/A"), singleDescripe:"日落: " + (weatherDetail?.sunSet ?? "N/A"))
+                        // City Weather
+                        VStack{
+                            Text(weatherDetail?.city ?? "Unknown City")
+                                .font(.system(size: 35, weight: .bold, design: .monospaced))
+                            Text(weatherDetail?.temperature ?? " ")
+                                .fontWeight(.bold)
+                        }
+                        Spacer().frame(height: 35)
+                        VStack{
+                            HStack{
+                                DetailCard(icon: "sun.max.fill",detailText: "紫外线指数", detailDescripe: (weatherDetail?.ultravioletIndex ?? "N/A"), singleDescripe:"")
+                                DetailCard(icon: "sunrise",detailText: "日出", detailDescripe: (weatherDetail?.sunRise ?? "N/A"), singleDescripe:"日落: " + (weatherDetail?.sunSet ?? "N/A"))
+                            }
+                        }
+                        VStack{
+                            HStack{
+                                DetailCard(icon: "wind",detailText: "风速", detailDescripe: (weatherDetail?.windSpeed ?? "N/A"), singleDescripe:"")
+                                DetailCard(icon: "cloud.drizzle",detailText: "降雨", detailDescripe: "1 毫米", singleDescripe:"预计未来24小时内有23毫米")
+                            }
+                        }
+                        VStack{
+                            HStack{
+                                DetailCard(icon: "thermometer.low", detailText: "体感温度", detailDescripe: (weatherDetail?.realFeel ?? "N/A"), singleDescripe: (weatherDetail?.realFeelTip ?? "N/A"))
+                                DetailCard(icon: "humidity.fill", detailText: "湿度", detailDescripe: (weatherDetail?.humidity ?? "N/A"), singleDescripe: "")
+                            }
+                        }
+                        VStack{
+                            HStack{
+                                DetailCard(icon: "eye", detailText: "能见度", detailDescripe: (weatherDetail?.visibility ?? "N/A"), singleDescripe: "")
+                                DetailCard(icon: "cloud.bolt.circle", detailText: "气压", detailDescripe: (weatherDetail?.pressure ?? "N/A"), singleDescripe: "")
+                            }
                         }
                     }
-                    VStack{
-                        HStack{
-                            DetailCard(icon: "wind",detailText: "风速", detailDescripe: (weatherDetail?.windSpeed ?? "N/A"), singleDescripe:"")
-                            DetailCard(icon: "cloud.drizzle",detailText: "降雨", detailDescripe: "1 毫米", singleDescripe:"预计未来24小时内有23毫米")
-                        }
-                    }
-                    VStack{
-                        HStack{
-                            DetailCard(icon: "thermometer.low", detailText: "体感温度", detailDescripe: (weatherDetail?.realFeel ?? "N/A"), singleDescripe: (weatherDetail?.realFeelTip ?? "N/A"))
-                            DetailCard(icon: "humidity.fill", detailText: "湿度", detailDescripe: (weatherDetail?.humidity ?? "N/A"), singleDescripe: "")
-                        }
-                    }
-                    VStack{
-                        HStack{
-                            DetailCard(icon: "eye", detailText: "能见度", detailDescripe: (weatherDetail?.visibility ?? "N/A"), singleDescripe: "")
-                            DetailCard(icon: "cloud.bolt.circle", detailText: "气压", detailDescripe: (weatherDetail?.pressure ?? "N/A"), singleDescripe: "")
-                        }
-                    }
+                    .frame(maxWidth: .infinity)
                 }
+            } onRefresh: {
+                // Fetch all data again when user pulls to refresh the screen.
+                let _ = wm.fetchCurrentWeather(address: "上海")
             }
         }
     }

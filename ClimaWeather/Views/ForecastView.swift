@@ -31,6 +31,7 @@ struct HourlyWeather:Hashable {
     let temperature: String
 }
 
+/* The View for "天气预报" screen. */
 struct ForecastView: View, WeatherManagerDelegate {
     @State private var currentWeather: CurrentWeather? = nil
     @State private var hasUpdatedCurrentWeather = false
@@ -58,7 +59,6 @@ struct ForecastView: View, WeatherManagerDelegate {
                                         humidity: weather.humidity + "%",
                                         windSpeed: weather.windSpeed + "m/s")
         hasUpdatedCurrentWeather = true
-        print(currentWeather ?? "")
     }
     
     /* Fetch hourly weather forecasts - for the middle container */
@@ -75,7 +75,6 @@ struct ForecastView: View, WeatherManagerDelegate {
             )
         }
         hasUpdatedHourlyWeather = true
-        print(forecasts[0].secondaryName, "24小时温度: ", hourlyWeathers)
     }
     
     /* Return the day of week of any date */
@@ -123,7 +122,6 @@ struct ForecastView: View, WeatherManagerDelegate {
             )
         }
         hasUpdatedDailyWeather = true
-        print(forecasts[0].secondaryName, "15天天气: ", dailyWeathers)
     }
     
     var body: some View {
@@ -144,113 +142,121 @@ struct ForecastView: View, WeatherManagerDelegate {
             let _ = wm.fetch24HoursForecast(address: "上海")
         }
         
+        // When data hasn't been fetched, show the loading animation.
         if (!hasUpdatedCurrentWeather || !hasUpdatedHourlyWeather || !hasUpdatedDailyWeather) {
             VStack{
                 LottieView(lottieFile: "load.json")
-                    .frame(width: 300, height: 300)
+                    .frame(width: 300, height: 180)
                 Text("Fetching the weather details...")
                     .frame(alignment: .center)
             }
         } else {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack{
-                    // Weather Card
-                    VStack(alignment: .center){
-                        // Location and time
-                        HStack{
-                            Image(systemName: "location.fill")
-                            Text(currentWeather?.city ?? "Unknown City")
-                                .fontWeight(.bold)
-                            Spacer()
-                            Text(currentWeather?.time ?? "Unknown Time")
-                        }
-                        
-                        Spacer().frame(height: 35)
-                        
-                        // Temperature
-                        HStack(alignment: .top, spacing: 0){
-                            Text(currentWeather?.temperature ?? "Unknown Temperature")
-                                .font(.system(size: 95, weight: .bold, design: .monospaced))
-                            Text("º")
-                                .font(.system(size: 30, weight: .bold, design: .monospaced))
-                        }
-                        
-                        Spacer().frame(height: 2)
-                        // Single description
-                        Text(currentWeather?.description ?? "")
-                        
-                        Spacer().frame(height: 15)
-                        
-                        // Presure Huminity Wind
-                        HStack{
-                            HStack{
-                                Image(systemName: "aqi.medium")
-                                Text(currentWeather?.pressure ?? "N/A")
-                            }
-                            Spacer()
-                            HStack{
-                                Image(systemName: "humidity")
-                                Text(currentWeather?.humidity ?? "N/A")
-                            }
-                            Spacer()
-                            HStack{
-                                Image(systemName: "wind")
-                                Text(currentWeather?.windSpeed ?? "N/A")
-                            }
-                        }
-                        
-                    }
-                    .padding()
-                    .foregroundColor(Color.white)
-                    .background(Color.secondary.cornerRadius(10))
-                    
-                    Divider()
-                    
-                    // Today's Weather: Show hourly weather and temperature
-                    // Horizontally Scrollable Component
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 12){
-                            ForEach(hourlyWeathers, id: \.self){ weather in
-                                VStack{
-                                    Text(weather.hour)
-                                        .font(.system(size: 14, weight: .bold))
-                                    Spacer().frame(height: 5)
-                                    Image(weather.icon)
-                                        .frame(width: 60, height: 60)
-                                        .scaledToFill()
-                                    Spacer().frame(height: 7)
-                                    Text(weather.temperature + "º")
-                                }
-                            }
-                        }
-                    }
-                    
-                    Divider()
-                    
-                    // Future daily weather
+            RefreshableScrollView{
+                ScrollView(.vertical, showsIndicators: false) {
                     VStack{
-                        ForEach(dailyWeathers, id:\.self){ weather in
+                        // Weather Card
+                        VStack(alignment: .center){
+                            // Location and time
+                            HStack{
+                                Image(systemName: "location.fill")
+                                Text(currentWeather?.city ?? "Unknown City")
+                                    .fontWeight(.bold)
+                                Spacer()
+                                Text(currentWeather?.time ?? "Unknown Time")
+                            }
+                            
+                            Spacer().frame(height: 35)
+                            
+                            // Temperature
+                            HStack(alignment: .top, spacing: 0){
+                                Text(currentWeather?.temperature ?? "Unknown Temperature")
+                                    .font(.system(size: 95, weight: .bold, design: .monospaced))
+                                Text("º")
+                                    .font(.system(size: 30, weight: .bold, design: .monospaced))
+                            }
+                            
+                            Spacer().frame(height: 2)
+                            // Single description
+                            Text(currentWeather?.description ?? "")
+                            
+                            Spacer().frame(height: 15)
+                            
+                            // Presure Huminity Wind
                             HStack{
                                 HStack{
-                                    VStack(alignment: .leading){
-                                        Text(weather.date)
-                                            .font(.system(size: 19, weight: .bold))
-                                        Spacer().frame(height: 5)
-                                        Text(weather.day)
-                                            .font(.subheadline)
-                                    }
-                                    Spacer()
+                                    Image(systemName: "aqi.medium")
+                                    Text(currentWeather?.pressure ?? "N/A")
                                 }
-                                .frame(width: 100)
                                 Spacer()
-                                Text(weather.temperature)
+                                HStack{
+                                    Image(systemName: "humidity")
+                                    Text(currentWeather?.humidity ?? "N/A")
+                                }
                                 Spacer()
-                                Image(weather.icon)
-                            }.padding()
+                                HStack{
+                                    Image(systemName: "wind")
+                                    Text(currentWeather?.windSpeed ?? "N/A")
+                                }
+                            }
+                            
+                        }
+                        .padding()
+                        .foregroundColor(Color.white)
+                        .background(Color.secondary.cornerRadius(10))
+                        
+                        Divider()
+                        
+                        // Today's Weather: Show hourly weather and temperature
+                        // Horizontally Scrollable Component
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 12){
+                                ForEach(hourlyWeathers, id: \.self){ weather in
+                                    VStack{
+                                        Text(weather.hour)
+                                            .font(.system(size: 14, weight: .bold))
+                                        Spacer().frame(height: 5)
+                                        Image(weather.icon)
+                                            .frame(width: 60, height: 60)
+                                            .scaledToFill()
+                                        Spacer().frame(height: 7)
+                                        Text(weather.temperature + "º")
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        // Future daily weather
+                        VStack{
+                            ForEach(dailyWeathers, id:\.self){ weather in
+                                HStack{
+                                    HStack{
+                                        VStack(alignment: .leading){
+                                            Text(weather.date)
+                                                .font(.system(size: 19, weight: .bold))
+                                            Spacer().frame(height: 5)
+                                            Text(weather.day)
+                                                .font(.subheadline)
+                                        }
+                                        Spacer()
+                                    }
+                                    .frame(width: 100)
+                                    Spacer()
+                                    Text(weather.temperature)
+                                    Spacer()
+                                    Image(weather.icon)
+                                }.padding()
+                            }
                         }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+            } onRefresh: {
+                // Fetch all data again when user pulls to refresh the screen.
+                let _ = wm.fetchCurrentWeather(address: "上海")
+                let _ = wm.fetch15DaysForecast(address: "上海")
+                let _ = wm.fetch24HoursForecast(address: "上海")
             }
         }
     }
