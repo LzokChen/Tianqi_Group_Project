@@ -12,15 +12,15 @@ struct ContentView: View {
 
     var body: some View {
         TabView{
-            Temperature()
+            WeatherDetailView()
+                .tabItem{
+                    Image(systemName: "wind")
+                    Text("实时天气")
+                }
+            ForecastView()
                 .tabItem{
                     Image(systemName: "cloud.fill")
                     Text("天气预报")
-                }
-            WeatherDetail()
-                .tabItem{
-                    Image(systemName: "wind")
-                    Text("空气质量")
                 }
         }
     }

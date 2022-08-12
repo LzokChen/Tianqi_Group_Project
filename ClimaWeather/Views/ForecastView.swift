@@ -30,7 +30,7 @@ struct HourlyWeather:Hashable {
     let temperature: String
 }
 
-struct Temperature: View, WeatherManagerDelegate {
+struct ForecastView: View, WeatherManagerDelegate {
     @State private var currentWeather: CurrentWeather? = nil
     @State private var hasUpdatedCurrentWeather = false
     
@@ -235,6 +235,6 @@ struct Temperature: View, WeatherManagerDelegate {
 
 struct Temperature_Previews: PreviewProvider {
     static var previews: some View {
-        Temperature()
+        ForecastView()
     }
 }

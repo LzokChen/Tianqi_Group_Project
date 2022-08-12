@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeatherDetail: View {
+struct WeatherDetailView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false){
             VStack{
@@ -50,7 +50,7 @@ struct WeatherDetail: View {
 
 struct WeatherDetail_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetail()
+        WeatherDetailView()
     }
 }
 
