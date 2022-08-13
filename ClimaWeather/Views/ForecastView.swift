@@ -33,8 +33,8 @@ struct HourlyWeather:Hashable {
 
 /* The View for "天气预报" screen. */
 struct ForecastView: View, WeatherManagerDelegate {
-    @State private var hasUpdatedWeather = false
-    
+    @State private var weatherManager = WeatherManager.shared
+    @State private var hasUpdateWeather = false
     @State private var currentWeather: CurrentWeather? = nil
     @State private var dailyWeathers = [DailyWeather]()
     @State private var hourlyWeathers = [HourlyWeather]()
@@ -49,7 +49,7 @@ struct ForecastView: View, WeatherManagerDelegate {
         formatter.timeStyle = .short
         formatter.dateStyle = .none
         
-        currentWeather = CurrentWeather(city: weather.secondaryName,
+        currentWeather = CurrentWeather(city: weather.city.secondaryName,
                                         updateTime: formatter.string(from: updateDateTime),
                                         temperature: weather.current.temp,
                                         description: weather.current.condition,
@@ -79,7 +79,8 @@ struct ForecastView: View, WeatherManagerDelegate {
                              icon: "W" + forecast.conditionIdDay)
             )
         }
-        self.hasUpdatedWeather = true
+        
+        hasUpdateWeather = true
     }
     
 
@@ -118,16 +119,15 @@ struct ForecastView: View, WeatherManagerDelegate {
     
     var body: some View {
         //MARK: - Usage: create weatherManager and setup the delegate
-        let wm = WeatherManager.shared
-        let _ = wm.addDelegate(with: self)
         
-        if (!hasUpdatedWeather) {
-            //let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
-            let _ = wm.fetchWeather(address: "上海", withLatest: false)
+        let _ = weatherManager.addDelegate(with: self)
+        
+        if (!hasUpdateWeather) {
+            let _ = weatherManager.fetchWeather(address: "上海", withLatest: false)
         }
         
         // When data hasn't been fetched, show the loading animation.
-        if (!hasUpdatedWeather) {
+        if (!hasUpdateWeather) {
             VStack{
                 LottieView(lottieFile: "load.json")
                     .frame(width: 300, height: 180)
@@ -238,7 +238,7 @@ struct ForecastView: View, WeatherManagerDelegate {
                 }
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
-                let _ = wm.fetchWeather(address: "上海", withLatest: true)
+                let _ = weatherManager.fetchWeather(address: "上海", withLatest: true)
                
             }
         }

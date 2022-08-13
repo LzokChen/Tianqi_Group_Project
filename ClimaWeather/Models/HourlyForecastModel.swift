@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HourlyForecastModel{
+class HourlyForecastModel: Codable{
     
     let condition : String, //气象
         conditionId : String,

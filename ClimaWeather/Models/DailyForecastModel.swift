@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DailyForecastModel{
+class DailyForecastModel: Codable{
     
     let conditionDay : String, //白天气象
         conditionNight : String, //夜间气象

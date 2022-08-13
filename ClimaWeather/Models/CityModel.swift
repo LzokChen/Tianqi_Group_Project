@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CityModel {
+class CityModel: Codable {
     let name : String, //城市名称 （区）
         pname : String, //省份名称 （省）
         secondaryName : String //上级城市名称 （市）

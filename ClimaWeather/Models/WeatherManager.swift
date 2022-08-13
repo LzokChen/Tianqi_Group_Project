@@ -16,7 +16,7 @@ protocol WeatherManagerDelegate {
 }
 
 //MARK: - WeatherManager
-class WeatherManager {
+class WeatherManager : ObservableObject{
     let curWeatherURL = "http://aliv8.data.moji.com/whapi/json/aliweather/condition"
     let hourlyForecastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast24hours"
     let dailyForecastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast15days"
@@ -30,30 +30,126 @@ class WeatherManager {
     
     //singleton mode
     static let shared = WeatherManager()
-    private init(){}
+    private init(){
+    }
     
     func addDelegate(with delegate: WeatherManagerDelegate){
         self.delegates.append(delegate)
     }
     
+    func noWeatherData()->Bool{
+        return self.weather == nil
+    }
+    
+    //MARK: - Persisting Weather Data
+    private static func fileURL() throws -> URL{
+        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("weather.data")
+    }
+    
+    static func load(completion: @escaping (Result<WeatherModel?, Error>)-> Void){
+        DispatchQueue.global(qos: .background).async {
+            do{
+                let fileURL = try WeatherManager.fileURL()
+                guard let file = try? FileHandle(forReadingFrom: fileURL) else{
+                    DispatchQueue.main.async {
+                        completion(.success(nil))
+                    }
+                    return
+                }
+                let weatherModel = try JSONDecoder().decode(WeatherModel.self, from: file.availableData)
+                DispatchQueue.main.async {
+                    completion(.success(weatherModel))
+                }
+            }catch{
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    static func save(weatherModel: WeatherModel, completion: @escaping (Result<Date, Error>)-> Void){
+        DispatchQueue.global(qos: .background).async {
+            do{
+                let data = try JSONEncoder().encode(weatherModel)
+                let outFile = try fileURL()
+                try data.write(to: outFile)
+                DispatchQueue.main.async {
+                    completion(.success(weatherModel.updateTime))
+                }
+            }catch{
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
 
     //MARK: - Fetch functions
     func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, withLatest: Bool){
-        if (withLatest || self.weather == nil){
-            self.requestWeather(latitude: latitude, longitude: longitude)
-        }else{
-            for delegate in self.delegates {
-                delegate.didUpdateWeather(self, weather: self.weather!)
+        if (!withLatest && self.weather == nil){
+            print("loading")
+            WeatherManager.load { result in
+                switch result{
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                case .success(let model):
+                    self.weather = model
+                    if self.weather != nil{
+                        print("Load weather: \(self.weather!.city.secondaryName), updateTime: \(self.weather!.updateTime)")
+                        for delegate in self.delegates {
+                            delegate.didUpdateWeather(self, weather: self.weather!)
+                        }
+                    }else{
+                        self.requestWeather(latitude: latitude, longitude: longitude)
+                    }
+                
+                }
             }
+        }else{
+            self.requestWeather(latitude: latitude, longitude: longitude)
         }
-        
-        
     }
     
     func fetchWeather(address: String, withLatest: Bool){
-        if (withLatest || self.weather == nil){
+
+        if (!withLatest && self.weather == nil){
+            print("loading")
+            WeatherManager.load { [self] result in
+                switch result{
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                    
+                case .success(let model):
+                    self.weather = model
+                    if self.weather != nil{
+                        print("Load weather: \(self.weather!.city.secondaryName), updateTime: \(self.weather!.updateTime)")
+                        for delegate in self.delegates {
+                            delegate.didUpdateWeather(self, weather: self.weather!)
+                        }
+                    }
+                    else{ //no weather data
+                        let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
+                        AF.request(self.getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
+                            switch response.result {
+                            case .success(let data):
+                                if let location = self.parseLocationData(data){
+                                    self.requestWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                                }else{
+                                    print("Error: Fail to parse location JSON")
+                                }
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
             let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
-            AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
+            AF.request(self.getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
                 switch response.result {
                 case .success(let data):
                     if let location = self.parseLocationData(data){
@@ -65,12 +161,7 @@ class WeatherManager {
                     print(error)
                 }
             }
-        }else{
-            for delegate in self.delegates {
-                delegate.didUpdateWeather(self, weather: self.weather!)
-            }
         }
-        
     }
 
     
@@ -110,9 +201,19 @@ class WeatherManager {
                     let safeCurrent = current,
                     let safeHourlyForecasts = hourlyForecasts,
                     let safeDailyForecasts = dailyForecasts{
-                    self.weather = WeatherModel(name: safeCity.name, pname: safeCity.pname, secondaryName: safeCity.secondaryName,
+                    self.weather = WeatherModel(city: safeCity,
                                                 current: safeCurrent, hourlyForecasts: safeHourlyForecasts, dailyForecasts: safeDailyForecasts)
                     print("Successfully requesting the latest weather")
+                   
+                    WeatherManager.save(weatherModel: self.weather!) { result in
+                        switch result{
+                            case .failure(let error):
+                                print("fail to save the weather data \(error.localizedDescription)")
+                            case .success(let date):
+                                        print("Successfully save the weather data with updatetime: \(date)")
+                        }
+                    }
+                                      
                     for delegate in self.delegates {
                         delegate.didUpdateWeather(self, weather: self.weather!)
                     }

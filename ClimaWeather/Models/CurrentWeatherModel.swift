@@ -8,7 +8,7 @@
 import Foundation
 
 
-class CurrentWeatherModel {
+class CurrentWeatherModel: Codable {
     
     
     let condition : String, //实时气象
