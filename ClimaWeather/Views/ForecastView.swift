@@ -51,7 +51,7 @@ struct ForecastView: View, WeatherManagerDelegate {
         
         currentWeather = CurrentWeather(city: weather.secondaryName,
                                         updateTime: formatter.string(from: updateDateTime),
-                                        temperature: weather.current.temperature,
+                                        temperature: weather.current.temp,
                                         description: weather.current.condition,
                                         pressure: weather.current.pressure + "hpa",
                                         humidity: weather.current.humidity + "%",
@@ -64,7 +64,7 @@ struct ForecastView: View, WeatherManagerDelegate {
             hourlyWeathers.append(
                 HourlyWeather(hour: (index == 0) ? "现在" : String(format: "%02d时", hour),
                               icon: "W" + ((hour > 17 || hour < 6) ? forecast.iconNight : forecast.iconDay),
-                              temperature: forecast.temperature
+                              temperature: forecast.temp
                              )
             )
         }
@@ -73,8 +73,8 @@ struct ForecastView: View, WeatherManagerDelegate {
         dailyWeathers.removeAll()
         for (index, forecast) in weather.dailyForecasts.enumerated() {
             dailyWeathers.append(
-                DailyWeather(day: getDayNameBy(forecast.date) + (index == 0 ? " (今天)" : index == 1 ? " (明天)" : index == 2 ? " (后天)" : ""),
-                             date: String((forecast.date).suffix(5)),
+                DailyWeather(day: getDayNameBy(forecast.predictDate) + (index == 0 ? " (今天)" : index == 1 ? " (明天)" : index == 2 ? " (后天)" : ""),
+                             date: String((forecast.predictDate).suffix(5)),
                              temperature: forecast.tempDay + "º ~ " + forecast.tempNight + "º",
                              icon: "W" + forecast.conditionIdDay)
             )

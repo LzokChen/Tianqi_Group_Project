@@ -76,6 +76,7 @@ class WeatherManager {
     
     //MARK: - HTTP requests with Alamofire
     private func requestWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        var city : CityModel?
         var current : CurrentWeatherModel?
         var hourlyForecasts : [HourlyForecastModel]?
         var dailyForecasts: [DailyForecastModel]?
@@ -86,8 +87,9 @@ class WeatherManager {
         requestGroup.enter()
         requestGroup.enter()
         
-        self.requestCurrentWeather(latitude: latitude, longitude: longitude) { model in
-            current = model
+        self.requestCurrentWeather(latitude: latitude, longitude: longitude) { modelPair in
+            city = modelPair?.0
+            current = modelPair?.1
             requestGroup.leave()
         }
         
@@ -104,8 +106,11 @@ class WeatherManager {
         DispatchQueue.global(qos: .background).async {
             requestGroup.wait()
             DispatchQueue.main.async {
-                if let safeCurrent = current, let safeHourlyForecasts = hourlyForecasts, let safeDailyForecasts = dailyForecasts{
-                    self.weather = WeatherModel(name: safeCurrent.name, pname: safeCurrent.pname, secondaryName: safeCurrent.secondaryName,
+                if let safeCity = city,
+                    let safeCurrent = current,
+                    let safeHourlyForecasts = hourlyForecasts,
+                    let safeDailyForecasts = dailyForecasts{
+                    self.weather = WeatherModel(name: safeCity.name, pname: safeCity.pname, secondaryName: safeCity.secondaryName,
                                                 current: safeCurrent, hourlyForecasts: safeHourlyForecasts, dailyForecasts: safeDailyForecasts)
                     print("Successfully requesting the latest weather")
                     for delegate in self.delegates {
@@ -120,7 +125,7 @@ class WeatherManager {
         
     }
     
-    private func requestCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completeion: @escaping (_ model: CurrentWeatherModel?) -> Void){
+    private func requestCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completeion: @escaping (_ model: (CityModel, CurrentWeatherModel)?) -> Void){
         let params = [
             "lat": String(latitude),
             "lon": String(longitude),
@@ -130,8 +135,8 @@ class WeatherManager {
         AF.request(curWeatherURL, method: .post, parameters: params, encoding: URLEncoding.queryString, headers: HTTPHeaders(mojiHeaders)).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
             case .success(let data):
-                if let currentWeatherModel = self.parseCurWeatherData(data){
-                    completeion(currentWeatherModel)
+                if let modelPair = self.parseCurWeatherData(data){
+                    completeion(modelPair)
                     // self.delegate?.didUpdateCurrentWeather(self, weather: weatherModel)
                 }else{
                     print("Error: Fail to convert JSON data to currentWeatherModel")
@@ -199,19 +204,19 @@ class WeatherManager {
         }
     }
     
-    private func parseCurWeatherData(_ weatherData: Data) -> CurrentWeatherModel?{
+    private func parseCurWeatherData(_ weatherData: Data) -> (CityModel, CurrentWeatherModel)?{
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(CurrentWeatherData.self, from: weatherData) //use .self to make it a value type
             let city = decodedData.data.city
             let condition = decodedData.data.condition
             
-            let CurrentWeather = CurrentWeatherModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname,
-                                                     condition: condition.condition, conditionId: condition.conditionId, humidity: condition.humidity, weatherIcon: condition.icon,
+            let cityModel = CityModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname)
+            let currentWeatherModel = CurrentWeatherModel( condition: condition.condition, conditionId: condition.conditionId, humidity: condition.humidity, weatherIcon: condition.icon,
                                                      pressure: condition.pressure, realFeel: condition.realFeel, temperature: condition.temp, uvi: condition.uvi, vis: condition.vis,
                                                      windDegrees: condition.windDegrees, windDir: condition.windDir, windLevel: condition.windLevel, windSpeed: condition.windSpeed,
                                                      tips: condition.tips, sunRise: condition.sunRise, sunSet: condition.sunSet)
-            return CurrentWeather
+            return (cityModel, currentWeatherModel)
         } catch {
             print(error.localizedDescription)
             return nil
@@ -251,7 +256,7 @@ class WeatherManager {
             for forecast in forecasts {
                 let model = DailyForecastModel(conditionDay: forecast.conditionDay, conditionNight: forecast.conditionNight,
                                                conditionIdDay: forecast.conditionIdDay, conditionIdNight: forecast.conditionIdNight,
-                                               date: forecast.predictDate,
+                                               predictDate: forecast.predictDate,
                                                pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight,
                                                windDirDay: forecast.windDirDay, windDirNight: forecast.windDirNight, windLevelDay: forecast.windLevelDay, windLevelNight: forecast.windLevelNight)
                 forecastModels.append(model)

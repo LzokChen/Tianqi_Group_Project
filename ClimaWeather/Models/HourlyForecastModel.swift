@@ -18,7 +18,7 @@ class HourlyForecastModel{
         pop : String, //降水概率 百分比
         qpf : String, //未来一小时降水量 毫米
         realFeel : String, //体感温度
-        temperature : String //实际温度
+        temp : String //实际温度
     
     init(condiction: String, conditionId: String, iconDay: String, iconNight: String, date: String, hour : String, pop : String, qpf: String, realFeel : String, temp : String) {
         
@@ -31,7 +31,7 @@ class HourlyForecastModel{
         self.pop = pop
         self.qpf = qpf
         self.realFeel = realFeel
-        self.temperature = temp
+        self.temp = temp
     }
     
         

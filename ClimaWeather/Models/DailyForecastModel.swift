@@ -13,7 +13,7 @@ class DailyForecastModel{
         conditionNight : String, //夜间气象
         conditionIdDay : String, //白天icon
         conditionIdNight : String, //夜间icon
-        date : String, //日期
+        predictDate : String, //日期
         pop : String, //降水概率 百分比
         tempDay : String, //白天温度，最高温度
         tempNight : String, //夜晚温度，最低温度
@@ -22,13 +22,13 @@ class DailyForecastModel{
         windLevelDay : String,  //白天风力等级
         windLevelNight : String //夜晚风力等级
     
-    init(conditionDay: String, conditionNight: String, conditionIdDay: String, conditionIdNight: String, date: String, pop : String, tempDay : String, tempNight : String, windDirDay: String, windDirNight: String, windLevelDay: String, windLevelNight: String) {
+    init(conditionDay: String, conditionNight: String, conditionIdDay: String, conditionIdNight: String, predictDate: String, pop : String, tempDay : String, tempNight : String, windDirDay: String, windDirNight: String, windLevelDay: String, windLevelNight: String) {
         
         self.conditionDay = conditionDay
         self.conditionNight = conditionNight
         self.conditionIdDay = conditionIdDay
         self.conditionIdNight = conditionIdNight
-        self.date = date
+        self.predictDate = predictDate
         self.pop = pop
         self.tempDay = tempDay
         self.tempNight = tempNight

@@ -51,8 +51,8 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
         formatter.dateStyle = .none
         
         weatherDetail = WeatherDetail(updateTime: formatter.string(from: updateDateTime),
-                                      city: curWeather.secondaryName,
-                                      temperature: curWeather.temperature + "º | " + curWeather.condition,
+                                      city: weather.secondaryName,
+                                      temperature: curWeather.temp + "º | " + curWeather.condition,
                                       pressure: pressureDescription,
                                       humidity: curWeather.humidity + "%",
                                       windSpeed: curWeather.windSpeed + "m/s",
