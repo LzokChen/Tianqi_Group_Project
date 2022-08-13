@@ -10,7 +10,7 @@ import Lottie
 
 struct CurrentWeather:Hashable {
     let city : String
-    let time : String
+    let updateTime : String
     let temperature: String
     let description: String
     let pressure: String
@@ -33,39 +33,33 @@ struct HourlyWeather:Hashable {
 
 /* The View for "天气预报" screen. */
 struct ForecastView: View, WeatherManagerDelegate {
+    @State private var hasUpdatedWeather = false
+    
     @State private var currentWeather: CurrentWeather? = nil
-    @State private var hasUpdatedCurrentWeather = false
-    
     @State private var dailyWeathers = [DailyWeather]()
-    @State private var hasUpdatedDailyWeather = false
-    
     @State private var hourlyWeathers = [HourlyWeather]()
-    @State private var hasUpdatedHourlyWeather = false
+
     
     //MARK: - WeatherManagerDelegate functions
     /* Fetch current weather details - for the upper container */
-    func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel) {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         // Get the current date and time
-        let currentDateTime = Date()
+        let updateDateTime = weather.updateTime
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .none
         
         currentWeather = CurrentWeather(city: weather.secondaryName,
-                                        time: formatter.string(from: currentDateTime),
-                                        temperature: weather.temperature,
-                                        description: weather.condition,
-                                        pressure: weather.pressure + "hpa",
-                                        humidity: weather.humidity + "%",
-                                        windSpeed: weather.windSpeed + "m/s")
-        hasUpdatedCurrentWeather = true
-    }
-    
-    /* Fetch hourly weather forecasts - for the middle container */
-    func didUpdate24HoursForecast(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel]) {
-        hourlyWeathers.removeAll()
+                                        updateTime: formatter.string(from: updateDateTime),
+                                        temperature: weather.current.temperature,
+                                        description: weather.current.condition,
+                                        pressure: weather.current.pressure + "hpa",
+                                        humidity: weather.current.humidity + "%",
+                                        windSpeed: weather.current.windSpeed + "m/s")
+       
         
-        for (index, forecast) in forecasts.enumerated() {
+        hourlyWeathers.removeAll()
+        for (index, forecast) in weather.hourlyForecasts.enumerated() {
             let hour: Int = (Int)(forecast.hour) ?? 0
             hourlyWeathers.append(
                 HourlyWeather(hour: (index == 0) ? "现在" : String(format: "%02d时", hour),
@@ -74,8 +68,21 @@ struct ForecastView: View, WeatherManagerDelegate {
                              )
             )
         }
-        hasUpdatedHourlyWeather = true
+        
+        
+        dailyWeathers.removeAll()
+        for (index, forecast) in weather.dailyForecasts.enumerated() {
+            dailyWeathers.append(
+                DailyWeather(day: getDayNameBy(forecast.date) + (index == 0 ? " (今天)" : index == 1 ? " (明天)" : index == 2 ? " (后天)" : ""),
+                             date: String((forecast.date).suffix(5)),
+                             temperature: forecast.tempDay + "º ~ " + forecast.tempNight + "º",
+                             icon: "W" + forecast.conditionIdDay)
+            )
+        }
+        self.hasUpdatedWeather = true
     }
+    
+
     
     /* Return the day of week of any date */
     func getDayNameBy(_ stringDate: String) -> String {
@@ -109,41 +116,18 @@ struct ForecastView: View, WeatherManagerDelegate {
         return getDayInChn(dayInEng)
     }
     
-    /* Fetch daily weather forecasts - for the bottom container */
-    func didUpdate15DaysForecast(_ weatherManager: WeatherManager, forecasts: [DailyForecastModel]) {
-        dailyWeathers.removeAll()
-        
-        for (index, forecast) in forecasts.enumerated() {
-            dailyWeathers.append(
-                DailyWeather(day: getDayNameBy(forecast.date) + (index == 0 ? " (今天)" : index == 1 ? " (明天)" : index == 2 ? " (后天)" : ""),
-                             date: String((forecast.date).suffix(5)),
-                             temperature: forecast.tempDay + "º ~ " + forecast.tempNight + "º",
-                             icon: "W" + forecast.conditionIdDay)
-            )
-        }
-        hasUpdatedDailyWeather = true
-    }
-    
     var body: some View {
         //MARK: - Usage: create weatherManager and setup the delegate
-        let wm = WeatherManager()
-        let _ = wm.setDelegate(delegate: self)
+        let wm = WeatherManager.shared
+        let _ = wm.addDelegate(with: self)
         
-        if (!hasUpdatedCurrentWeather) {
+        if (!hasUpdatedWeather) {
             //let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
-            let _ = wm.fetchCurrentWeather(address: "上海")
-        }
-        
-        if (!hasUpdatedDailyWeather) {
-            let _ = wm.fetch15DaysForecast(address: "上海")
-        }
-        
-        if (!hasUpdatedHourlyWeather) {
-            let _ = wm.fetch24HoursForecast(address: "上海")
+            let _ = wm.fetchWeather(address: "上海", withLatest: false)
         }
         
         // When data hasn't been fetched, show the loading animation.
-        if (!hasUpdatedCurrentWeather || !hasUpdatedHourlyWeather || !hasUpdatedDailyWeather) {
+        if (!hasUpdatedWeather) {
             VStack{
                 LottieView(lottieFile: "load.json")
                     .frame(width: 300, height: 180)
@@ -162,7 +146,7 @@ struct ForecastView: View, WeatherManagerDelegate {
                                 Text(currentWeather?.city ?? "Unknown City")
                                     .fontWeight(.bold)
                                 Spacer()
-                                Text(currentWeather?.time ?? "Unknown Time")
+                                Text("更新时间:"+(currentWeather?.updateTime ?? "Unknown Time"))
                             }
                             
                             Spacer().frame(height: 35)
@@ -254,9 +238,8 @@ struct ForecastView: View, WeatherManagerDelegate {
                 }
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
-                let _ = wm.fetchCurrentWeather(address: "上海")
-                let _ = wm.fetch15DaysForecast(address: "上海")
-                let _ = wm.fetch24HoursForecast(address: "上海")
+                let _ = wm.fetchWeather(address: "上海", withLatest: true)
+               
             }
         }
     }

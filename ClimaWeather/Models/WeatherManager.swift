@@ -11,17 +11,8 @@ import Alamofire
 
 //MARK: - WeatherManagerDeleage
 protocol WeatherManagerDelegate {
-    func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel)
-    func didUpdate24HoursForecast(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel])
-    func didUpdate15DaysForecast(_ weatherManager: WeatherManager, forecasts: [DailyForecastModel])
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
     //func didFailWithError(error : Error)
-}
-
-//default methods
-extension WeatherManagerDelegate{
-    func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel){print("no didUpdateCurrentWeather")}
-    func didUpdate24HoursForecast(_ weatherManager: WeatherManager, forecasts: [HourlyForecastModel]){print("no didUpdate24HourForecasts")}
-    func didUpdate15DaysForecast(_ weatherManager: WeatherManager, forecasts: [DailyForecastModel]){print("no didUpdate15DayForecasts")}
 }
 
 //MARK: - WeatherManager
@@ -33,76 +24,103 @@ class WeatherManager {
     
     let mojiHeaders = ["Authorization": "APPCODE 1bb40f32e8384e04bef97ae3d628274e", "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"]
     
-    private var delegate : WeatherManagerDelegate?
+    private var delegates : [WeatherManagerDelegate] = []
+    private var weather : WeatherModel?
     
-    func setDelegate(delegate : WeatherManagerDelegate){
-        self.delegate = delegate
+    
+    //singleton mode
+    static let shared = WeatherManager()
+    private init(){}
+    
+    func addDelegate(with delegate: WeatherManagerDelegate){
+        self.delegates.append(delegate)
     }
     
+
     //MARK: - Fetch functions
-    func fetchCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
-        self.requestCurrentWeather(latitude: latitude, longitude: longitude)
-    }
-    
-    func fetchCurrentWeather(address: String){
-        let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
-        AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
-            switch response.result {
-            case .success(let data):
-                if let location = self.parseLocationData(data){
-                    self.requestCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                }else{
-                    print("Error: Fail to parse location JSON")
-                }
-            case .failure(let error):
-                print(error)
+    func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, withLatest: Bool){
+        if (withLatest || self.weather == nil){
+            self.requestWeather(latitude: latitude, longitude: longitude)
+        }else{
+            for delegate in self.delegates {
+                delegate.didUpdateWeather(self, weather: self.weather!)
             }
         }
+        
+        
     }
     
-    func fetch24HoursForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
-        self.request24HoursForecast(latitude: latitude, longitude: longitude)
-    }
-    
-    func fetch24HoursForecast(address: String){
-        let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
-        AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
-            switch response.result {
-            case .success(let data):
-                if let location = self.parseLocationData(data){
-                    self.request24HoursForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                }else{
-                    print("Error: Fail to parse location JSON")
+    func fetchWeather(address: String, withLatest: Bool){
+        if (withLatest || self.weather == nil){
+            let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
+            AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
+                switch response.result {
+                case .success(let data):
+                    if let location = self.parseLocationData(data){
+                        self.requestWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                    }else{
+                        print("Error: Fail to parse location JSON")
+                    }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
+            }
+        }else{
+            for delegate in self.delegates {
+                delegate.didUpdateWeather(self, weather: self.weather!)
             }
         }
+        
     }
-    
-    
-    func fetch15DaysForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
-        self.request15DaysForecast(latitude: latitude, longitude: longitude)
-    }
-    
-    func fetch15DaysForecast(address: String){
-        let params = ["key":"57115a6e1f71cc02273d01b7d60b1e24", "address": address]
-        AF.request(getLocationURL, method: .get, parameters: params, encoding: URLEncoding.queryString).validate(statusCode: 200..<299).responseData { response in
-            switch response.result {
-            case .success(let data):
-                if let location = self.parseLocationData(data){
-                    self.request15DaysForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                }else{
-                    print("Error: Fail to parse location JSON")
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+
     
     //MARK: - HTTP requests with Alamofire
-    private func requestCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+    private func requestWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+        var current : CurrentWeatherModel?
+        var hourlyForecasts : [HourlyForecastModel]?
+        var dailyForecasts: [DailyForecastModel]?
+        
+        let requestGroup = DispatchGroup()
+        
+        requestGroup.enter()
+        requestGroup.enter()
+        requestGroup.enter()
+        
+        self.requestCurrentWeather(latitude: latitude, longitude: longitude) { model in
+            current = model
+            requestGroup.leave()
+        }
+        
+        self.request24HoursForecast(latitude: latitude, longitude: longitude) { models in
+            hourlyForecasts = models
+            requestGroup.leave()
+        }
+        
+        self.request15DaysForecast(latitude: latitude, longitude: longitude) { models in
+            dailyForecasts = models
+            requestGroup.leave()
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            requestGroup.wait()
+            DispatchQueue.main.async {
+                if let safeCurrent = current, let safeHourlyForecasts = hourlyForecasts, let safeDailyForecasts = dailyForecasts{
+                    self.weather = WeatherModel(name: safeCurrent.name, pname: safeCurrent.pname, secondaryName: safeCurrent.secondaryName,
+                                                current: safeCurrent, hourlyForecasts: safeHourlyForecasts, dailyForecasts: safeDailyForecasts)
+                    print("Successfully requesting the latest weather")
+                    for delegate in self.delegates {
+                        delegate.didUpdateWeather(self, weather: self.weather!)
+                    }
+                }else{
+                    print("Error, fail to fetch Weather")
+                }
+                
+            }
+        }
+        
+    }
+    
+    private func requestCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completeion: @escaping (_ model: CurrentWeatherModel?) -> Void){
         let params = [
             "lat": String(latitude),
             "lon": String(longitude),
@@ -112,9 +130,9 @@ class WeatherManager {
         AF.request(curWeatherURL, method: .post, parameters: params, encoding: URLEncoding.queryString, headers: HTTPHeaders(mojiHeaders)).validate(statusCode: 200 ..< 299).responseData { response in
             switch response.result {
             case .success(let data):
-                if let weatherModel = self.parseCurWeatherData(data){
-                    self.delegate?.didUpdateCurrentWeather(self, weather: weatherModel)
-                    
+                if let currentWeatherModel = self.parseCurWeatherData(data){
+                    completeion(currentWeatherModel)
+                    // self.delegate?.didUpdateCurrentWeather(self, weather: weatherModel)
                 }else{
                     print("Error: Fail to convert JSON data to currentWeatherModel")
                 }
@@ -123,8 +141,8 @@ class WeatherManager {
             }
         }
     }
-    
-    private func request24HoursForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+
+    private func request24HoursForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completeion: @escaping (_ models: [HourlyForecastModel]?) -> Void){
         let params = [
             "lat": String(latitude),
             "lon": String(longitude),
@@ -135,7 +153,7 @@ class WeatherManager {
             switch response.result {
             case .success(let data):
                 if let hourlyForecasts = self.parseHourlyForecastsData(data){
-                    self.delegate?.didUpdate24HoursForecast(self, forecasts: hourlyForecasts)
+                    completeion(hourlyForecasts)
                     
                 }else{
                     print("Error: Fail to convert JSON data to hourlyForecastModels")
@@ -146,7 +164,7 @@ class WeatherManager {
         }
     }
     
-    private func request15DaysForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
+    private func request15DaysForecast(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completeion: @escaping (_ models: [DailyForecastModel]?) -> Void){
         let params = [
             "lat": String(latitude),
             "lon": String(longitude),
@@ -157,8 +175,7 @@ class WeatherManager {
             switch response.result {
             case .success(let data):
                 if let dailyForecasts = self.parseDailyForecastsData(data){
-                    self.delegate?.didUpdate15DaysForecast(self, forecasts: dailyForecasts)
-                    
+                    completeion(dailyForecasts)
                 }else{
                     print("Error: Fail to convert JSON data to dailyForecastModels")
                 }
@@ -205,17 +222,15 @@ class WeatherManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(HourlyForecastsData.self, from: forecastData)
-            let city = decodedData.data.city
             let forecasts = decodedData.data.hourly
             
             var forecastModels : [HourlyForecastModel] = []
             
             for forecast in forecasts {
-                let model = HourlyForecastModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname,
-                                                condiction: forecast.condition, conditionId: forecast.conditionId,
+                let model = HourlyForecastModel(condiction: forecast.condition, conditionId: forecast.conditionId,
                                                 iconDay: forecast.iconDay, iconNight: forecast.iconNight,
                                                 date: forecast.date, hour: forecast.hour,
-                                                pop: forecast.pop, realFeel: forecast.realFeel, temp: forecast.temp)
+                                                pop: forecast.pop, qpf: forecast.qpf, realFeel: forecast.realFeel, temp: forecast.temp)
                 forecastModels.append(model)
             }
             return forecastModels
@@ -229,14 +244,12 @@ class WeatherManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(DailyForecastsData.self, from: forecastData)
-            let city = decodedData.data.city
             let forecasts = decodedData.data.forecast
             
             var forecastModels : [DailyForecastModel] = []
             
             for forecast in forecasts {
-                let model = DailyForecastModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname,
-                                               conditionDay: forecast.conditionDay, conditionNight: forecast.conditionNight,
+                let model = DailyForecastModel(conditionDay: forecast.conditionDay, conditionNight: forecast.conditionNight,
                                                conditionIdDay: forecast.conditionIdDay, conditionIdNight: forecast.conditionIdNight,
                                                date: forecast.predictDate,
                                                pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight,

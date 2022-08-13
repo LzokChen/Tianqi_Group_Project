@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WeatherDetail:Hashable {
+    let updateTime : String
     let city : String
     let temperature: String
     let pressure: String
@@ -19,50 +20,60 @@ struct WeatherDetail:Hashable {
     let sunSet: String
     let realFeel: String
     let realFeelTip: String
+    let qpf : String
 }
 
 /* The View for "实习天气" screen. */
 struct WeatherDetailView: View, WeatherManagerDelegate {
+
+    
     @State private var weatherDetail: WeatherDetail? = nil
     @State private var hasUpdatedWeatherDetail = false
     
     /* Fetch current weather details */
-    func didUpdateCurrentWeather(_ weatherManager: WeatherManager, weather: CurrentWeatherModel) {
-        let uvi = (Int)(weather.uvi) ?? 0
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        let curWeather = weather.current
+        let uvi = (Int)(curWeather.uvi) ?? 0
         let uviDescription = (uvi <= 2 ? "最弱" : uvi <= 4 ? "弱" : uvi <= 6 ? "中等" : uvi <= 9 ? "强" : "很强")
         
         // Convert the unit of weather.vis from m to km and round to keep 1 decimal place
-        var visibility = (Double)(weather.vis) ?? 0
+        var visibility = (Double)(curWeather.vis) ?? 0
         visibility = round(visibility / 100) / 10.0
         let visibilityDescription = (String)(visibility) + "公里"
         
         // Convert the unit of weather.pressure from hpa to kpa and round to nearest Int
-        let pressure = (Double)(weather.pressure) ?? 0
+        let pressure = (Double)(curWeather.pressure) ?? 0
         let pressureDescription = String(Int(round(pressure / 10))) + "kPa"
         
-        weatherDetail = WeatherDetail(city: weather.secondaryName,
-                                      temperature: weather.temperature + "º | " + weather.condition,
+        let updateDateTime = weather.updateTime
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .none
+        
+        weatherDetail = WeatherDetail(updateTime: formatter.string(from: updateDateTime),
+                                      city: curWeather.secondaryName,
+                                      temperature: curWeather.temperature + "º | " + curWeather.condition,
                                       pressure: pressureDescription,
-                                      humidity: weather.humidity + "%",
-                                      windSpeed: weather.windSpeed + "m/s",
-                                      ultravioletIndex: weather.uvi + " " + uviDescription,
-                                      sunRise: String(weather.sunRise.components(separatedBy: " ")[1].prefix(5)),
+                                      humidity: curWeather.humidity + "%",
+                                      windSpeed: curWeather.windSpeed + "m/s",
+                                      ultravioletIndex: curWeather.uvi + " " + uviDescription,
+                                      sunRise: String(curWeather.sunRise.components(separatedBy: " ")[1].prefix(5)),
                                       visibility: visibilityDescription,
-                                      sunSet: String(weather.sunSet.components(separatedBy: " ")[1].prefix(5)),
-                                      realFeel: weather.realFeel + "º",
-                                      realFeelTip: weather.tips
+                                      sunSet: String(curWeather.sunSet.components(separatedBy: " ")[1].prefix(5)),
+                                      realFeel: curWeather.realFeel + "º",
+                                      realFeelTip: curWeather.tips,
+                                      qpf: weather.hourlyForecasts[0].qpf + "毫米"
         )
         hasUpdatedWeatherDetail = true
     }
     
     var body: some View {
         //MARK: - Usage: create weatherManager and setup the delegate
-        let wm = WeatherManager()
-        let _ = wm.setDelegate(delegate: self)
+        let wm = WeatherManager.shared
+        let _ = wm.addDelegate(with: self)
         
         if (!hasUpdatedWeatherDetail) {
-            //let _ = wm.fetchCurrentWeather(latitude: 22.555259, longitude: 113.88402)
-            let _ = wm.fetchCurrentWeather(address: "上海")
+            let _ = wm.fetchWeather(address: "上海", withLatest: false)
         }
         
         // When data hasn't been fetched, show the loading animation.
@@ -83,6 +94,8 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
                                 .font(.system(size: 35, weight: .bold, design: .monospaced))
                             Text(weatherDetail?.temperature ?? " ")
                                 .fontWeight(.bold)
+                            Spacer()
+                            Text("更新时间:"+(weatherDetail?.updateTime ?? "Unknown Time"))
                         }
                         Spacer().frame(height: 35)
                         VStack{
@@ -94,19 +107,19 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
                         VStack{
                             HStack{
                                 DetailCard(icon: "wind",detailText: "风速", detailDescripe: (weatherDetail?.windSpeed ?? "N/A"), singleDescripe:"")
-                                DetailCard(icon: "cloud.drizzle",detailText: "降雨", detailDescripe: "1 毫米", singleDescripe:"预计未来24小时内有23毫米")
+                                DetailCard(icon: "cloud.drizzle",detailText: "降雨", detailDescripe: (weatherDetail?.qpf ?? "N/A"), singleDescripe:"预计未来24小时内有\(weatherDetail?.qpf ?? "N/A")")
                             }
                         }
                         VStack{
                             HStack{
-                                DetailCard(icon: "thermometer.low", detailText: "体感温度", detailDescripe: (weatherDetail?.realFeel ?? "N/A"), singleDescripe: (weatherDetail?.realFeelTip ?? "N/A"))
+                                DetailCard(icon: "thermometer", detailText: "体感温度", detailDescripe: (weatherDetail?.realFeel ?? "N/A"), singleDescripe: (weatherDetail?.realFeelTip ?? "N/A"))
                                 DetailCard(icon: "humidity.fill", detailText: "湿度", detailDescripe: (weatherDetail?.humidity ?? "N/A"), singleDescripe: "")
                             }
                         }
                         VStack{
                             HStack{
                                 DetailCard(icon: "eye", detailText: "能见度", detailDescripe: (weatherDetail?.visibility ?? "N/A"), singleDescripe: "")
-                                DetailCard(icon: "cloud.bolt.circle", detailText: "气压", detailDescripe: (weatherDetail?.pressure ?? "N/A"), singleDescripe: "")
+                                DetailCard(icon: "cloud", detailText: "气压", detailDescripe: (weatherDetail?.pressure ?? "N/A"), singleDescripe: "")
                             }
                         }
                     }
@@ -114,7 +127,7 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
                 }
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
-                let _ = wm.fetchCurrentWeather(address: "上海")
+                let _ = wm.fetchWeather(address: "上海", withLatest: true)
             }
         }
     }

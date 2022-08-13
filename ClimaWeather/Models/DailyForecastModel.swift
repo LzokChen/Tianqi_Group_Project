@@ -8,9 +8,6 @@
 import Foundation
 
 class DailyForecastModel{
-    let name : String, //城市名称 （区）
-        pname : String, //省份名称 （省）
-        secondaryName : String //上级城市名称 （市）
     
     let conditionDay : String, //白天气象
         conditionNight : String, //夜间气象
@@ -25,11 +22,8 @@ class DailyForecastModel{
         windLevelDay : String,  //白天风力等级
         windLevelNight : String //夜晚风力等级
     
-    init(name: String, pname: String, secondaryName: String, conditionDay: String, conditionNight: String, conditionIdDay: String, conditionIdNight: String, date: String, pop : String, tempDay : String, tempNight : String, windDirDay: String, windDirNight: String, windLevelDay: String, windLevelNight: String) {
+    init(conditionDay: String, conditionNight: String, conditionIdDay: String, conditionIdNight: String, date: String, pop : String, tempDay : String, tempNight : String, windDirDay: String, windDirNight: String, windLevelDay: String, windLevelNight: String) {
         
-        self.name = name
-        self.pname = pname
-        self.secondaryName = secondaryName
         self.conditionDay = conditionDay
         self.conditionNight = conditionNight
         self.conditionIdDay = conditionIdDay

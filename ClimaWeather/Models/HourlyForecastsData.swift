@@ -13,7 +13,6 @@ struct HourlyForecastsData : Codable{
 }
 
 struct hData: Codable{
-    let city : City
     let hourly : [HourlyForecast]
 }
 
@@ -25,6 +24,7 @@ struct HourlyForecast : Codable{
         date : String,
         hour : String,
         pop : String, //降水概率 百分比
+        qpf : String, //未来一小时降水量 毫米
         realFeel : String, //体感温度
         temp : String //实际温度
 }

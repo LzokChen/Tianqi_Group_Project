@@ -8,9 +8,6 @@
 import Foundation
 
 class HourlyForecastModel{
-    let name : String, //城市名称 （区）
-        pname : String, //省份名称 （省）
-        secondaryName : String //上级城市名称 （市）
     
     let condition : String, //气象
         conditionId : String,
@@ -19,14 +16,12 @@ class HourlyForecastModel{
         date : String, //日期
         hour : String, //小时
         pop : String, //降水概率 百分比
+        qpf : String, //未来一小时降水量 毫米
         realFeel : String, //体感温度
         temperature : String //实际温度
     
-    init(name: String, pname: String, secondaryName: String, condiction: String, conditionId: String, iconDay: String, iconNight: String, date: String, hour : String, pop : String, realFeel : String, temp : String) {
+    init(condiction: String, conditionId: String, iconDay: String, iconNight: String, date: String, hour : String, pop : String, qpf: String, realFeel : String, temp : String) {
         
-        self.name = name
-        self.pname = pname
-        self.secondaryName = secondaryName
         self.condition = condiction
         self.conditionId = conditionId
         self.iconDay = iconDay
@@ -34,6 +29,7 @@ class HourlyForecastModel{
         self.date = date
         self.hour = hour
         self.pop = pop
+        self.qpf = qpf
         self.realFeel = realFeel
         self.temperature = temp
     }

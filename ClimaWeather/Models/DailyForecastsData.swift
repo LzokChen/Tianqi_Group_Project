@@ -13,7 +13,6 @@ struct DailyForecastsData: Codable {
 }
 
 struct dData: Codable{
-    let city : City
     let forecast : [DailyForecast]
 }
 
@@ -24,6 +23,7 @@ struct DailyForecast : Codable{
         conditionIdNight : String, //夜间icon
         predictDate : String,
         pop : String, //降水概率 百分比
+        
         tempDay : String, //白天温度，最高温度
         tempNight : String, //夜晚温度，最低温度
         windDirDay : String, //白天风向
