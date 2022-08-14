@@ -17,5 +17,6 @@ target 'ClimaWeather' do
 
 pod 'Alamofire'
 pod 'lottie-ios'
+pod 'SDWebImageSwiftUI'
 
 end

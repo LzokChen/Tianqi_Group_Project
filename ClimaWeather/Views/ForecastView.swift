@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Lottie
+import SDWebImageSwiftUI
 
 struct CurrentWeather:Hashable {
     let city : String
@@ -236,10 +237,10 @@ struct ForecastView: View, WeatherManagerDelegate {
                     }
                     .padding(.horizontal)
                 }
+
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
                 let _ = weatherManager.fetchWeather(address: "上海", withLatest: true)
-               
             }
         }
     }

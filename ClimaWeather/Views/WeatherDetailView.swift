@@ -4,8 +4,8 @@
 //
 //  Created by 刘峥炫 on 2022/8/12.
 //
-
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct WeatherDetail:Hashable {
     let updateTime : String
