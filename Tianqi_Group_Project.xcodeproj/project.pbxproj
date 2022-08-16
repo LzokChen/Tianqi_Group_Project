@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DEE6428AB606E00138EF8 /* TetrominoModel.m */; };
 		05B1598B28A601B900CC047D /* load.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B1598A28A601B900CC047D /* load.json */; };
 		05B1598D28A602CC00CC047D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B1598C28A602CC00CC047D /* LottieView.swift */; };
 		05B1598F28A6E7EF00CC047D /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B1598E28A6E7EF00CC047D /* RefreshableScrollView.swift */; };
@@ -60,6 +61,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051DEE6328AB605500138EF8 /* TetrominoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrominoModel.h; sourceTree = "<group>"; };
+		051DEE6428AB606E00138EF8 /* TetrominoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrominoModel.m; sourceTree = "<group>"; };
+		051DEE6628AB652B00138EF8 /* CellStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellStructures.h; sourceTree = "<group>"; };
 		05B1598A28A601B900CC047D /* load.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = load.json; sourceTree = "<group>"; };
 		05B1598C28A602CC00CC047D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		05B1598E28A6E7EF00CC047D /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
@@ -194,6 +198,9 @@
 				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
 				52561AF628AB49BB00FEA0E0 /* Info.plist */,
 				52561AF728AB49BB00FEA0E0 /* main.m */,
+				051DEE6328AB605500138EF8 /* TetrominoModel.h */,
+				051DEE6428AB606E00138EF8 /* TetrominoModel.m */,
+				051DEE6628AB652B00138EF8 /* CellStructures.h */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -511,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */,
+				051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */,
 				52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */,
 				52561AF828AB49BB00FEA0E0 /* main.m in Sources */,
 				52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */,
