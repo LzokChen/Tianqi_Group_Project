@@ -23,7 +23,7 @@ struct WeatherDetail:Hashable {
     let qpf : String
 }
 
-/* The View for "实习天气" screen. */
+/* The View for "实时天气" screen. */
 struct WeatherDetailView: View, WeatherManagerDelegate {
 
     

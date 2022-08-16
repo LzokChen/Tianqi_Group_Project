@@ -32,6 +32,12 @@
 		52FBB547289B6AA80079D684 /* PropertyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB542289B6AA80079D684 /* PropertyDemo.m */; };
 		52FBB548289B6AA80079D684 /* SortingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB544289B6AA80079D684 /* SortingDemo.m */; };
 		CC5AF2A1E8A06F58B03F9625 /* Pods_ClimaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */; };
+		F01FD0C828AA278400CEFD7B /* sunAndRain.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD0C728AA278400CEFD7B /* sunAndRain.json */; };
+		F01FD0E728AAA9DA00CEFD7B /* sunny.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD0E628AAA9DA00CEFD7B /* sunny.json */; };
+		F01FD10528AB4F1F00CEFD7B /* cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD10428AB4F1F00CEFD7B /* cloudy.json */; };
+		F01FD10728AB4FA800CEFD7B /* overcast.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD10628AB4FA800CEFD7B /* overcast.json */; };
+		F01FD10928AB53A400CEFD7B /* rainy.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD10828AB53A400CEFD7B /* rainy.json */; };
+		F01FD10B28AB54FE00CEFD7B /* snowy.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD10A28AB54FE00CEFD7B /* snowy.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,6 +88,12 @@
 		52FBB545289B6AA80079D684 /* PropertyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDemo.h; sourceTree = "<group>"; };
 		9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9AAC14B65F1839C56C1A47 /* Pods_Assignment_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F01FD0C728AA278400CEFD7B /* sunAndRain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunAndRain.json; sourceTree = "<group>"; };
+		F01FD0E628AAA9DA00CEFD7B /* sunny.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunny.json; sourceTree = "<group>"; };
+		F01FD10428AB4F1F00CEFD7B /* cloudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudy.json; sourceTree = "<group>"; };
+		F01FD10628AB4FA800CEFD7B /* overcast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = overcast.json; sourceTree = "<group>"; };
+		F01FD10828AB53A400CEFD7B /* rainy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainy.json; sourceTree = "<group>"; };
+		F01FD10A28AB54FE00CEFD7B /* snowy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowy.json; sourceTree = "<group>"; };
 		F6EA7880D37B7B2AD29098A9 /* Pods-Assignment 1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assignment 1.release.xcconfig"; path = "Target Support Files/Pods-Assignment 1/Pods-Assignment 1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +124,7 @@
 				5292A4A528A2536300A25F50 /* Info.plist */,
 				5239AEC428A21320001250BE /* ClimaWeatherApp.swift */,
 				5239AED028A21336001250BE /* Views */,
+				F01FD10C28AB561100CEFD7B /* New Group */,
 				5239AEC828A21323001250BE /* Assets.xcassets */,
 				5239AECA28A21323001250BE /* Preview Content */,
 				5292A47B28A2181A00A25F50 /* ClimaWeatherBridge.h */,
@@ -131,6 +144,7 @@
 		5239AED028A21336001250BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F01FD10D28AB562B00CEFD7B /* details */,
 				523D63D128A5F1DD00C2F1D2 /* ForecastView.swift */,
 				523D63D228A5F1DD00C2F1D2 /* WeatherDetailView.swift */,
 				5239AEC628A21320001250BE /* ContentView.swift */,
@@ -198,6 +212,26 @@
 				9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F01FD10C28AB561100CEFD7B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		F01FD10D28AB562B00CEFD7B /* details */ = {
+			isa = PBXGroup;
+			children = (
+				F01FD10428AB4F1F00CEFD7B /* cloudy.json */,
+				F01FD10628AB4FA800CEFD7B /* overcast.json */,
+				F01FD10A28AB54FE00CEFD7B /* snowy.json */,
+				F01FD10828AB53A400CEFD7B /* rainy.json */,
+				F01FD0C728AA278400CEFD7B /* sunAndRain.json */,
+				F01FD0E628AAA9DA00CEFD7B /* sunny.json */,
+			);
+			path = details;
 			sourceTree = "<group>";
 		};
 		FF5CDFBF0B7107B0FB7683B9 /* Pods */ = {
@@ -293,9 +327,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F01FD10728AB4FA800CEFD7B /* overcast.json in Resources */,
+				F01FD10B28AB54FE00CEFD7B /* snowy.json in Resources */,
 				5239AECC28A21323001250BE /* Preview Assets.xcassets in Resources */,
 				5239AEC928A21323001250BE /* Assets.xcassets in Resources */,
+				F01FD0E728AAA9DA00CEFD7B /* sunny.json in Resources */,
+				F01FD0C828AA278400CEFD7B /* sunAndRain.json in Resources */,
+				F01FD10928AB53A400CEFD7B /* rainy.json in Resources */,
 				05B1598B28A601B900CC047D /* load.json in Resources */,
+				F01FD10528AB4F1F00CEFD7B /* cloudy.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,19 +4,16 @@
 //
 //  Created by Mingyu Liu on 2022-08-11.
 //
-
-import Foundation
 import SwiftUI
 import Lottie
  
 struct LottieView: UIViewRepresentable {
-    let lottieFile: String
+    let lottieFile: String//传入JSON文件的名称
  
     let animationView = AnimationView()
  
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> some UIView {
         let view = UIView(frame: .zero)
- 
         animationView.animation = Animation.named(lottieFile)
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop

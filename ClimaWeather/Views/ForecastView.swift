@@ -84,6 +84,18 @@ struct ForecastView: View, WeatherManagerDelegate {
         hasUpdateWeather = true
     }
     
+    
+    func getCurrentWeather(description: String) ->String{
+        if(description == "多云" || description == "少云") {return "cloudy"}
+        else if(description == "晴" || description == "大部晴朗") {return "sunny"}
+        else if(description == "阴" ) {return "overcast"}
+        else if(description == "晴雨") {return "sunAndRain"}
+        else if(description == "阵雨" || description == "雷阵雨伴有冰雹" || description == "冰雹" || description == "冰针" || description == "冰粒" || description == "局部阵雨" || description == "小阵雨" || description == "强阵雨" || description == "暴雨" || description == "大暴雨" || description == "特大暴雨" || description == "冻雨" || description == "小雨" || description == "中雨" || description == "大雨" || description == "雨" || description == "小到中雨" || description == "雷阵雨") {return "rainy"}
+        else if(description == "阵雪" || description == "小阵雪" || description == "小到中雪" || description == "雨夹雪") {return "sonwy"}
+        else if(description == "雾" || description == "冻雾" || description == "沙尘暴" || description == "浮尘" || description == "尘卷风" || description == "扬沙" || description == "强沙尘暴" || description == "霾") {return "overcast"}
+                
+        return ""
+    }
 
     
     /* Return the day of week of any date */
@@ -138,7 +150,7 @@ struct ForecastView: View, WeatherManagerDelegate {
         } else {
             RefreshableScrollView{
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack{
+                    VStack(){
                         // Weather Card
                         VStack(alignment: .center){
                             // Location and time
@@ -153,17 +165,21 @@ struct ForecastView: View, WeatherManagerDelegate {
                             Spacer().frame(height: 35)
                             
                             // Temperature
-                            HStack(alignment: .top, spacing: 0){
-                                Text(currentWeather?.temperature ?? "Unknown Temperature")
-                                    .font(.system(size: 95, weight: .bold, design: .monospaced))
-                                Text("º")
-                                    .font(.system(size: 30, weight: .bold, design: .monospaced))
+                            HStack{
+                                HStack{
+                                    LottieView(lottieFile: getCurrentWeather(description: currentWeather?.description ?? "" ?? ""))
+                                        .frame(width: 160, height: 130)
+                                }
+                                HStack(alignment: .top, spacing: 0){
+                                    Text(currentWeather?.temperature ?? "Unknown Temperature")
+                                        .font(.system(size: 95, weight: .bold, design: .monospaced))
+                                    Text("º")
+                                        .font(.system(size: 30, weight: .bold, design: .monospaced))
+                                }
                             }
-                            
                             Spacer().frame(height: 2)
                             // Single description
                             Text(currentWeather?.description ?? "")
-                            
                             Spacer().frame(height: 15)
                             
                             // Presure Huminity Wind
@@ -205,6 +221,7 @@ struct ForecastView: View, WeatherManagerDelegate {
                                             .scaledToFill()
                                         Spacer().frame(height: 7)
                                         Text(weather.temperature + "º")
+                                            
                                     }
                                 }
                             }
