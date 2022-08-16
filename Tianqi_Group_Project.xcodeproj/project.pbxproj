@@ -19,6 +19,13 @@
 		523D63D428A5F1DE00C2F1D2 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523D63D228A5F1DD00C2F1D2 /* WeatherDetailView.swift */; };
 		52561AB228A716FD00FEA0E0 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52561AB128A716FD00FEA0E0 /* WeatherModel.swift */; };
 		52561AB428A7355A00FEA0E0 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52561AB328A7355A00FEA0E0 /* CityModel.swift */; };
+		52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AE628AB49BA00FEA0E0 /* AppDelegate.m */; };
+		52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */; };
+		52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AEC28AB49BA00FEA0E0 /* ViewController.m */; };
+		52561AF028AB49BA00FEA0E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AEE28AB49BA00FEA0E0 /* Main.storyboard */; };
+		52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF128AB49BB00FEA0E0 /* Assets.xcassets */; };
+		52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */; };
+		52561AF828AB49BB00FEA0E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AF728AB49BB00FEA0E0 /* main.m */; };
 		5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47C28A2196800A25F50 /* WeatherManager.swift */; };
 		5292A47F28A2198600A25F50 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */; };
 		5292A48128A2199500A25F50 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */; };
@@ -62,6 +69,18 @@
 		523D63D228A5F1DD00C2F1D2 /* WeatherDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
 		52561AB128A716FD00FEA0E0 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		52561AB328A7355A00FEA0E0 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		52561AE328AB49B900FEA0E0 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52561AE528AB49BA00FEA0E0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		52561AE628AB49BA00FEA0E0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		52561AE828AB49BA00FEA0E0 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		52561AEB28AB49BA00FEA0E0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		52561AEC28AB49BA00FEA0E0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		52561AEF28AB49BA00FEA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		52561AF128AB49BB00FEA0E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52561AF428AB49BB00FEA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		52561AF628AB49BB00FEA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52561AF728AB49BB00FEA0E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5292A47B28A2181A00A25F50 /* ClimaWeatherBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClimaWeatherBridge.h; sourceTree = "<group>"; };
 		5292A47C28A2196800A25F50 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
@@ -91,6 +110,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC5AF2A1E8A06F58B03F9625 /* Pods_ClimaWeather.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52561AE028AB49B900FEA0E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +166,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		52561AE428AB49B900FEA0E0 /* Tetris */ = {
+			isa = PBXGroup;
+			children = (
+				52561AE528AB49BA00FEA0E0 /* AppDelegate.h */,
+				52561AE628AB49BA00FEA0E0 /* AppDelegate.m */,
+				52561AE828AB49BA00FEA0E0 /* SceneDelegate.h */,
+				52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */,
+				52561AEB28AB49BA00FEA0E0 /* ViewController.h */,
+				52561AEC28AB49BA00FEA0E0 /* ViewController.m */,
+				52561AEE28AB49BA00FEA0E0 /* Main.storyboard */,
+				52561AF128AB49BB00FEA0E0 /* Assets.xcassets */,
+				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
+				52561AF628AB49BB00FEA0E0 /* Info.plist */,
+				52561AF728AB49BB00FEA0E0 /* main.m */,
+			);
+			path = Tetris;
+			sourceTree = "<group>";
+		};
 		5292A48228A2199F00A25F50 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +206,7 @@
 			children = (
 				52FBB53A289B6A970079D684 /* Assignment 1 */,
 				5239AEC328A21320001250BE /* ClimaWeather */,
+				52561AE428AB49B900FEA0E0 /* Tetris */,
 				52FBB50A2890B8320079D684 /* Products */,
 				FF5CDFBF0B7107B0FB7683B9 /* Pods */,
 				54124684C493024194FBE89E /* Frameworks */,
@@ -173,6 +218,7 @@
 			children = (
 				52FBB539289B6A970079D684 /* Assignment 1 */,
 				5239AEC228A21320001250BE /* ClimaWeather.app */,
+				52561AE328AB49B900FEA0E0 /* Tetris.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,6 +279,23 @@
 			productReference = 5239AEC228A21320001250BE /* ClimaWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
+		52561AE228AB49B900FEA0E0 /* Tetris */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52561AFB28AB49BB00FEA0E0 /* Build configuration list for PBXNativeTarget "Tetris" */;
+			buildPhases = (
+				52561ADF28AB49B900FEA0E0 /* Sources */,
+				52561AE028AB49B900FEA0E0 /* Frameworks */,
+				52561AE128AB49B900FEA0E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tetris;
+			productName = Tetris;
+			productReference = 52561AE328AB49B900FEA0E0 /* Tetris.app */;
+			productType = "com.apple.product-type.application";
+		};
 		52FBB538289B6A970079D684 /* Assignment 1 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52FBB53D289B6A970079D684 /* Build configuration list for PBXNativeTarget "Assignment 1" */;
@@ -264,6 +327,9 @@
 					5239AEC128A21320001250BE = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					52561AE228AB49B900FEA0E0 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					52FBB538289B6A970079D684 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -284,6 +350,7 @@
 			targets = (
 				52FBB538289B6A970079D684 /* Assignment 1 */,
 				5239AEC128A21320001250BE /* ClimaWeather */,
+				52561AE228AB49B900FEA0E0 /* Tetris */,
 			);
 		};
 /* End PBXProject section */
@@ -296,6 +363,16 @@
 				5239AECC28A21323001250BE /* Preview Assets.xcassets in Resources */,
 				5239AEC928A21323001250BE /* Assets.xcassets in Resources */,
 				05B1598B28A601B900CC047D /* load.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52561AE128AB49B900FEA0E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */,
+				52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */,
+				52561AF028AB49BA00FEA0E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +466,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52561ADF28AB49B900FEA0E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */,
+				52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */,
+				52561AF828AB49BB00FEA0E0 /* main.m in Sources */,
+				52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52FBB535289B6A970079D684 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,6 +489,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		52561AEE28AB49BA00FEA0E0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52561AEF28AB49BA00FEA0E0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52561AF428AB49BB00FEA0E0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5239AECE28A21323001250BE /* Debug */ = {
@@ -469,6 +576,61 @@
 				SWIFT_OBJC_BRIDGING_HEADER = ClimaWeather/ClimaWeatherBridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		52561AF928AB49BB00FEA0E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianqi.Tetris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		52561AFA28AB49BB00FEA0E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tetris/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tianqi.Tetris;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -616,6 +778,15 @@
 			buildConfigurations = (
 				5239AECE28A21323001250BE /* Debug */,
 				5239AECF28A21323001250BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52561AFB28AB49BB00FEA0E0 /* Build configuration list for PBXNativeTarget "Tetris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52561AF928AB49BB00FEA0E0 /* Debug */,
+				52561AFA28AB49BB00FEA0E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
