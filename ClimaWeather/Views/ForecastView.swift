@@ -39,6 +39,8 @@ struct ForecastView: View, WeatherManagerDelegate {
     @State private var currentWeather: CurrentWeather? = nil
     @State private var dailyWeathers = [DailyWeather]()
     @State private var hourlyWeathers = [HourlyWeather]()
+    
+    @State var showSheet:Bool = false
 
     
     //MARK: - WeatherManagerDelegate functions
@@ -136,7 +138,7 @@ struct ForecastView: View, WeatherManagerDelegate {
         let _ = weatherManager.addDelegate(with: self)
         
         if (!hasUpdateWeather) {
-            let _ = weatherManager.fetchWeather(address: "上海", withLatest: false)
+            let _ = weatherManager.fetchWeather(address: currentWeather?.city ?? "上海", withLatest: false)
         }
         
         // When data hasn't been fetched, show the loading animation.
@@ -155,9 +157,22 @@ struct ForecastView: View, WeatherManagerDelegate {
                         VStack(alignment: .center){
                             // Location and time
                             HStack{
-                                Image(systemName: "location.fill")
-                                Text(currentWeather?.city ?? "Unknown City")
-                                    .fontWeight(.bold)
+                                Button(action: {
+                                    showSheet = true
+                                }, label: {
+                                    HStack{
+                                        Image(systemName: "location.fill")
+                                        Text(currentWeather?.city ?? "Unknown City")
+                                            .fontWeight(.bold)
+                                    }
+                                    .padding(.horizontal, 5)
+                                    .padding(.vertical, 2)
+                                    .background(Color.blue.cornerRadius(50))
+                                }).sheet(isPresented: $showSheet, onDismiss: {
+                                    showSheet = false
+                                },content: {
+                                    SearchView()
+                                })
                                 Spacer()
                                 Text("更新时间:"+(currentWeather?.updateTime ?? "Unknown Time"))
                             }
@@ -257,9 +272,10 @@ struct ForecastView: View, WeatherManagerDelegate {
 
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
-                let _ = weatherManager.fetchWeather(address: "上海", withLatest: true)
+                let _ = weatherManager.fetchWeather(address: currentWeather?.city ?? "上海", withLatest: true)
             }
         }
+//        .EnvironmentObject(weatherManager)
     }
 }
 
