@@ -39,6 +39,9 @@
 		52FBB547289B6AA80079D684 /* PropertyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB542289B6AA80079D684 /* PropertyDemo.m */; };
 		52FBB548289B6AA80079D684 /* SortingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB544289B6AA80079D684 /* SortingDemo.m */; };
 		CC5AF2A1E8A06F58B03F9625 /* Pods_ClimaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */; };
+		CEF8381028AB6D75000C33B5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8380F28AB6D75000C33B5 /* SearchView.swift */; };
+		CEF8381228AB6DE7000C33B5 /* CityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8381128AB6DE7000C33B5 /* CityLocation.swift */; };
+		CEF8381428AB727D000C33B5 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8381328AB727D000C33B5 /* LocationViewModel.swift */; };
 		F01FD0C828AA278400CEFD7B /* sunAndRain.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD0C728AA278400CEFD7B /* sunAndRain.json */; };
 		F01FD0E728AAA9DA00CEFD7B /* sunny.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD0E628AAA9DA00CEFD7B /* sunny.json */; };
 		F01FD10528AB4F1F00CEFD7B /* cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = F01FD10428AB4F1F00CEFD7B /* cloudy.json */; };
@@ -106,6 +109,9 @@
 		52FBB544289B6AA80079D684 /* SortingDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingDemo.m; sourceTree = "<group>"; };
 		52FBB545289B6AA80079D684 /* PropertyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDemo.h; sourceTree = "<group>"; };
 		9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF8380F28AB6D75000C33B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		CEF8381128AB6DE7000C33B5 /* CityLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLocation.swift; sourceTree = "<group>"; };
+		CEF8381328AB727D000C33B5 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		EC9AAC14B65F1839C56C1A47 /* Pods_Assignment_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assignment_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01FD0C728AA278400CEFD7B /* sunAndRain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunAndRain.json; sourceTree = "<group>"; };
 		F01FD0E628AAA9DA00CEFD7B /* sunny.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunny.json; sourceTree = "<group>"; };
@@ -150,7 +156,6 @@
 				5292A4A528A2536300A25F50 /* Info.plist */,
 				5239AEC428A21320001250BE /* ClimaWeatherApp.swift */,
 				5239AED028A21336001250BE /* Views */,
-				F01FD10C28AB561100CEFD7B /* New Group */,
 				5239AEC828A21323001250BE /* Assets.xcassets */,
 				5239AECA28A21323001250BE /* Preview Content */,
 				5292A47B28A2181A00A25F50 /* ClimaWeatherBridge.h */,
@@ -176,6 +181,7 @@
 				5239AEC628A21320001250BE /* ContentView.swift */,
 				05B1598C28A602CC00CC047D /* LottieView.swift */,
 				05B1598E28A6E7EF00CC047D /* RefreshableScrollView.swift */,
+				CEF8380F28AB6D75000C33B5 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +217,8 @@
 				5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */,
 				52561AB328A7355A00FEA0E0 /* CityModel.swift */,
 				5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */,
+				CEF8381128AB6DE7000C33B5 /* CityLocation.swift */,
+				CEF8381328AB727D000C33B5 /* LocationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,13 +266,6 @@
 				9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F01FD10C28AB561100CEFD7B /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F01FD10D28AB562B00CEFD7B /* details */ = {
@@ -490,9 +491,11 @@
 				5292A4BB28A31E7E00A25F50 /* DailyForecastModel.swift in Sources */,
 				5292A4B528A305E100A25F50 /* HourlyForecastModel.swift in Sources */,
 				5292A4BD28A3224B00A25F50 /* DailyForecastsData.swift in Sources */,
+				CEF8381428AB727D000C33B5 /* LocationViewModel.swift in Sources */,
 				5292A4B328A2F44B00A25F50 /* LocationData.swift in Sources */,
 				52561AB228A716FD00FEA0E0 /* WeatherModel.swift in Sources */,
 				5292A47F28A2198600A25F50 /* CurrentWeatherData.swift in Sources */,
+				CEF8381028AB6D75000C33B5 /* SearchView.swift in Sources */,
 				05B1598F28A6E7EF00CC047D /* RefreshableScrollView.swift in Sources */,
 				5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */,
 				52561AB428A7355A00FEA0E0 /* CityModel.swift in Sources */,
@@ -503,6 +506,7 @@
 				523D63D428A5F1DE00C2F1D2 /* WeatherDetailView.swift in Sources */,
 				5239AEC728A21320001250BE /* ContentView.swift in Sources */,
 				5239AEC528A21320001250BE /* ClimaWeatherApp.swift in Sources */,
+				CEF8381228AB6DE7000C33B5 /* CityLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ClimaWeather/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J7UL7M7KLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClimaWeather/Info.plist;
@@ -594,7 +598,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ClimaWeather/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J7UL7M7KLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClimaWeather/Info.plist;

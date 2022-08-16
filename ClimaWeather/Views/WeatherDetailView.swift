@@ -74,7 +74,7 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
         let _ = weatherManager.addDelegate(with: self)
         
         if (!hasUpdateWeather) {
-            let _ = weatherManager.fetchWeather(address: "上海", withLatest: false)
+            let _ = weatherManager.fetchWeather(address: weatherDetail?.city ?? "上海", withLatest: false)
         }
         
         // When data hasn't been fetched, show the loading animation.
@@ -128,7 +128,7 @@ struct WeatherDetailView: View, WeatherManagerDelegate {
                 }
             } onRefresh: {
                 // Fetch all data again when user pulls to refresh the screen.
-                let _ = weatherManager.fetchWeather(address: "上海", withLatest: true)
+                let _ = weatherManager.fetchWeather(address: weatherDetail?.city ?? "上海", withLatest: true)
             }
         }
     }
@@ -152,18 +152,20 @@ struct DetailCard: View {
                 HStack{
                     Image(systemName: icon)
                     Text(detailText)
+                        .fontWeight(.bold)
                 }
                 Spacer().frame(height: 10)
                 Text(detailDescripe)
                     .font(.system(size: 28, weight: .heavy))
                 Spacer()
                 Text(singleDescripe)
+                    .fontWeight(.bold)
             }
             Spacer()
         }
         .padding()
         .frame(width: UIScreen.main.bounds.width/2*0.80, height: UIScreen.main.bounds.width/2*0.80)
-        .background(Color.secondary.opacity(0.3).cornerRadius(15))
-        .foregroundColor(.secondary)
+        .background(Color.secondary.opacity(0.5).cornerRadius(15))
+        .foregroundColor(.white)
     }
 }
