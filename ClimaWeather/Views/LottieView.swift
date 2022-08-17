@@ -29,7 +29,24 @@ struct LottieView: UIViewRepresentable {
         return view
     }
  
-    func updateUIView(_ uiView: UIViewType, context: Context) {
- 
+    func updateUIView(_ uiView: UIViewType, context: UIViewRepresentableContext<LottieView>) {
+        uiView.subviews.forEach({ sub in
+                    sub.removeFromSuperview()
+                })
+            
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        uiView.addSubview(animationView)
+
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalTo: uiView.widthAnchor),
+            animationView.heightAnchor.constraint(equalTo: uiView.heightAnchor)
+        ])
+
+        animationView.animation = Animation.named(lottieFile)
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
     }
+    
+    
 }
