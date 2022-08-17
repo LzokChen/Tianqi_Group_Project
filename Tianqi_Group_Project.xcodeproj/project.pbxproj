@@ -24,7 +24,6 @@
 		52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AE628AB49BA00FEA0E0 /* AppDelegate.m */; };
 		52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */; };
 		52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AEC28AB49BA00FEA0E0 /* ViewController.m */; };
-		52561AF028AB49BA00FEA0E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AEE28AB49BA00FEA0E0 /* Main.storyboard */; };
 		52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF128AB49BB00FEA0E0 /* Assets.xcassets */; };
 		52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */; };
 		52561AF828AB49BB00FEA0E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AF728AB49BB00FEA0E0 /* main.m */; };
@@ -41,6 +40,9 @@
 		52FBB547289B6AA80079D684 /* PropertyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB542289B6AA80079D684 /* PropertyDemo.m */; };
 		52FBB548289B6AA80079D684 /* SortingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB544289B6AA80079D684 /* SortingDemo.m */; };
 		CC5AF2A1E8A06F58B03F9625 /* Pods_ClimaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */; };
+		CE9882C728AD8C7B00F6BE5F /* TetrisGameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9882C628AD8C7B00F6BE5F /* TetrisGameViewModel.m */; };
+		CE9882CB28AD8D5300F6BE5F /* TetrisGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9882CA28AD8D5300F6BE5F /* TetrisGameModel.m */; };
+		CE9882D128AD91BE00F6BE5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9882D028AD91BE00F6BE5F /* Main.storyboard */; };
 		CEF8381028AB6D75000C33B5 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8380F28AB6D75000C33B5 /* SearchView.swift */; };
 		CEF8381228AB6DE7000C33B5 /* CityLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8381128AB6DE7000C33B5 /* CityLocation.swift */; };
 		CEF8381428AB727D000C33B5 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8381328AB727D000C33B5 /* LocationViewModel.swift */; };
@@ -91,7 +93,6 @@
 		52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		52561AEB28AB49BA00FEA0E0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		52561AEC28AB49BA00FEA0E0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		52561AEF28AB49BA00FEA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52561AF128AB49BB00FEA0E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52561AF428AB49BB00FEA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52561AF628AB49BB00FEA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +116,11 @@
 		52FBB544289B6AA80079D684 /* SortingDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingDemo.m; sourceTree = "<group>"; };
 		52FBB545289B6AA80079D684 /* PropertyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDemo.h; sourceTree = "<group>"; };
 		9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9882C528AD8C7B00F6BE5F /* TetrisGameViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrisGameViewModel.h; sourceTree = "<group>"; };
+		CE9882C628AD8C7B00F6BE5F /* TetrisGameViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrisGameViewModel.m; sourceTree = "<group>"; };
+		CE9882C928AD8D5300F6BE5F /* TetrisGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrisGameModel.h; sourceTree = "<group>"; };
+		CE9882CA28AD8D5300F6BE5F /* TetrisGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrisGameModel.m; sourceTree = "<group>"; };
+		CE9882D028AD91BE00F6BE5F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CEF8380F28AB6D75000C33B5 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		CEF8381128AB6DE7000C33B5 /* CityLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLocation.swift; sourceTree = "<group>"; };
 		CEF8381328AB727D000C33B5 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
@@ -195,21 +201,18 @@
 		52561AE428AB49B900FEA0E0 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
+				CE9882C428AD8AFC00F6BE5F /* View */,
+				CE9882C328AD8AD300F6BE5F /* ViewModel */,
+				CE9882C228AD8ABE00F6BE5F /* Model */,
 				52561AE528AB49BA00FEA0E0 /* AppDelegate.h */,
 				52561AE628AB49BA00FEA0E0 /* AppDelegate.m */,
 				52561AE828AB49BA00FEA0E0 /* SceneDelegate.h */,
 				52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */,
-				52561AEB28AB49BA00FEA0E0 /* ViewController.h */,
-				52561AEC28AB49BA00FEA0E0 /* ViewController.m */,
-				52561AEE28AB49BA00FEA0E0 /* Main.storyboard */,
+				CE9882D028AD91BE00F6BE5F /* Main.storyboard */,
 				52561AF128AB49BB00FEA0E0 /* Assets.xcassets */,
 				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
 				52561AF628AB49BB00FEA0E0 /* Info.plist */,
 				52561AF728AB49BB00FEA0E0 /* main.m */,
-				051DEE6328AB605500138EF8 /* TetrominoModel.h */,
-				051DEE6428AB606E00138EF8 /* TetrominoModel.m */,
-				051DEE6628AB652B00138EF8 /* CellStructures.h */,
-				05A2822728AC201A00E19D38 /* CellStructures.m */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -276,6 +279,37 @@
 				9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE9882C228AD8ABE00F6BE5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				051DEE6328AB605500138EF8 /* TetrominoModel.h */,
+				051DEE6428AB606E00138EF8 /* TetrominoModel.m */,
+				051DEE6628AB652B00138EF8 /* CellStructures.h */,
+				05A2822728AC201A00E19D38 /* CellStructures.m */,
+				CE9882C928AD8D5300F6BE5F /* TetrisGameModel.h */,
+				CE9882CA28AD8D5300F6BE5F /* TetrisGameModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE9882C328AD8AD300F6BE5F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE9882C528AD8C7B00F6BE5F /* TetrisGameViewModel.h */,
+				CE9882C628AD8C7B00F6BE5F /* TetrisGameViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE9882C428AD8AFC00F6BE5F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52561AEB28AB49BA00FEA0E0 /* ViewController.h */,
+				52561AEC28AB49BA00FEA0E0 /* ViewController.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F01FD10D28AB562B00CEFD7B /* details */ = {
@@ -421,9 +455,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9882D128AD91BE00F6BE5F /* Main.storyboard in Resources */,
 				52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */,
 				52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */,
-				52561AF028AB49BA00FEA0E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,9 +560,11 @@
 			files = (
 				52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */,
 				051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */,
+				CE9882CB28AD8D5300F6BE5F /* TetrisGameModel.m in Sources */,
 				52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */,
 				05A2822828AC201A00E19D38 /* CellStructures.m in Sources */,
 				52561AF828AB49BB00FEA0E0 /* main.m in Sources */,
+				CE9882C728AD8C7B00F6BE5F /* TetrisGameViewModel.m in Sources */,
 				52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,14 +583,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		52561AEE28AB49BA00FEA0E0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52561AEF28AB49BA00FEA0E0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -644,6 +672,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J7UL7M7KLH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tetris/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -651,7 +680,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,6 +700,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J7UL7M7KLH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tetris/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -678,7 +708,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
