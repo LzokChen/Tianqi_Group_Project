@@ -163,7 +163,6 @@
 				5239AEC828A21323001250BE /* Assets.xcassets */,
 				52561AFD28ACC2BC00FEA0E0 /* ClimaWeatherBridge.h */,
 				5239AEC428A21320001250BE /* ClimaWeatherApp.swift */,
-				52561AFC28ACC0D800FEA0E0 /* Controller */,
 				5292A48228A2199F00A25F50 /* Models */,
 				5239AED028A21336001250BE /* Views */,
 				5239AECA28A21323001250BE /* Preview Content */,
@@ -215,18 +214,11 @@
 			path = Tetris;
 			sourceTree = "<group>";
 		};
-		52561AFC28ACC0D800FEA0E0 /* Controller */ = {
+		5292A48228A2199F00A25F50 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5292A47C28A2196800A25F50 /* WeatherManager.swift */,
 				CEF8381328AB727D000C33B5 /* LocationViewModel.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		5292A48228A2199F00A25F50 /* Models */ = {
-			isa = PBXGroup;
-			children = (
 				52561AB128A716FD00FEA0E0 /* WeatherModel.swift */,
 				5292A4B428A305E100A25F50 /* HourlyForecastModel.swift */,
 				5292A4BA28A31E7E00A25F50 /* DailyForecastModel.swift */,
