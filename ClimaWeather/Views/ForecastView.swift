@@ -181,7 +181,7 @@ struct ForecastView: View, WeatherManagerDelegate {
                             // Temperature
                             HStack{
                                 HStack{
-                                    LottieView(lottieFile: getCurrentWeather(description: currentWeather?.description ?? "" ?? ""))
+                                    LottieView(lottieFile: getCurrentWeather(description: currentWeather?.description ?? "" ))
                                         .frame(width: 160, height: 130)
                                 }
                                 HStack(alignment: .top, spacing: 0){

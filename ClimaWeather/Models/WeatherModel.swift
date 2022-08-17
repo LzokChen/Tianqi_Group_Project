@@ -7,7 +7,8 @@
 
 import Foundation
 
-class WeatherModel: Codable{
+//用于存储获取的天气数据
+struct WeatherModel: Codable{
     let city : CityModel
     
     let current : CurrentWeatherModel
@@ -16,12 +17,4 @@ class WeatherModel: Codable{
     
     let updateTime : Date
     
-    init(city: CityModel, current : CurrentWeatherModel, hourlyForecasts : [HourlyForecastModel], dailyForecasts: [DailyForecastModel]) {
-        self.city = city
-        self.current = current
-        self.hourlyForecasts = hourlyForecasts
-        self.dailyForecasts = dailyForecasts
-        self.updateTime = Date()
-        
-    }
 }

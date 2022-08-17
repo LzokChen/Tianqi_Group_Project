@@ -7,7 +7,8 @@
 
 import Foundation
 
-class DailyForecastModel: Codable{
+//用于存储获取的单日的天气预报
+struct DailyForecastModel: Codable{
     
     let conditionDay : String, //白天气象
         conditionNight : String, //夜间气象
@@ -21,22 +22,4 @@ class DailyForecastModel: Codable{
         windDirNight : String, //夜晚风向
         windLevelDay : String,  //白天风力等级
         windLevelNight : String //夜晚风力等级
-    
-    init(conditionDay: String, conditionNight: String, conditionIdDay: String, conditionIdNight: String, predictDate: String, pop : String, tempDay : String, tempNight : String, windDirDay: String, windDirNight: String, windLevelDay: String, windLevelNight: String) {
-        
-        self.conditionDay = conditionDay
-        self.conditionNight = conditionNight
-        self.conditionIdDay = conditionIdDay
-        self.conditionIdNight = conditionIdNight
-        self.predictDate = predictDate
-        self.pop = pop
-        self.tempDay = tempDay
-        self.tempNight = tempNight
-        self.windDirDay = windDirDay
-        self.windDirNight = windDirNight
-        self.windLevelDay = windLevelDay
-        self.windLevelNight = windLevelNight
-    }
-    
-        
 }

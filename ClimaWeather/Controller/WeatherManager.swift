@@ -41,7 +41,16 @@ class WeatherManager : ObservableObject{
         return self.weather == nil
     }
     
-    //MARK: - Persisting Weather Data
+    func lastUpdateTime()->Date {
+        if let safeWather = self.weather{
+            return safeWather.updateTime
+        }
+        else{
+            return Date(timeIntervalSince1970: 0)
+        }
+    }
+    
+    //MARK: - Persisting Weather Data 数据本地存储与加载
     private static func fileURL() throws -> URL{
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("weather.data")
@@ -87,7 +96,7 @@ class WeatherManager : ObservableObject{
     }
     
 
-    //MARK: - Fetch functions
+    //MARK: - Fetch functions 通过HTTP请求获取天气数据
     func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, withLatest: Bool){
         if (!withLatest && self.weather == nil){
             print("loading")
@@ -102,7 +111,7 @@ class WeatherManager : ObservableObject{
                         for delegate in self.delegates {
                             delegate.didUpdateWeather(self, weather: self.weather!)
                         }
-                    }else{
+                    }else{ //如果本地没有数据
                         self.requestWeather(latitude: latitude, longitude: longitude)
                     }
                 
@@ -165,7 +174,7 @@ class WeatherManager : ObservableObject{
     }
 
     
-    //MARK: - HTTP requests with Alamofire
+    //MARK: - HTTP requests with Alamofire 通过Alamofire发送HTTP请求以获取数据
     private func requestWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees){
         var city : CityModel?
         var current : CurrentWeatherModel?
@@ -202,7 +211,7 @@ class WeatherManager : ObservableObject{
                     let safeHourlyForecasts = hourlyForecasts,
                     let safeDailyForecasts = dailyForecasts{
                     self.weather = WeatherModel(city: safeCity,
-                                                current: safeCurrent, hourlyForecasts: safeHourlyForecasts, dailyForecasts: safeDailyForecasts)
+                                                current: safeCurrent, hourlyForecasts: safeHourlyForecasts, dailyForecasts: safeDailyForecasts, updateTime: Date())
                     print("Successfully requesting the latest weather")
                    
                     WeatherManager.save(weatherModel: self.weather!) { result in
@@ -291,7 +300,7 @@ class WeatherManager : ObservableObject{
         }
     }
     
-    //MARK: - JSON parsers
+    //MARK: - JSON parsers 对HTTP 请求返回的数据进行解码
     private func parseLocationData(_ locationData: Data) -> CLLocation?{
         let decoder = JSONDecoder()
         do{
@@ -313,8 +322,8 @@ class WeatherManager : ObservableObject{
             let condition = decodedData.data.condition
             
             let cityModel = CityModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname)
-            let currentWeatherModel = CurrentWeatherModel( condition: condition.condition, conditionId: condition.conditionId, humidity: condition.humidity, weatherIcon: condition.icon,
-                                                     pressure: condition.pressure, realFeel: condition.realFeel, temperature: condition.temp, uvi: condition.uvi, vis: condition.vis,
+            let currentWeatherModel = CurrentWeatherModel( condition: condition.condition, conditionId: condition.conditionId, humidity: condition.humidity, icon: condition.icon,
+                                                           pressure: condition.pressure, realFeel: condition.realFeel, temp: condition.temp, uvi: condition.uvi, vis: condition.vis,
                                                      windDegrees: condition.windDegrees, windDir: condition.windDir, windLevel: condition.windLevel, windSpeed: condition.windSpeed,
                                                      tips: condition.tips, sunRise: condition.sunRise, sunSet: condition.sunSet)
             return (cityModel, currentWeatherModel)
@@ -333,7 +342,7 @@ class WeatherManager : ObservableObject{
             var forecastModels : [HourlyForecastModel] = []
             
             for forecast in forecasts {
-                let model = HourlyForecastModel(condiction: forecast.condition, conditionId: forecast.conditionId,
+                let model = HourlyForecastModel(condition: forecast.condition, conditionId: forecast.conditionId,
                                                 iconDay: forecast.iconDay, iconNight: forecast.iconNight,
                                                 date: forecast.date, hour: forecast.hour,
                                                 pop: forecast.pop, qpf: forecast.qpf, realFeel: forecast.realFeel, temp: forecast.temp)

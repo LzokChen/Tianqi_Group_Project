@@ -7,7 +7,7 @@
 
 import Foundation
 
-//for json parsing
+//for parsing the json file
 struct CurrentWeatherData: Codable {   //Codable = Decodable, Encodable
     let data : wData
 }
