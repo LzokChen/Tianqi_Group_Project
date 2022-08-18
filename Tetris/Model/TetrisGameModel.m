@@ -14,6 +14,7 @@
     self.numColumns = 10;
     self.score = 0;
     self.speed = 1.0;
+    self.gameIsPause = true;
     
     self.gameBoard = [NSMutableArray array];
     for (int col = 0; col < self.numColumns; col++){
@@ -44,6 +45,8 @@
 }
 
 - (void)resumeGame{
+    NSLog(@"Resuming Game");
+    self.gameIsPause = false;
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.speed repeats:true block:^(NSTimer * _Nonnull timer) {
         [self runEngine];
@@ -51,6 +54,8 @@
 }
 
 - (void) pauseGame{
+    NSLog(@"Pausing Game");
+    self.gameIsPause = true;
     [self.timer invalidate];
 }
 
@@ -67,7 +72,7 @@
         
         self.tetromino = [TetrominoModel createNewTetrominoBy:self.numRows andBy:self.numColumns];
         
-        NSLog(@"Spawning new Tetromino %@", [TetrominoModel getBlockTypeBy:self.tetromino.blockType]);
+        NSLog(@"Spawning new Tetromino %@, origin: (%d, %d)", [TetrominoModel getBlockTypeBy:self.tetromino.blockType], self.tetromino.origin.row, self.tetromino.origin.column);
         if (![self isValidTetromino:self.tetromino]){
             NSLog(@"Game Over! Final score: %d", self.score);
             [self pauseGame];
@@ -77,7 +82,7 @@
     
     //see about moving down
     if ([self moveTetrominoDown]){
-        NSLog(@"Moving Tetromino down");
+        NSLog(@"Moving Tetromino down, origin: (%d, %d)", self.tetromino.origin.row, self.tetromino.origin.column);
         return;
     }
     

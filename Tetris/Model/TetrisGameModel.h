@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (atomic, nullable) NSTimer *timer;
 @property (nonatomic, assign) double speed;
+@property (atomic, assign) Boolean gameIsPause;
 
 //shadow
 

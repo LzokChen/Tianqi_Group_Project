@@ -62,26 +62,31 @@
 }
 
 - (void)UpTapped:(UIGestureRecognizer*)gesture{
-    NSLog(@"UP Clicked!");
+    NSLog(@"UP Clicked - Rotation!");
+    [self.tetrisGameViewModel.tetrisGameModel rotateTetrominoWithClockwise:true];
 //    TetrisGameSquare *square = [[_gameboard objectAtIndex:9] objectAtIndex:14];
 //    square.color = UIColor.redColor;
 //    [_myCollectionView reloadData];
 }
 - (void)DownTapped:(UIGestureRecognizer*)gesture{
+    [self.tetrisGameViewModel.tetrisGameModel moveTetrominoDown];
     NSLog(@"DOWN Clicked!");
 }
 - (void)LeftTapped:(UIGestureRecognizer*)gesture{
+    [self.tetrisGameViewModel.tetrisGameModel moveTetrominoLeft];
     NSLog(@"LEFT Clicked!");
 }
 - (void)RightTapped:(UIGestureRecognizer*)gesture{
+    [self.tetrisGameViewModel.tetrisGameModel moveTetrominoRight];
     NSLog(@"RIGHT Clicked!");
 }
 - (void)PlayTapped:(UIGestureRecognizer*)gesture{
-//    NSLog(@"!PAUSE!");
     if(self.PauseButton.image == [UIImage systemImageNamed:@"pause"]){
+        [self.tetrisGameViewModel.tetrisGameModel pauseGame];
         NSLog(@"!PAUSE!");
         self.PauseButton.image = [UIImage systemImageNamed:@"play"];
     }else{
+        [self.tetrisGameViewModel.tetrisGameModel resumeGame];
         NSLog(@"!PLAY!");
         self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
     }
