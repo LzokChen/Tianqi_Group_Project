@@ -51,12 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-//@interface TetrisGameBlock : NSObject
-//
-//@property BlockType blockType;
-//
-//- (id)initWithType:(BlockType)blockType;
-//
-//@end
+@interface TetrisGameBlock : NSObject
+
+@property BlockType blockType;
+
+- (id)initWithType:(BlockType)blockType;
+
+@end
 
 NS_ASSUME_NONNULL_END
