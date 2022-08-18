@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DEE6428AB606E00138EF8 /* TetrominoModel.m */; };
-		05A2822828AC201A00E19D38 /* CellStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A2822728AC201A00E19D38 /* CellStructures.m */; };
 		05B1598B28A601B900CC047D /* load.json in Resources */ = {isa = PBXBuildFile; fileRef = 05B1598A28A601B900CC047D /* load.json */; };
 		05B1598D28A602CC00CC047D /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B1598C28A602CC00CC047D /* LottieView.swift */; };
 		05B1598F28A6E7EF00CC047D /* RefreshableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B1598E28A6E7EF00CC047D /* RefreshableScrollView.swift */; };
@@ -27,6 +26,7 @@
 		52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF128AB49BB00FEA0E0 /* Assets.xcassets */; };
 		52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */; };
 		52561AF828AB49BB00FEA0E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AF728AB49BB00FEA0E0 /* main.m */; };
+		52561AFF28ADDF6400FEA0E0 /* BlockStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */; };
 		5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47C28A2196800A25F50 /* WeatherManager.swift */; };
 		5292A47F28A2198600A25F50 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */; };
 		5292A48128A2199500A25F50 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */; };
@@ -69,8 +69,6 @@
 /* Begin PBXFileReference section */
 		051DEE6328AB605500138EF8 /* TetrominoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrominoModel.h; sourceTree = "<group>"; };
 		051DEE6428AB606E00138EF8 /* TetrominoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrominoModel.m; sourceTree = "<group>"; };
-		051DEE6628AB652B00138EF8 /* CellStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellStructures.h; sourceTree = "<group>"; };
-		05A2822728AC201A00E19D38 /* CellStructures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellStructures.m; sourceTree = "<group>"; };
 		05B1598A28A601B900CC047D /* load.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = load.json; sourceTree = "<group>"; };
 		05B1598C28A602CC00CC047D /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		05B1598E28A6E7EF00CC047D /* RefreshableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScrollView.swift; sourceTree = "<group>"; };
@@ -98,6 +96,8 @@
 		52561AF628AB49BB00FEA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52561AF728AB49BB00FEA0E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52561AFD28ACC2BC00FEA0E0 /* ClimaWeatherBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClimaWeatherBridge.h; sourceTree = "<group>"; };
+		52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BlockStructures.m; path = "/Users/lzokchen/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Tianqi_Group_Project/Tetris/Model/BlockStructures.m"; sourceTree = "<absolute>"; };
+		52561B0028ADDF6600FEA0E0 /* BlockStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlockStructures.h; path = "/Users/lzokchen/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Tianqi_Group_Project/Tetris/Model/BlockStructures.h"; sourceTree = "<absolute>"; };
 		5292A47C28A2196800A25F50 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
@@ -284,10 +284,10 @@
 		CE9882C228AD8ABE00F6BE5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				52561B0028ADDF6600FEA0E0 /* BlockStructures.h */,
+				52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */,
 				051DEE6328AB605500138EF8 /* TetrominoModel.h */,
 				051DEE6428AB606E00138EF8 /* TetrominoModel.m */,
-				051DEE6628AB652B00138EF8 /* CellStructures.h */,
-				05A2822728AC201A00E19D38 /* CellStructures.m */,
 				CE9882C928AD8D5300F6BE5F /* TetrisGameModel.h */,
 				CE9882CA28AD8D5300F6BE5F /* TetrisGameModel.m */,
 			);
@@ -561,8 +561,8 @@
 				52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */,
 				051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */,
 				CE9882CB28AD8D5300F6BE5F /* TetrisGameModel.m in Sources */,
+				52561AFF28ADDF6400FEA0E0 /* BlockStructures.m in Sources */,
 				52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */,
-				05A2822828AC201A00E19D38 /* CellStructures.m in Sources */,
 				52561AF828AB49BB00FEA0E0 /* main.m in Sources */,
 				CE9882C728AD8C7B00F6BE5F /* TetrisGameViewModel.m in Sources */,
 				52561AEA28AB49BA00FEA0E0 /* SceneDelegate.m in Sources */,

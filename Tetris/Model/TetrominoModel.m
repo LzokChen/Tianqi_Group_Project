@@ -10,7 +10,7 @@
 
 @implementation TetrominoModel
 
--(id)initWithOrigin:(BlcokLocation *)origin withType:(BlockType)type withRotation:(int)rotation {
+-(id)initWithOrigin:(BlockLocation *)origin withType:(BlockType)type withRotation:(int)rotation {
     self.origin = origin;
     self.blockType = type;
     self.rotation = rotation;
@@ -18,25 +18,25 @@
     return self;
 }
 
--(NSArray<BlcokLocation *> *)blocks {
-    return [TetrominoModel getBlocksBy:_blockType andBy:_rotation];
+-(NSArray<BlockLocation *> *)blocks {
+    return [TetrominoModel getBlocksWithBlockType:_blockType andWithRotation:_rotation];
 }
 
--(TetrominoModel *)moveBy:(int)row andBy:(int)col {
-    BlcokLocation *newOrigin = [[BlcokLocation alloc] initWithRow:_origin.row + row andCol:_origin.column + col];
+-(TetrominoModel *)moveByRow:(int)row andByColumn:(int)col {
+    BlockLocation *newOrigin = [[BlockLocation alloc] initWithRow:_origin.row + row andCol:_origin.column + col];
     return [[TetrominoModel alloc] initWithOrigin:newOrigin withType:_blockType withRotation:_rotation];
 }
 
--(TetrominoModel *)rotateBy:(Boolean)isClockwise {
+-(TetrominoModel *)rotateByClockwise:(Boolean)isClockwise {
     return [[TetrominoModel alloc] initWithOrigin:_origin withType:_blockType withRotation:_rotation + (isClockwise ? 1 : -1)];
 }
 
--(NSArray<BlcokLocation *> *)getKicksBy:(Boolean)isClockwise {
-    return [TetrominoModel getKicksBy:_blockType andBy:_rotation lastlyBy:isClockwise];
+-(NSArray<BlockLocation *> *)getKicksByClockwise:(Boolean)isClockwise {
+    return [TetrominoModel getKicksByBlockType:_blockType andByRotation:_rotation lastlyByClockwise:isClockwise];
 }
 
-+(NSArray<BlcokLocation *> *)getBlocksBy:(BlockType)blockType andBy:(int)rotation {
-    NSArray<NSArray<BlcokLocation *> *> *allCells = [TetrominoModel getAllBlocksBy:blockType];
++(NSArray<BlockLocation *> *)getBlocksWithBlockType:(BlockType)blockType andWithRotation:(int)rotation {
+    NSArray<NSArray<BlockLocation *> *> *allCells = [TetrominoModel getAllBlocksByBlockType:blockType];
     
     int index = rotation % allCells.count;
     if (index < 0) {
@@ -46,65 +46,65 @@
     return allCells[index];
 }
 
-+(NSArray<NSArray<BlcokLocation *> *> *)getAllBlocksBy:(BlockType)cellType {
++(NSArray<NSArray<BlockLocation *> *> *)getAllBlocksByBlockType:(BlockType)cellType {
     switch (cellType) {
         case i:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]]];
         case o:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:1], [[BlcokLocation alloc] initWithRow:1 andCol:0]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:1 andCol:1], [[BlockLocation alloc] initWithRow:1 andCol:0]]];
         case t:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:1 andCol:0]],
-                     @[[[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:1 andCol:0]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:-1 andCol:0]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:0]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:1 andCol:0]],
+                     @[[[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:1 andCol:0]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:-1 andCol:0]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:0]]];
         case j:
-            return @[@[[[BlcokLocation alloc] initWithRow:1 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:-1 andCol:1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:1 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:-1 andCol:1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:-1]]];
         case l:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:-1 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:1 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:-1 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:1 andCol:-1]]];
         case s:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:-1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:0]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:-1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:0]]];
         case z:
-            return @[@[[[BlcokLocation alloc] initWithRow:1 andCol:-1], [[BlcokLocation alloc] initWithRow:1 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:1], [[BlcokLocation alloc] initWithRow:0 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:0]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:0], [[BlcokLocation alloc] initWithRow:-1 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:1 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:-1 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:1 andCol:-1], [[BlockLocation alloc] initWithRow:1 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:1], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:0]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:-1 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:-1 andCol:-1]]];
     }
 }
 
@@ -112,27 +112,27 @@
     BlockType randomType = (BlockType) (arc4random() % (int)z);
     
     int maxRow = 0;
-    for (BlcokLocation *cell in [TetrominoModel getBlocksBy:randomType andBy:0]) {
+    for (BlockLocation *cell in [TetrominoModel getBlocksWithBlockType:randomType andWithRotation:0]) {
         maxRow = MAX(maxRow, cell.row);
     }
     
-    BlcokLocation *origin = [[BlcokLocation alloc] initWithRow:numRows - 1 - maxRow andCol:(numCols - 1) / 2];
+    BlockLocation *origin = [[BlockLocation alloc] initWithRow:numRows - 1 - maxRow andCol:(numCols - 1) / 2];
     return [[TetrominoModel alloc] initWithOrigin:origin withType:randomType withRotation:0];
 }
 
-+(NSArray<BlcokLocation *> *)getKicksBy:(BlockType)cellType andBy:(int)rotation lastlyBy:(Boolean)isClockwise {
-    int rotationCount = (int)[TetrominoModel getAllKicksBy:cellType].count;
++(NSArray<BlockLocation *> *)getKicksByBlockType:(BlockType)cellType andByRotation:(int)rotation lastlyByClockwise:(Boolean)isClockwise {
+    int rotationCount = (int)[TetrominoModel getAllKicksByBlockType:cellType].count;
     
     int index = rotation % rotationCount;
     if (index < 0) {
         index += rotationCount;
     }
     
-    NSArray<BlcokLocation *> *kicks = [TetrominoModel getAllKicksBy:cellType][index];
+    NSArray<BlockLocation *> *kicks = [TetrominoModel getAllKicksByBlockType:cellType][index];
     if (!isClockwise) {
-        NSMutableArray<BlcokLocation *> *counterKicks = [NSMutableArray array];
-        for (BlcokLocation *kick in kicks) {
-            [counterKicks addObject:[[BlcokLocation alloc] initWithRow:-1 * kick.row andCol:-1 * kick.column]];
+        NSMutableArray<BlockLocation *> *counterKicks = [NSMutableArray array];
+        for (BlockLocation *kick in kicks) {
+            [counterKicks addObject:[[BlockLocation alloc] initWithRow:-1 * kick.row andCol:-1 * kick.column]];
         }
         kicks = counterKicks;
     }
@@ -140,37 +140,42 @@
     return kicks;
 }
 
-+(NSArray<NSArray<BlcokLocation *> *> *)getAllKicksBy:(BlockType)cellType; {
++(NSArray<NSArray<BlockLocation *> *> *)getAllKicksByBlockType:(BlockType)cellType; {
     switch (cellType) {
         case o:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:0]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:0]]];
         case i:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:-2],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:1], [[BlcokLocation alloc] initWithRow:-1 andCol:-2],
-                       [[BlcokLocation alloc] initWithRow:2 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:2], [[BlcokLocation alloc] initWithRow:2 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:2]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:2],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-1], [[BlcokLocation alloc] initWithRow:1 andCol:2],
-                       [[BlcokLocation alloc] initWithRow:-2 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:0 andCol:-2], [[BlcokLocation alloc] initWithRow:-2 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:-2]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:-2],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:-1 andCol:-2],
+                       [[BlockLocation alloc] initWithRow:2 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:2], [[BlockLocation alloc] initWithRow:2 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:2]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:2],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:1 andCol:2],
+                       [[BlockLocation alloc] initWithRow:-2 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:0 andCol:-2], [[BlockLocation alloc] initWithRow:-2 andCol:1],
+                       [[BlockLocation alloc] initWithRow:1 andCol:-2]]];
         default:
-            return @[@[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:-1], [[BlcokLocation alloc] initWithRow:0 andCol:-2],
-                       [[BlcokLocation alloc] initWithRow:-2 andCol:-1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:1], [[BlcokLocation alloc] initWithRow:2 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:2]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:1],
-                       [[BlcokLocation alloc] initWithRow:1 andCol:1], [[BlcokLocation alloc] initWithRow:-2 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:-2 andCol:1]],
-                     @[[[BlcokLocation alloc] initWithRow:0 andCol:0], [[BlcokLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlcokLocation alloc] initWithRow:-1 andCol:-1], [[BlcokLocation alloc] initWithRow:2 andCol:0],
-                       [[BlcokLocation alloc] initWithRow:2 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:1 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-2],
+                       [[BlockLocation alloc] initWithRow:-2 andCol:-1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:1], [[BlockLocation alloc] initWithRow:2 andCol:0],
+                       [[BlockLocation alloc] initWithRow:1 andCol:2]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:1 andCol:1], [[BlockLocation alloc] initWithRow:-2 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-2 andCol:1]],
+                     @[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:-1],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:-1], [[BlockLocation alloc] initWithRow:2 andCol:0],
+                       [[BlockLocation alloc] initWithRow:2 andCol:-1]]];
     }
+}
+
++ (NSString *)getBlockTypeBy:(BlockType)blocktype{
+    NSArray * types = @[@"i",@"t",@"o", @"j", @"l", @"s", @"z"];
+    return types[blocktype];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 - (id)initGameBoard:(UICollectionView *)collectionView;{
     self = [super init];
-    self.tetrisGameModel = [[TetrisGameModel alloc] init];
+    self.tetrisGameModel = [[TetrisGameModel alloc] initGameModel];
     
     
     // 行列
@@ -51,7 +51,7 @@
 
     // TODO: Combine - AnyCancellable
     
-    return  self;
+    return self;
 }
 
 // 将blcok转化为GameBoard方块(有颜色)

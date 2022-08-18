@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CellStructures.h"
+#import "BlockStructures.h"
 #import "TetrominoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,22 +15,36 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) int numRows;
 @property (nonatomic, assign) int numColumns;
-@property (nonatomic, assign) NSArray* gameBoard;
-@property (nonatomic, assign) TetrominoModel* tetromino;
+@property (nonatomic) NSMutableArray* gameBoard;
+@property (nonatomic, nullable) TetrominoModel* tetromino;
+@property (nonatomic, assign) int score;
+
+@property (atomic, nullable) NSTimer *timer;
+@property (nonatomic, assign) double speed;
+
+//shadow
 
 - (id)initGameModel;
-//- (void)resumeGame;
-//- (void)pauseGame;
-//- (void)runEngine;
+-(void) newGame;
+
+- (void)resumeGame;
+- (void)pauseGame;
+- (void)runEngine;
+
+- (void)dropTetromino;
+- (Boolean)moveTetrominoRight;
+- (Boolean)moveTetrominoLeft;
+- (Boolean)moveTetrominoDown;
+- (Boolean)moveTetrominoWithRowOffset:(int) rowOffset andColumnOffset:(int)colOffset;
+- (void)rotateTetrominoWithClockwise:(Boolean) clockwise;
+
+- (Boolean)isValidTetromino:(TetrominoModel *) tetromino;
+
+- (void)placeTetromino; //lock the tetromino when it touch the tetromino stack
+- (int)clearLines; //return the number of time that is cleared 用于计分
 
 
-@end
 
-@interface TetrisGameBlock : NSObject
-
-@property BlockType blockType;
-
-- (id)initWithType:(BlockType)blockType;
 
 @end
 
