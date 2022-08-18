@@ -215,12 +215,12 @@
 @end
 
 
-@implementation TetrisGameBlock
-
-- (id)initWithType:(BlockType)blockType{
-    self = [super init];
-    self.blockType = blockType;
-    return self;
-}
-
-@end
+//@implementation TetrisGameBlock
+//
+//- (id)initWithType:(BlockType)blockType{
+//    self = [super init];
+//    self.blockType = blockType;
+//    return self;
+//}
+//
+//@end
