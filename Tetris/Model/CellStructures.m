@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "CellStructures.h"
 
-@implementation CellLocation
+@implementation BlcokLocation
 
 - (id)initWithRow:(int)row andCol:(int)column {
     self.row = row;

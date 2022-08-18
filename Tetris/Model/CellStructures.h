@@ -14,7 +14,7 @@
 
 @end
 
-@interface CellLocation : NSObject
+@interface BlcokLocation : NSObject
 
 @property (nonatomic, assign) int row;
 @property (nonatomic, assign) int column;
@@ -24,7 +24,7 @@
 @end
 
 typedef enum {
-    i = 0, t, o, j, l, s, z
-} CellType;
+    i , t, o, j, l, s, z
+} BlockType;
 
 #endif /* CellStructures_h */

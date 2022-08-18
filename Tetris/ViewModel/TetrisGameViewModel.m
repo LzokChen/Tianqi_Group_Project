@@ -9,7 +9,7 @@
 
 @interface TetrisGameViewModel ()
 
-- (TetrisGameSquare *)convertToSquare:(TetrisGameCell *)cell;
+- (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block;
 
 @end
 
@@ -54,20 +54,20 @@
     return  self;
 }
 
-// 将Cell转化为GameBoard方块(有颜色)
-- (TetrisGameSquare *)convertToSquare:(TetrisGameCell *)cell{
-    // 判断cell是否是TetrisGameCell的实例化对象, cell可能为空
-    if([cell isKindOfClass:[TetrisGameCell class]]){
-        return [[TetrisGameSquare alloc] initWithColor:[self getColor:cell.cellType]];
+// 将blcok转化为GameBoard方块(有颜色)
+- (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block{
+    // 判断blcok是否是TetrisGameBlock的实例化对象, block可能为空
+    if([block isKindOfClass:[TetrisGameBlock class]]){
+        return [[TetrisGameSquare alloc] initWithColor:[self getColor:block.blockType]];
     }else{
         return [[TetrisGameSquare alloc] initWithColor:UIColor.blackColor];
     }
 }
 
 // 获取俄罗斯方块的颜色
-- (UIColor *)getColor:(CellType)cellType{
+- (UIColor *)getColor:(BlockType)blockType{
     UIColor *color = nil;
-    switch(cellType){
+    switch(blockType){
         case i:
             color = [UIColor colorNamed:@"IColor"];
             break;

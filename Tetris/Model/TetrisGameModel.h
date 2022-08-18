@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface TetrisGameCell : NSObject
+@interface TetrisGameBlock : NSObject
 
-@property CellType cellType;
+@property BlockType blockType;
 
-- (id)initWithType:(CellType)cellType;
+- (id)initWithType:(BlockType)blockType;
 
 @end
 

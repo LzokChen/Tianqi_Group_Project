@@ -27,11 +27,11 @@
 
 @end
 
-@implementation TetrisGameCell
+@implementation TetrisGameBlock
 
-- (id)initWithType:(CellType)cellType{
+- (id)initWithType:(BlockType)blockTpye{
     self = [super init];
-    self.cellType = cellType;
+    self.blockType = blockTpye;
     return self;
 }
 

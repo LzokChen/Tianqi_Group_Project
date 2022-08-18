@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initGameBoard:(UICollectionView *)collectionView;
 
-//- (TetrisGameSquare *)convertToSquare:(TetrisGameCell *)cell;
+//- (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block;
 
-- (UIColor *)getColor:(CellType)cellType;
+- (UIColor *)getColor:(BlockType)blockType;
 
 - (void)squareClicker:(int)row coloumn:(int)col;
 
