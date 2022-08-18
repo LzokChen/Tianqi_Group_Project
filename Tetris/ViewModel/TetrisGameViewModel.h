@@ -19,12 +19,27 @@ NS_ASSUME_NONNULL_BEGIN
 @property TetrisGameModel* tetrisGameModel;
 
 @property UICollectionView *collectionView;
+@property UILabel *scoreText;
 
-- (id)initGameBoard:(UICollectionView *)collectionView;
+- (id)initGameBoard:(UICollectionView *)collectionView ScoreText:(UILabel *)scoreText;
+
+- (void)UpdateGameBoard;
 
 //- (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block;
 
 - (UIColor *)getColor:(BlockType)blockType;
+
+- (void)RightButtonClick;
+
+- (void)LeftButtonClick;
+
+- (void)DownButtonClick;
+
+- (void)UpButtonClick;
+
+- (void)ClockwiseButtonClick;
+
+- (void)AntiClockwiseButtonClick;
 
 - (void)squareClicker:(int)row coloumn:(int)col;
 

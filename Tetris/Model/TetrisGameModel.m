@@ -13,7 +13,7 @@
     self.numRows = 15;
     self.numColumns = 10;
     self.score = 0;
-    self.speed = 1.0;
+    self.speed = 0.5;
     self.gameIsPause = true;
     
     self.gameBoard = [NSMutableArray array];
@@ -23,7 +23,7 @@
             [colArray addObject:[NSNull null]];
         [self.gameBoard addObject:colArray];
     }
-    
+    self.status = 0;
     [self resumeGame];
     return self;
 }
@@ -32,6 +32,7 @@
     self.score = 0;
     self.tetromino = nil;
     self.timer = nil;
+    self.gameIsOver = false;
     
     self.gameBoard = [NSMutableArray array];
     for (int col = 0; col < self.numColumns; col++){
@@ -40,7 +41,7 @@
             [colArray addObject:[NSNull null]];
         [self.gameBoard addObject:colArray];
     }
-    
+    self.status = 0;
     [self resumeGame];
 }
 
@@ -60,6 +61,8 @@
 }
 
 - (void)runEngine{
+    // change status
+    self.status += 1;
     //check if we need to clear the line
     int numOfLineClear = [self clearLines];
     if (numOfLineClear > 0){
@@ -76,10 +79,10 @@
         if (![self isValidTetromino:self.tetromino]){
             NSLog(@"Game Over! Final score: %d", self.score);
             [self pauseGame];
+            self.gameIsOver = true;
         }
         return;
     }
-    
     //see about moving down
     if ([self moveTetrominoDown]){
         NSLog(@"Moving Tetromino down, origin: (%d, %d)", self.tetromino.origin.row, self.tetromino.origin.column);
@@ -165,7 +168,6 @@
         
         int column = curTetromino.origin.column + block.column;
         if (column < 0 || column >= self.numColumns){continue;;}
-        
         self.gameBoard[column][row] = [[TetrisGameBlock alloc] initWithType:curTetromino.blockType];
     }
     
@@ -173,11 +175,52 @@
 }
 
 - (int)clearLines{
-    //Todo
+    // TODO: ClearLines
     int lines = 0;
+    // Create New GameBoard
+    NSMutableArray *newGameBoard = [NSMutableArray array];
+    for (int col = 0; col < self.numColumns; col++){
+        NSMutableArray *colArray = [NSMutableArray array];
+        for (int row = 0; row < self.numRows; row++)
+            [colArray addObject:[NSNull null]];
+        [newGameBoard addObject:colArray];
+    }
+    bool BoardUpdated = false;
+    bool clearLine;
+    int nextRowToCopy = 0;
+    for (int row = 0; row < self.numRows; row++){
+        clearLine = true;
+        for (int col = 0; col < self.numColumns; col++)
+            clearLine = clearLine && [self.gameBoard[col][row] isKindOfClass:[TetrisGameBlock class]];
+        if (!clearLine) {
+            // TODO: Is This Copy Right?
+            for (int col = 0; col < self.numColumns; col++){
+                if(self.gameBoard[col][row] != [NSNull null]){
+                    newGameBoard[col][nextRowToCopy] = self.gameBoard[col][row];
+                }
+            }
+            nextRowToCopy += 1;
+        }else{
+            lines += 1;
+        }
+        BoardUpdated = BoardUpdated || clearLine;
+    }
+    
+    if (BoardUpdated){
+        self.gameBoard = newGameBoard;
+    }
     
     return lines;
 }
 @end
 
 
+@implementation TetrisGameBlock
+
+- (id)initWithType:(BlockType)blockType{
+    self = [super init];
+    self.blockType = blockType;
+    return self;
+}
+
+@end

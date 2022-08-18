@@ -26,7 +26,6 @@
 		52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF128AB49BB00FEA0E0 /* Assets.xcassets */; };
 		52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */; };
 		52561AF828AB49BB00FEA0E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AF728AB49BB00FEA0E0 /* main.m */; };
-		52561AFF28ADDF6400FEA0E0 /* BlockStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */; };
 		5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47C28A2196800A25F50 /* WeatherManager.swift */; };
 		5292A47F28A2198600A25F50 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */; };
 		5292A48128A2199500A25F50 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */; };
@@ -40,6 +39,7 @@
 		52FBB547289B6AA80079D684 /* PropertyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB542289B6AA80079D684 /* PropertyDemo.m */; };
 		52FBB548289B6AA80079D684 /* SortingDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FBB544289B6AA80079D684 /* SortingDemo.m */; };
 		CC5AF2A1E8A06F58B03F9625 /* Pods_ClimaWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */; };
+		CE982C1928AE0105009630F9 /* BlockStructures.m in Sources */ = {isa = PBXBuildFile; fileRef = CE982C1728AE0104009630F9 /* BlockStructures.m */; };
 		CE9882C728AD8C7B00F6BE5F /* TetrisGameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9882C628AD8C7B00F6BE5F /* TetrisGameViewModel.m */; };
 		CE9882CB28AD8D5300F6BE5F /* TetrisGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9882CA28AD8D5300F6BE5F /* TetrisGameModel.m */; };
 		CE9882D128AD91BE00F6BE5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE9882D028AD91BE00F6BE5F /* Main.storyboard */; };
@@ -96,8 +96,6 @@
 		52561AF628AB49BB00FEA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52561AF728AB49BB00FEA0E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52561AFD28ACC2BC00FEA0E0 /* ClimaWeatherBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClimaWeatherBridge.h; sourceTree = "<group>"; };
-		52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BlockStructures.m; path = "/Users/lzokchen/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Tianqi_Group_Project/Tetris/Model/BlockStructures.m"; sourceTree = "<absolute>"; };
-		52561B0028ADDF6600FEA0E0 /* BlockStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlockStructures.h; path = "/Users/lzokchen/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Tianqi_Group_Project/Tetris/Model/BlockStructures.h"; sourceTree = "<absolute>"; };
 		5292A47C28A2196800A25F50 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
@@ -116,6 +114,8 @@
 		52FBB544289B6AA80079D684 /* SortingDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingDemo.m; sourceTree = "<group>"; };
 		52FBB545289B6AA80079D684 /* PropertyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDemo.h; sourceTree = "<group>"; };
 		9FFEC04C670DD2DD8DFBF5C4 /* Pods_ClimaWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClimaWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE982C1728AE0104009630F9 /* BlockStructures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockStructures.m; sourceTree = "<group>"; };
+		CE982C1828AE0104009630F9 /* BlockStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockStructures.h; sourceTree = "<group>"; };
 		CE9882C528AD8C7B00F6BE5F /* TetrisGameViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrisGameViewModel.h; sourceTree = "<group>"; };
 		CE9882C628AD8C7B00F6BE5F /* TetrisGameViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrisGameViewModel.m; sourceTree = "<group>"; };
 		CE9882C928AD8D5300F6BE5F /* TetrisGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrisGameModel.h; sourceTree = "<group>"; };
@@ -284,8 +284,8 @@
 		CE9882C228AD8ABE00F6BE5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				52561B0028ADDF6600FEA0E0 /* BlockStructures.h */,
-				52561AFE28ADDF6400FEA0E0 /* BlockStructures.m */,
+				CE982C1828AE0104009630F9 /* BlockStructures.h */,
+				CE982C1728AE0104009630F9 /* BlockStructures.m */,
 				051DEE6328AB605500138EF8 /* TetrominoModel.h */,
 				051DEE6428AB606E00138EF8 /* TetrominoModel.m */,
 				CE9882C928AD8D5300F6BE5F /* TetrisGameModel.h */,
@@ -561,7 +561,7 @@
 				52561AED28AB49BA00FEA0E0 /* ViewController.m in Sources */,
 				051DEE6528AB606E00138EF8 /* TetrominoModel.m in Sources */,
 				CE9882CB28AD8D5300F6BE5F /* TetrisGameModel.m in Sources */,
-				52561AFF28ADDF6400FEA0E0 /* BlockStructures.m in Sources */,
+				CE982C1928AE0105009630F9 /* BlockStructures.m in Sources */,
 				52561AE728AB49BA00FEA0E0 /* AppDelegate.m in Sources */,
 				52561AF828AB49BB00FEA0E0 /* main.m in Sources */,
 				CE9882C728AD8C7B00F6BE5F /* TetrisGameViewModel.m in Sources */,

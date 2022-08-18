@@ -60,7 +60,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozh-wS-sRX">
                                 <rect key="frame" x="154" y="79" width="82" height="40.666666666666657"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="25">
+                                    <fragment content="0">
                                         <attributes>
                                             <font key="NSFont" size="36" name="Arial-BoldMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -136,6 +136,7 @@
                         <outlet property="LeftButton" destination="8v1-AW-D8R" id="Z9v-mX-4qb"/>
                         <outlet property="PauseButton" destination="u6x-FV-ewh" id="kuK-ex-fNl"/>
                         <outlet property="RightButton" destination="IXh-OS-wSj" id="RDx-7Z-2f8"/>
+                        <outlet property="ScoreText" destination="ozh-wS-sRX" id="hKL-xc-6SY"/>
                         <outlet property="UpButton" destination="aPl-st-Hb3" id="7bC-YF-TyH"/>
                         <outlet property="myCollectionView" destination="ga5-Sb-nwc" id="cyu-qi-dui"/>
                     </connections>

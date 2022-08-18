@@ -1,5 +1,5 @@
 //
-//  BlockStructures.m
+//  CellStructures.m
 //  Tetris
 //
 //  Created by Mingyu Liu on 2022-08-16.
@@ -14,16 +14,6 @@
     self.row = row;
     self.column = column;
     
-    return self;
-}
-
-@end
-
-@implementation TetrisGameBlock
-
-- (id)initWithType:(BlockType)blockTpye{
-    self = [super init];
-    self.blockType = blockTpye;
     return self;
 }
 

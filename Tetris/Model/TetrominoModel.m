@@ -49,14 +49,14 @@
 +(NSArray<NSArray<BlockLocation *> *> *)getAllBlocksByBlockType:(BlockType)cellType {
     switch (cellType) {
         case i:
-            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]],
-                     @[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1],
-                       [[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:-1]]];
+            return @[@[[[BlockLocation alloc] initWithRow:0 andCol:-1], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:0 andCol:1], [[BlockLocation alloc] initWithRow:0 andCol:2]],
+                      @[[[BlockLocation alloc] initWithRow:-1 andCol:1], [[BlockLocation alloc] initWithRow:0 andCol:1],
+                       [[BlockLocation alloc] initWithRow:1 andCol:1], [[BlockLocation alloc] initWithRow:-2 andCol:1]],
+                      @[[[BlockLocation alloc] initWithRow:-1 andCol:-1], [[BlockLocation alloc] initWithRow:-1 andCol:0],
+                       [[BlockLocation alloc] initWithRow:-1 andCol:1], [[BlockLocation alloc] initWithRow:-1 andCol:2]],
+                      @[[[BlockLocation alloc] initWithRow:-1 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:0],
+                       [[BlockLocation alloc] initWithRow:1 andCol:0], [[BlockLocation alloc] initWithRow:-2 andCol:0]]];
         case o:
             return @[@[[[BlockLocation alloc] initWithRow:0 andCol:0], [[BlockLocation alloc] initWithRow:0 andCol:1],
                        [[BlockLocation alloc] initWithRow:1 andCol:1], [[BlockLocation alloc] initWithRow:1 andCol:0]]];

@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *RightButton;
 @property (weak, nonatomic) IBOutlet UIImageView *DownButton;
 @property (weak, nonatomic) IBOutlet UIImageView *PauseButton;
-//@property Boolean pause;
-//@property NSMutableArray *gameboard;
+@property (weak, nonatomic) IBOutlet UILabel *ScoreText;
+
 @property (nonatomic, retain) TetrisGameViewModel *tetrisGameViewModel;
 @end
 
@@ -25,21 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameBoard:_myCollectionView];
-    
-    
-//    self.gameboard = [NSMutableArray array];
-//
-//    for (int column = 0; column < 10; column++)
-//    {
-//        NSMutableArray *columnArray = [NSMutableArray array];
-//
-//        for (int row = 0; row < 15; row++)
-//            [columnArray addObject:[[TetrisGameSquare alloc] initWithColor:UIColor.blackColor]];
-//
-//        [self.gameboard addObject:columnArray];
-//    }
-    
+    self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameBoard:_myCollectionView ScoreText:_ScoreText];
     
     _myCollectionView.backgroundColor = [UIColor blackColor];
     UITapGestureRecognizer *uptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(UpTapped:)];
@@ -61,25 +47,25 @@
     [_PauseButton addGestureRecognizer:playtap];
 }
 
+
+// 方向上 - 顺时针旋转
 - (void)UpTapped:(UIGestureRecognizer*)gesture{
     NSLog(@"UP Clicked - Rotation!");
     [self.tetrisGameViewModel.tetrisGameModel rotateTetrominoWithClockwise:true];
-//    TetrisGameSquare *square = [[_gameboard objectAtIndex:9] objectAtIndex:14];
-//    square.color = UIColor.redColor;
-//    [_myCollectionView reloadData];
 }
+// 方向下 - 向下移动
 - (void)DownTapped:(UIGestureRecognizer*)gesture{
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoDown];
-    NSLog(@"DOWN Clicked!");
 }
+// 方向左 - 向左移动
 - (void)LeftTapped:(UIGestureRecognizer*)gesture{
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoLeft];
-    NSLog(@"LEFT Clicked!");
 }
+// 方向右 - 向右移动
 - (void)RightTapped:(UIGestureRecognizer*)gesture{
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoRight];
-    NSLog(@"RIGHT Clicked!");
 }
+// 暂停/继续 按钮 - 游戏停止
 - (void)PlayTapped:(UIGestureRecognizer*)gesture{
     if(self.PauseButton.image == [UIImage systemImageNamed:@"pause"]){
         [self.tetrisGameViewModel.tetrisGameModel pauseGame];

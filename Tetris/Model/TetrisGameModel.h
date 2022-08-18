@@ -22,11 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (atomic, nullable) NSTimer *timer;
 @property (nonatomic, assign) double speed;
 @property (atomic, assign) Boolean gameIsPause;
+@property (atomic, assign) Boolean gameIsOver;
+@property (nonatomic, assign) int status;
 
 //shadow
 
 - (id)initGameModel;
--(void) newGame;
+- (void) newGame;
 
 - (void)resumeGame;
 - (void)pauseGame;
@@ -46,6 +48,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+
+@end
+
+@interface TetrisGameBlock : NSObject
+
+@property BlockType blockType;
+
+- (id)initWithType:(BlockType)blockType;
 
 @end
 

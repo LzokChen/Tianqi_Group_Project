@@ -1,14 +1,14 @@
 //
-//  BlockStructures.h
+//  CellStructures.h
 //  Tianqi_Group_Project
 //
 //  Created by Mingyu Liu on 2022-08-16.
 //
 
-#ifndef BlockStructures_h
-#define BlockStructures_h
+#ifndef CellStructures_h
+#define CellStructures_h
 
-@interface GameBoardSquare : NSObject
+@interface GameboardCell : NSObject
 
 @property (nonatomic, copy) NSString * color;
 
@@ -23,16 +23,8 @@
 
 @end
 
-
 typedef enum {
-    i, t, o, j, l, s, z
+    i , t, o, j, l, s, z
 } BlockType;
 
-@interface TetrisGameBlock : NSObject
-
-@property BlockType blockType;
-
-- (id)initWithType:(BlockType)blockType;
-
-@end
-#endif /* BlockStructures_h */
+#endif /* CellStructures_h */
