@@ -52,7 +52,7 @@ struct ForecastView: View, WeatherManagerDelegate {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .none        
-        currentWeather = CurrentWeather(city: weather.city.secondaryName,
+        currentWeather = CurrentWeather(city: weather.city.secondaryName + " " + weather.city.name,
                                         updateTime: formatter.string(from: updateDateTime),
                                         temperature: weather.current.temp,
                                         description: weather.current.condition,
