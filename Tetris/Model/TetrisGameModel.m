@@ -12,10 +12,10 @@
 
 
 - (id)initGameModel {
-    self.numRows = 23;
+    self.numRows = 20;
     self.numColumns = 10;
     self.score = 0;
-    self.speed = 0.5;
+    self.speed = 1;
     self.gameIsPause = true;
     self.gameIsOver = false;
     self.gameState = (GameState) Over;

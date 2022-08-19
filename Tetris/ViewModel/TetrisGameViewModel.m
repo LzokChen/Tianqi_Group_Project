@@ -55,25 +55,30 @@
 
 
 - (void) drawBoardwithGameBoardSquares: (NSMutableArray<NSMutableArray<TetrisGameSquare *>* >*) gameBoardSquares{
-    int columns = self.numColumns;
-    int rows = self.numRows;
-    CGFloat gameBoardWidth = self.gameBoardView.frame.size.width;
-    CGFloat gameBoardHight = self.gameBoardView.frame.size.height;
-    CGFloat blocksize = MIN(gameBoardWidth/columns, gameBoardHight/rows);
-    CGFloat xOffset = (gameBoardWidth - blocksize*columns)/2;
-    CGFloat yOfsset = (gameBoardHight - blocksize*rows)/2;
-    
-    for (int col = 0 ; col < columns ; col++){
-        for (int row = 0; row < rows; row++){
-            CGFloat x = xOffset + blocksize * col;
-            CGFloat y = gameBoardHight - yOfsset - blocksize * (row+1);
-            
-            UIView * square = [[UIView alloc] initWithFrame:CGRectMake(x, y, blocksize, blocksize)];
-            square.backgroundColor = gameBoardSquares[col][row].color;
-            
-            [self.gameBoardView addSubview:square];
+    dispatch_queue_t  mainQueue = dispatch_get_main_queue();
+    dispatch_async(mainQueue, ^{
+        int columns = self.numColumns;
+        int rows = self.numRows;
+        CGFloat gameBoardWidth = self.gameBoardView.frame.size.width;
+        CGFloat gameBoardHight = self.gameBoardView.frame.size.height;
+        
+        CGFloat blocksize = MIN(gameBoardWidth/columns, gameBoardHight/rows);
+        CGFloat xOffset = (gameBoardWidth - blocksize*columns)/2;
+        CGFloat yOfsset = (gameBoardHight - blocksize*rows)/2;
+        
+        for (int col = 0 ; col < columns ; col++){
+            for (int row = 0; row < rows; row++){
+                CGFloat x = xOffset + blocksize * col;
+                CGFloat y = gameBoardHight - yOfsset - blocksize * (row+1);
+                
+                UIView * square = [[UIView alloc] initWithFrame:CGRectMake(x, y, blocksize, blocksize)];
+                square.backgroundColor = gameBoardSquares[col][row].color;
+                
+                [self.gameBoardView addSubview:square];
+            }
         }
-    }
+    });
+    
 }
 
 
