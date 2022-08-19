@@ -9,12 +9,16 @@
 
 @implementation TetrisGameModel
 
+
+
 - (id)initGameModel {
-    self.numRows = 15;
+    self.numRows = 23;
     self.numColumns = 10;
     self.score = 0;
     self.speed = 0.5;
     self.gameIsPause = true;
+    self.gameIsOver = false;
+    self.gameState = (GameState) Over;
     
     self.gameBoard = [NSMutableArray array];
     for (int col = 0; col < self.numColumns; col++){
@@ -33,6 +37,7 @@
     self.tetromino = nil;
     self.timer = nil;
     self.gameIsOver = false;
+    self.gameState = (GameState) Over;
     
     self.gameBoard = [NSMutableArray array];
     for (int col = 0; col < self.numColumns; col++){
@@ -48,6 +53,7 @@
 - (void)resumeGame{
     NSLog(@"Resuming Game");
     self.gameIsPause = false;
+    self.gameState = (GameState) Running;
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.speed repeats:true block:^(NSTimer * _Nonnull timer) {
         [self runEngine];
@@ -57,6 +63,7 @@
 - (void) pauseGame{
     NSLog(@"Pausing Game");
     self.gameIsPause = true;
+    self.gameState = (GameState) Pause;
     [self.timer invalidate];
 }
 
@@ -80,6 +87,7 @@
             NSLog(@"Game Over! Final score: %d", self.score);
             [self pauseGame];
             self.gameIsOver = true;
+            self.gameState = (GameState) Over;
         }
         return;
     }

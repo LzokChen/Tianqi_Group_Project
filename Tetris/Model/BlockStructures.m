@@ -8,6 +8,18 @@
 #import <Foundation/Foundation.h>
 #import "BlockStructures.h"
 
+
+
+@implementation TetrisGameSquare
+
+- (id)initWithColor:(UIColor *)color{
+    self = [super init];
+    self.color = color;
+    return self;
+}
+
+@end
+
 @implementation BlockLocation
 
 - (id)initWithRow:(int)row andCol:(int)column {

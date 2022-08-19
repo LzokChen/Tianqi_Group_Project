@@ -15,13 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property int numRows;
 @property int numColumns;
-@property NSMutableArray* gameBoard;
+@property NSMutableArray<NSMutableArray<TetrisGameSquare *>* >* gameBoardSquares;
 @property TetrisGameModel* tetrisGameModel;
 
-@property UICollectionView *collectionView;
+@property UIView *gameBoardView;
 @property UILabel *scoreText;
+@property UIImageView *pauseButton;
 
-- (id)initGameBoard:(UICollectionView *)collectionView ScoreText:(UILabel *)scoreText;
+- (id)initGameViewModelwithGameBoardView:(UIView *)gameBoardView ScoreText:(UILabel *)scoreText PauseButton:(UIImageView *)pauseButton;
+
+- (void) drawBoardwithGameBoardSquares: (NSMutableArray<NSMutableArray<TetrisGameSquare *>* >*) gameBoardSquares; //二维数组
 
 - (void)UpdateGameBoard;
 
@@ -41,16 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)AntiClockwiseButtonClick;
 
-- (void)squareClicker:(int)row coloumn:(int)col;
+//- (void)squareClicker:(int)row coloumn:(int)col;
+
+
 
 @end
 
-@interface TetrisGameSquare : NSObject
-
-@property UIColor *color;
-
-- (id)initWithColor:(UIColor *)color;
-
-@end
 
 NS_ASSUME_NONNULL_END
