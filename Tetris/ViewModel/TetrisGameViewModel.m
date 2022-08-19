@@ -108,44 +108,12 @@
     int tetrominoOriginX = self.tetrisGameModel.tetromino.origin.row;
     int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
     NSArray<BlockLocation *> *relativeLocation = [self.tetrisGameModel.tetromino blocks];
-    
-    switch(tetrominoBlockType){
-        case i:
-            break;
-        case t:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
-        case o:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
-        case j:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
-        case l:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
-        case s:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
-        case z:
-            for (int i = 0; i < 4; i++){
-                self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
-            }
-            break;
+    for(int i = 0; i < 4; i++){
+        self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
     }
     [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
+    
 }
-
 //// 将blcok转化为GameBoard方块(有颜色)
 - (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block{
     // 判断blcok是否是TetrisGameBlock的实例化对象, block可能为空
