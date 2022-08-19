@@ -100,14 +100,15 @@
     }
     
     //正在移动的方块
-    BlockType tetrominoBlockType = self.tetrisGameModel.tetromino.blockType;
-    int tetrominoOriginX = self.tetrisGameModel.tetromino.origin.row;
-    int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
-    NSArray<BlockLocation *> *relativeLocation = [self.tetrisGameModel.tetromino blocks];
-    for(int i = 0; i < 4; i++){
-        self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
+    if(self.tetrisGameModel.tetromino != nil){
+        BlockType tetrominoBlockType = self.tetrisGameModel.tetromino.blockType;
+        int tetrominoOriginX = self.tetrisGameModel.tetromino.origin.row;
+        int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
+        NSArray<BlockLocation *> *relativeLocation = [self.tetrisGameModel.tetromino blocks];
+        for(int i = 0; i < 4; i++){
+            self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
+        }
     }
-    
     //绘制游戏盘
     [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
     
