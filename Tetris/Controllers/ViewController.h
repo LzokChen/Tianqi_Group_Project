@@ -6,6 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 @interface ViewController: UIViewController
+
+//-(IBAction)selector:(id)sender;
 @end
 
