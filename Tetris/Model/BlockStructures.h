@@ -7,10 +7,13 @@
 
 #ifndef CellStructures_h
 #define CellStructures_h
+#import <UIKit/UIKit.h>
 
-@interface GameboardCell : NSObject
+@interface TetrisGameSquare : NSObject
 
-@property (nonatomic, copy) NSString * color;
+@property UIColor *color;
+
+- (id)initWithColor:(UIColor *)color;
 
 @end
 

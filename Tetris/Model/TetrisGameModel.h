@@ -10,6 +10,11 @@
 #import "TetrominoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum {
+    Pause,
+    Running,
+    Over
+} GameState;
 
 @interface TetrisGameModel : NSObject
 
@@ -23,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) double speed;
 @property (atomic, assign) Boolean gameIsPause;
 @property (atomic, assign) Boolean gameIsOver;
+@property (atomic, assign) GameState gameState;
 @property (nonatomic, assign) int status;
 
 //shadow

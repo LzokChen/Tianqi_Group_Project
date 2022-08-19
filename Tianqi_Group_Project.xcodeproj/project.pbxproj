@@ -201,20 +201,28 @@
 		52561AE428AB49B900FEA0E0 /* Tetris */ = {
 			isa = PBXGroup;
 			children = (
-				CE9882C428AD8AFC00F6BE5F /* View */,
-				CE9882C328AD8AD300F6BE5F /* ViewModel */,
+				52561B0C28AEF71A00FEA0E0 /* Views */,
 				CE9882C228AD8ABE00F6BE5F /* Model */,
+				CE9882C428AD8AFC00F6BE5F /* Controllers */,
+				CE9882C328AD8AD300F6BE5F /* ViewModel */,
 				52561AE528AB49BA00FEA0E0 /* AppDelegate.h */,
-				52561AE628AB49BA00FEA0E0 /* AppDelegate.m */,
 				52561AE828AB49BA00FEA0E0 /* SceneDelegate.h */,
 				52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */,
-				CE9882D028AD91BE00F6BE5F /* Main.storyboard */,
+				52561AE628AB49BA00FEA0E0 /* AppDelegate.m */,
 				52561AF128AB49BB00FEA0E0 /* Assets.xcassets */,
-				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
 				52561AF628AB49BB00FEA0E0 /* Info.plist */,
 				52561AF728AB49BB00FEA0E0 /* main.m */,
 			);
 			path = Tetris;
+			sourceTree = "<group>";
+		};
+		52561B0C28AEF71A00FEA0E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE9882D028AD91BE00F6BE5F /* Main.storyboard */,
+				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5292A48228A2199F00A25F50 /* Models */ = {
@@ -303,13 +311,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CE9882C428AD8AFC00F6BE5F /* View */ = {
+		CE9882C428AD8AFC00F6BE5F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				52561AEB28AB49BA00FEA0E0 /* ViewController.h */,
 				52561AEC28AB49BA00FEA0E0 /* ViewController.m */,
 			);
-			path = View;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		F01FD10D28AB562B00CEFD7B /* details */ = {
