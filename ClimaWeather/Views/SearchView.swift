@@ -10,72 +10,41 @@ import Lottie
 
 struct SearchView: View {
     
-    @StateObject var cityLocation = CityLocation()
-
-    @State var CurrentCity:String?
+    @StateObject var cityLocation : CityLocation = CityLocation()
     @StateObject var locationViewModel = LocationViewModel()
-    
     @State private var weatherManager = WeatherManager.shared
-    
-    @State var SearchContent:String = ""
-    @State var SearchMode:Bool = false
-    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        let binding = Binding<String>(get:{
-            self.SearchContent
-        },set:{
-            self.SearchContent = $0
-            if($0 != ""){
-                cityLocation.search($0)
-                SearchMode = true
-            }else{
-                SearchMode = false
-            }
-        })
         
         return NavigationView {
             List{
                 
                 HStack{
                     Image(systemName: "magnifyingglass")
-                    TextField("搜索城市", text: binding)
+                    SearchTextField()
                 }
-                if(SearchMode){
-                    ForEach(cityLocation.searchCitys, id:\.self){ city in
+                Section("当前所在城市"){
+                    if let city = locationViewModel.CurCity{
                         Button(city){
                             setWeatherCity(city)
                             dismiss()
                         }
+                    }else{
+                        Text("无法获取当前所在城市")
                     }
-                }else{
-                    Section("当前所在城市"){
-                        if let city = locationViewModel.CurCity{
+                }
+                ForEach(cityLocation.groupTitles, id:\.self){ cityTitle in
+                    Section(cityTitle){
+                        ForEach(cityLocation.cityGroups[cityTitle] ?? [], id:\.self){ city in
                             Button(city){
                                 setWeatherCity(city)
                                 dismiss()
                             }
-                        }else{
-                            Text("无法获取当前所在城市")
-                        }
-                        
-                    }
-                    
-                    ForEach(cityLocation.groupTitles, id:\.self){ cityTitle in
-                        Section(cityTitle){
-                            ForEach(cityLocation.cityGroups[cityTitle] ?? [], id:\.self){ city in
-                                Button(city){
-                                    setWeatherCity(city)
-                                    dismiss()
-                                }
-                            }
                         }
                     }
                 }
-                
             }
-            
             .foregroundColor(Color.primary)
             .listStyle(.insetGrouped)
         }
@@ -96,6 +65,8 @@ struct SearchView: View {
                 })
             }
         })
+        .environmentObject(cityLocation)
+        .environmentObject(locationViewModel)
         
     }
         
@@ -108,5 +79,27 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+    }
+}
+
+struct SearchTextField : View {
+    @State var SearchContent:String = ""
+    @EnvironmentObject var cityLocation : CityLocation
+    var body: some View {
+        let binding = Binding<String>(get:{
+            self.SearchContent
+        },set:{
+            self.SearchContent = $0
+            if($0 != ""){
+                cityLocation.search($0)
+                cityLocation.searchMode = true
+            }
+            else{
+                cityLocation.searchMode = false
+                cityLocation.back()
+            }
+        })
+        
+        return TextField("搜索城市", text: binding)            
     }
 }
