@@ -96,10 +96,24 @@
 
 - (void)UpdateGameBoard{
     //TODO - 把 TetrisGameModel.gameboard + TetrisGameModel.tetromino 转换成 self.gameBoardSquares
-    // 然后 [drawBoardwithGameBoardSquares: self.gameBoardSquares]
+    // 然后 [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
+//    self.tetrisGameModel.tetromino
+    for(int i = 0; i < self.numColumns; i++){
+        for (int j = 0; j < self.numRows; j++){
+            self.gameBoardSquares[i][j] = [self convertToSquare:self.tetrisGameModel.gameBoard[i][j]];
+        }
+    }
+    
+    BlockType tetrominoBlockType = self.tetrisGameModel.tetromino.blockType;
+    int tetrominoOriginX = self.tetrisGameModel.tetromino.origin.row;
+    int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
+    NSArray<BlockLocation *> *relativeLocation = [self.tetrisGameModel.tetromino blocks];
+    for(int i = 0; i < 4; i++){
+        self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
+    }
+    [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
     
 }
-
 //// 将blcok转化为GameBoard方块(有颜色)
 - (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block{
     // 判断blcok是否是TetrisGameBlock的实例化对象, block可能为空
