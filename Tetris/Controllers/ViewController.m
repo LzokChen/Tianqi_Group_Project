@@ -10,6 +10,10 @@
 #import "../ViewModel/TetrisGameViewModel.h"
 
 @interface ViewController ()
+{
+    AVAudioPlayer *player;
+}
+
 @property (weak, nonatomic) IBOutlet UIView *gameBoardView;
 @property (weak, nonatomic) IBOutlet UIImageView *UpButton;
 @property (weak, nonatomic) IBOutlet UIImageView *LeftButton;
@@ -86,5 +90,12 @@
 - (void)PlayTapped:(UIGestureRecognizer*)gesture{
     [self.tetrisGameViewModel PlayAndPauseButtonClick];
 }
+//-(IBAction)selector:(id)sender{
+   // NSString *path = [[NSBundle mainBundle] pathForResource:@"Tetris-Theme-Tetris-Soundtrack" ofType:@"mp3"];
+   // NSURL *url = [NSURL URLWithString:path];
+   // player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+    
+    //[player play];
+//}
 @end
 
