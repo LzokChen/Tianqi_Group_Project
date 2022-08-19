@@ -34,7 +34,7 @@
     for (int col = 0; col < self.numColumns; col++){
         NSMutableArray *colArray = [NSMutableArray array];
         for (int row = 0; row < self.numRows; row++)
-            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:UIColor.blackColor]];
+            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"BoardDotColor"]]];
         [self.gameBoardSquares addObject: colArray];
     }
     
