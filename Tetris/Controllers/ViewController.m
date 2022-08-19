@@ -50,7 +50,6 @@
     [_RightButton addGestureRecognizer:righttap];
     [_PauseButton addGestureRecognizer:playtap];
     
-    
     //创建并注册AudioPlayer
     NSString *path = [[NSBundle mainBundle] pathForResource:@"tetris" ofType:@"mp3"];
     NSURL *url = [NSURL URLWithString:path];
@@ -85,7 +84,7 @@
 }
 // 方向下 - 向下移动
 - (void)DownTapped:(UIGestureRecognizer*)gesture{
-    [self.tetrisGameViewModel.tetrisGameModel moveTetrominoDown];
+    [self.tetrisGameViewModel.tetrisGameModel dropTetromino];
 }
 // 方向左 - 向左移动
 - (void)LeftTapped:(UIGestureRecognizer*)gesture{
