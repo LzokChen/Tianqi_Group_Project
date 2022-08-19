@@ -28,18 +28,15 @@
     // 行列
     self.numRows = self.tetrisGameModel.numRows;
     self.numColumns = self.tetrisGameModel.numColumns;
-    // 初始化游戏盘 - 全黑色正方块
+    // 初始化游戏盘 - 全背景色正方块
     self.gameBoardSquares = [NSMutableArray array];
     
     for (int col = 0; col < self.numColumns; col++){
         NSMutableArray *colArray = [NSMutableArray array];
         for (int row = 0; row < self.numRows; row++)
-            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"BoardDotColor"]]];
+            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"GameBoardColor"]]];
         [self.gameBoardSquares addObject: colArray];
     }
-    
-    //测试用 在 （1.1 画红方块）
-    self.gameBoardSquares[1][1] = [[TetrisGameSquare alloc] initWithColor:UIColor.redColor];
     
     
     [self.tetrisGameModel addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
@@ -95,15 +92,14 @@
 }
 
 - (void)UpdateGameBoard{
-    //TODO - 把 TetrisGameModel.gameboard + TetrisGameModel.tetromino 转换成 self.gameBoardSquares
-    // 然后 [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
-//    self.tetrisGameModel.tetromino
+    //游戏盘背景和已经被锁定的方块
     for(int i = 0; i < self.numColumns; i++){
         for (int j = 0; j < self.numRows; j++){
             self.gameBoardSquares[i][j] = [self convertToSquare:self.tetrisGameModel.gameBoard[i][j]];
         }
     }
     
+    //正在移动的方块
     BlockType tetrominoBlockType = self.tetrisGameModel.tetromino.blockType;
     int tetrominoOriginX = self.tetrisGameModel.tetromino.origin.row;
     int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
@@ -111,16 +107,18 @@
     for(int i = 0; i < 4; i++){
         self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
     }
+    
+    //绘制游戏盘
     [self drawBoardwithGameBoardSquares: self.gameBoardSquares];
     
 }
-//// 将blcok转化为GameBoard方块(有颜色)
+// 将blcok转化为GameBoard方块(有颜色)
 - (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block{
     // 判断blcok是否是TetrisGameBlock的实例化对象, block可能为空
     if([block isKindOfClass:[TetrisGameBlock class]]){
         return [[TetrisGameSquare alloc] initWithColor:[self getColor:block.blockType]];
     }else{
-        return [[TetrisGameSquare alloc] initWithColor:UIColor.blackColor];
+        return [[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"GameBoardColor"]];
     }
 }
 
@@ -176,16 +174,5 @@
 - (void)AntiClockwiseButtonClick{
     [self.tetrisGameModel rotateTetrominoWithClockwise:false];
 }
-
-//// 测试 - 点击方块改变颜色
-//- (void)squareClicker:(int)row coloumn:(int)col{
-//    TetrisGameSquare *square = self.gameBoard[col][row];
-//    if(square.color == UIColor.blackColor){
-//        square.color = UIColor.redColor;
-//    }else{
-//        square.color = UIColor.blackColor;
-//    }
-//    //[self.collectionView reloadData];
-//}
 
 @end

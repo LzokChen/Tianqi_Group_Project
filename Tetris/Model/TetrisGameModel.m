@@ -15,7 +15,7 @@
     self.numRows = 20;
     self.numColumns = 10;
     self.score = 0;
-    self.speed = 1;
+    self.speed = 0.75;
     self.gameIsPause = true;
     self.gameIsOver = false;
     self.gameState = (GameState) Over;

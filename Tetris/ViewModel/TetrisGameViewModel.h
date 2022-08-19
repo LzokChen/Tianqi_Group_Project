@@ -44,10 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)AntiClockwiseButtonClick;
 
-//- (void)squareClicker:(int)row coloumn:(int)col;
-
-
-
 @end
 
 

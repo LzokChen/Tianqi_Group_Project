@@ -81,33 +81,5 @@
     }
     
 }
-//// CollectionDataSource
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-//    return 1;
-//}
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-//    return 150;
-//}
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    int x = (int)indexPath.row%10;
-//    int y = -((int)indexPath.row/10)+14;
-//    TetrisGameSquare *square = [[self.tetrisGameViewModel.gameBoard objectAtIndex:x] objectAtIndex:y];
-//    cell.backgroundColor = square.color;
-//    return cell;
-//}
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//    return CGSizeMake(CGRectGetWidth(collectionView.frame)/10*0.9, (CGRectGetWidth(collectionView.frame)/10*0.9));
-//}
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-//    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-//    if(cell != nil){
-//        int x = (int)indexPath.row%10;
-//        int y = -((int)indexPath.row/10)+14;
-//        [self.tetrisGameViewModel squareClicker:y coloumn:x];
-//        NSLog(@"(%d, %d)", x,y);
-//    }
-//}
 @end
 
