@@ -22,6 +22,7 @@ typedef enum {
 @property (nonatomic, assign) int numColumns;
 @property (nonatomic) NSMutableArray* gameBoard;
 @property (nonatomic, nullable) TetrominoModel* tetromino;
+
 @property (nonatomic, assign) int score;
 
 @property (atomic, nullable) NSTimer *timer;
@@ -39,6 +40,8 @@ typedef enum {
 - (void)resumeGame;
 - (void)pauseGame;
 - (void)runEngine;
+
+- (TetrominoModel*)getShadow; //获取当前方块的阴影方块
 
 - (void)dropTetromino;
 - (Boolean)moveTetrominoRight;

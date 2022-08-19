@@ -106,6 +106,19 @@
     [self placeTetromino];
 }
 
+- (TetrominoModel*)getShadow{
+    if (self.tetromino == nil){
+        return nil;
+    }
+    TetrominoModel * lastShadow = self.tetromino;
+    TetrominoModel * testShadow = lastShadow;
+    while([self isValidTetromino:testShadow]){
+        lastShadow = testShadow;
+        testShadow = [lastShadow moveByRow:-1 andByColumn:0];
+    }
+    return lastShadow;
+}
+
 - (void)dropTetromino{
     while([self moveTetrominoDown]){}
 }
