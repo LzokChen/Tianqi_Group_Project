@@ -176,4 +176,18 @@
     [self.tetrisGameModel rotateTetrominoWithClockwise:false];
 }
 
+- (void)PlayAndPauseButtonClick{
+    switch(self.tetrisGameModel.gameState){
+        case Over:
+            [self.tetrisGameModel newGame];
+            break;
+        case Pause:
+            [self.tetrisGameModel resumeGame];
+            break;
+        case Running:
+            [self.tetrisGameModel pauseGame];
+            break;
+    }
+}
+
 @end

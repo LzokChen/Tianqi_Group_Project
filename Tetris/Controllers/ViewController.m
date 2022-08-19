@@ -11,7 +11,6 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *gameBoardView;
-//@property (weak, nonatomic) IBOutlet UICollectionView *myCollectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *UpButton;
 @property (weak, nonatomic) IBOutlet UIImageView *LeftButton;
 @property (weak, nonatomic) IBOutlet UIImageView *RightButton;
@@ -29,7 +28,8 @@
     
     self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameViewModelwithGameBoardView:self.gameBoardView ScoreText:self.ScoreText PauseButton:self.PauseButton];
     
-    //_myCollectionView.backgroundColor = [UIColor blackColor];
+    [self.tetrisGameViewModel.tetrisGameModel addObserver:self forKeyPath:@"gameState" options:NSKeyValueObservingOptionNew context:NULL];
+    
     UITapGestureRecognizer *uptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(UpTapped:)];
     UITapGestureRecognizer *downtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DownTapped:)];
     UITapGestureRecognizer *lefttap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LeftTapped:)];
@@ -51,6 +51,20 @@
     
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"gameState"]) {
+        switch(self.tetrisGameViewModel.tetrisGameModel.gameState){
+            case Over:
+            case Pause:
+                self.PauseButton.image = [UIImage systemImageNamed:@"play"];
+                break;
+            case Running:
+                self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
+                break;
+        }
+    }
+}
+
 // 方向上 - 顺时针旋转
 - (void)UpTapped:(UIGestureRecognizer*)gesture{
     NSLog(@"UP Clicked - Rotation!");
@@ -70,16 +84,7 @@
 }
 // 暂停/继续 按钮 - 游戏停止
 - (void)PlayTapped:(UIGestureRecognizer*)gesture{
-    if(self.PauseButton.image == [UIImage systemImageNamed:@"pause"]){
-        [self.tetrisGameViewModel.tetrisGameModel pauseGame];
-        NSLog(@"!PAUSE!");
-        self.PauseButton.image = [UIImage systemImageNamed:@"play"];
-    }else{
-        [self.tetrisGameViewModel.tetrisGameModel resumeGame];
-        NSLog(@"!PLAY!");
-        self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
-    }
-    
+    [self.tetrisGameViewModel PlayAndPauseButtonClick];
 }
 @end
 

@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)AntiClockwiseButtonClick;
 
+- (void)PlayAndPauseButtonClick;
+
 @end
 
 
