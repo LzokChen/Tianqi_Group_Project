@@ -73,6 +73,7 @@
     //check if we need to clear the line
     int numOfLineClear = [self clearLines];
     if (numOfLineClear > 0){
+        //Todo-添加音频 clearline
         self.score += pow(2, numOfLineClear) * 100;
         return;
     }
@@ -85,14 +86,17 @@
         NSLog(@"Spawning new Tetromino %@, origin: (%d, %d)", [TetrominoModel getBlockTypeBy:self.tetromino.blockType], self.tetromino.origin.row, self.tetromino.origin.column);
         if (![self isValidTetromino:self.tetromino]){
             NSLog(@"Game Over! Final score: %d", self.score);
+            //Todo-添加音频- 游戏结束
             [self pauseGame];
             self.gameIsOver = true;
             self.gameState = (GameState) Over;
+            
         }
         return;
     }
     //see about moving down
     if ([self moveTetrominoDown]){
+        //Todo-添加音频 方块移动
         NSLog(@"Moving Tetromino down, origin: (%d, %d)", self.tetromino.origin.row, self.tetromino.origin.column);
         return;
     }
