@@ -26,6 +26,7 @@
 		52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF128AB49BB00FEA0E0 /* Assets.xcassets */; };
 		52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */; };
 		52561AF828AB49BB00FEA0E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52561AF728AB49BB00FEA0E0 /* main.m */; };
+		52561B5E28B03F6600FEA0E0 /* tetris.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52561B5D28B03F6500FEA0E0 /* tetris.mp3 */; };
 		5292A47D28A2196800A25F50 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47C28A2196800A25F50 /* WeatherManager.swift */; };
 		5292A47F28A2198600A25F50 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */; };
 		5292A48128A2199500A25F50 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */; };
@@ -96,6 +97,7 @@
 		52561AF628AB49BB00FEA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52561AF728AB49BB00FEA0E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52561AFD28ACC2BC00FEA0E0 /* ClimaWeatherBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClimaWeatherBridge.h; sourceTree = "<group>"; };
+		52561B5D28B03F6500FEA0E0 /* tetris.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tetris.mp3; sourceTree = "<group>"; };
 		5292A47C28A2196800A25F50 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		5292A47E28A2198600A25F50 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		5292A48028A2199500A25F50 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				CE9882C428AD8AFC00F6BE5F /* Controllers */,
 				CE9882C328AD8AD300F6BE5F /* ViewModel */,
 				52561AE528AB49BA00FEA0E0 /* AppDelegate.h */,
+				52561B5F28B03F6900FEA0E0 /* Audios */,
 				52561AE828AB49BA00FEA0E0 /* SceneDelegate.h */,
 				52561AE928AB49BA00FEA0E0 /* SceneDelegate.m */,
 				52561AE628AB49BA00FEA0E0 /* AppDelegate.m */,
@@ -223,6 +226,14 @@
 				52561AF328AB49BB00FEA0E0 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		52561B5F28B03F6900FEA0E0 /* Audios */ = {
+			isa = PBXGroup;
+			children = (
+				52561B5D28B03F6500FEA0E0 /* tetris.mp3 */,
+			);
+			path = Audios;
 			sourceTree = "<group>";
 		};
 		5292A48228A2199F00A25F50 /* Models */ = {
@@ -466,6 +477,7 @@
 				CE9882D128AD91BE00F6BE5F /* Main.storyboard in Resources */,
 				52561AF528AB49BB00FEA0E0 /* LaunchScreen.storyboard in Resources */,
 				52561AF228AB49BB00FEA0E0 /* Assets.xcassets in Resources */,
+				52561B5E28B03F6600FEA0E0 /* tetris.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

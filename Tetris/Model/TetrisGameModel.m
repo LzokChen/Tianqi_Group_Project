@@ -200,7 +200,6 @@
 }
 
 - (int)clearLines{
-    // TODO: ClearLines
     int lines = 0;
     // Create New GameBoard
     NSMutableArray *newGameBoard = [NSMutableArray array];

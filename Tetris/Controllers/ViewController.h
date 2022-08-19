@@ -10,6 +10,5 @@
 
 @interface ViewController: UIViewController
 
-//-(IBAction)selector:(id)sender;
 @end
 

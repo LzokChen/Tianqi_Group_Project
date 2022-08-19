@@ -10,9 +10,6 @@
 #import "../ViewModel/TetrisGameViewModel.h"
 
 @interface ViewController ()
-{
-    AVAudioPlayer *player;
-}
 
 @property (weak, nonatomic) IBOutlet UIView *gameBoardView;
 @property (weak, nonatomic) IBOutlet UIImageView *UpButton;
@@ -21,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *DownButton;
 @property (weak, nonatomic) IBOutlet UIImageView *PauseButton;
 @property (weak, nonatomic) IBOutlet UILabel *ScoreText;
+@property AVAudioPlayer * tetrisAudioPlayer;
 
 @property (nonatomic, retain) TetrisGameViewModel *tetrisGameViewModel;
 @end
@@ -53,6 +51,14 @@
     [_PauseButton addGestureRecognizer:playtap];
     
     
+    //创建并注册AudioPlayer
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"tetris" ofType:@"mp3"];
+    NSURL *url = [NSURL URLWithString:path];
+    self.tetrisAudioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
+    self.tetrisAudioPlayer.numberOfLoops = -1; //无限循环
+    
+    [self.tetrisAudioPlayer play]; //app启动时播放音乐
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -60,11 +66,14 @@
         switch(self.tetrisGameViewModel.tetrisGameModel.gameState){
             case Over:
             case Pause:
+                [self.tetrisAudioPlayer pause]; //游戏暂停时暂停音乐
                 self.PauseButton.image = [UIImage systemImageNamed:@"play"];
                 break;
             case Running:
+                [self.tetrisAudioPlayer play]; //游戏运行时播放音乐
                 self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
                 break;
+                
         }
     }
 }
@@ -90,12 +99,6 @@
 - (void)PlayTapped:(UIGestureRecognizer*)gesture{
     [self.tetrisGameViewModel PlayAndPauseButtonClick];
 }
-//-(IBAction)selector:(id)sender{
-   // NSString *path = [[NSBundle mainBundle] pathForResource:@"Tetris-Theme-Tetris-Soundtrack" ofType:@"mp3"];
-   // NSURL *url = [NSURL URLWithString:path];
-   // player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:NULL];
-    
-    //[player play];
-//}
+
 @end
 
