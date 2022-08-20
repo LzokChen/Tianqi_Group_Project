@@ -324,7 +324,7 @@ class WeatherManager : ObservableObject{
             let cityModel = CityModel(name: city.name, pname: city.pname, secondaryName: city.secondaryname)
             let currentWeatherModel = CurrentWeatherModel( condition: condition.condition, conditionId: condition.conditionId, humidity: condition.humidity, icon: condition.icon,
                                                            pressure: condition.pressure, realFeel: condition.realFeel, temp: condition.temp, uvi: condition.uvi, vis: condition.vis,
-                                                     windDegrees: condition.windDegrees, windDir: condition.windDir, windLevel: condition.windLevel, windSpeed: condition.windSpeed,
+                                                      windDir: condition.windDir, windSpeed: condition.windSpeed,
                                                      tips: condition.tips, sunRise: condition.sunRise, sunSet: condition.sunSet)
             return (cityModel, currentWeatherModel)
         } catch {
@@ -367,8 +367,7 @@ class WeatherManager : ObservableObject{
                 let model = DailyForecastModel(conditionDay: forecast.conditionDay, conditionNight: forecast.conditionNight,
                                                conditionIdDay: forecast.conditionIdDay, conditionIdNight: forecast.conditionIdNight,
                                                predictDate: forecast.predictDate,
-                                               pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight,
-                                               windDirDay: forecast.windDirDay, windDirNight: forecast.windDirNight, windLevelDay: forecast.windLevelDay, windLevelNight: forecast.windLevelNight)
+                                               pop: forecast.pop, tempDay: forecast.tempDay, tempNight: forecast.tempNight)
                 forecastModels.append(model)
             }
             return forecastModels

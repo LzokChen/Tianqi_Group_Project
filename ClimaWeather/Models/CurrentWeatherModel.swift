@@ -19,9 +19,7 @@ struct CurrentWeatherModel: Codable {
         temp : String, //温度 摄氏度
         uvi : String, //紫外线强度
         vis : String, //能见度 米
-        windDegrees : String, //风向角度 度
         windDir : String, //风向
-        windLevel : String, //风级
         windSpeed : String, //风速
         tips : String //一句话提示
     
