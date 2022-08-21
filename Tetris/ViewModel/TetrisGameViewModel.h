@@ -18,11 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSMutableArray<NSMutableArray<TetrisGameSquare *>* >* gameBoardSquares;
 @property TetrisGameModel* tetrisGameModel;
 
-@property UIView *gameBoardView;
+@property NSMutableArray *gameBoardView;
 @property UILabel *scoreText;
-@property UIImageView *pauseButton;
+//@property UIImageView *pauseButton;
 
-- (id)initGameViewModelwithGameBoardView:(UIView *)gameBoardView ScoreText:(UILabel *)scoreText PauseButton:(UIImageView *)pauseButton;
+//- (id)initGameViewModelwithGameBoardView:(UIView *)gameBoardView ScoreText:(UILabel *)scoreText PauseButton:(UIImageView *)pauseButton;
+- (id)initGameViewModelwithGameBoardView:(NSMutableArray *)gameBoardView ScoreText:(UILabel *)scoreText;
 
 - (void) drawBoardwithGameBoardSquares: (NSMutableArray<NSMutableArray<TetrisGameSquare *>* >*) gameBoardSquares; //二维数组
 

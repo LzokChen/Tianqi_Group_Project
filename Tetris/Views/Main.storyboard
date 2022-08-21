@@ -167,15 +167,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BdO-PH-ost" secondAttribute="bottom" constant="15" id="vGb-GO-UTc"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="DownButton" destination="yk8-Yx-w9f" id="XQb-7e-9Kt"/>
-                        <outlet property="LeftButton" destination="8v1-AW-D8R" id="Z9v-mX-4qb"/>
-                        <outlet property="PauseButton" destination="u6x-FV-ewh" id="kuK-ex-fNl"/>
-                        <outlet property="RightButton" destination="IXh-OS-wSj" id="RDx-7Z-2f8"/>
-                        <outlet property="ScoreText" destination="ozh-wS-sRX" id="hKL-xc-6SY"/>
-                        <outlet property="UpButton" destination="aPl-st-Hb3" id="7bC-YF-TyH"/>
-                        <outlet property="gameBoardView" destination="DKh-PX-K2P" id="usS-VS-j8C"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,13 +180,13 @@
         <image name="chevron.up" catalog="system" width="128" height="72"/>
         <image name="pause" catalog="system" width="88" height="128"/>
         <namedColor name="GameBoardColor">
-            <color red="0.26100000739097595" green="0.26100000739097595" blue="0.26100000739097595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.92799997329711914" green="0.92199999094009399" blue="0.91500002145767212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ScoreColor">
             <color red="0.048999998718500137" green="0.26800000667572021" blue="0.46000000834465027" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SystemBackground">
-            <color red="0.92845863100000003" green="0.92158323529999997" blue="0.91469985249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.92799997329711914" green="0.92199999094009399" blue="0.91500002145767212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SystemTextColor">
             <color red="0.27700001001358032" green="0.41200000047683716" blue="0.53799998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
