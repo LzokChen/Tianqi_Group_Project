@@ -12,11 +12,10 @@ import Alamofire
 //MARK: - WeatherManagerDeleage
 protocol WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
-    //func didFailWithError(error : Error)
 }
 
 //MARK: - WeatherManager
-class WeatherManager : ObservableObject{
+class WeatherManager{
     let curWeatherURL = "http://aliv8.data.moji.com/whapi/json/aliweather/condition"
     let hourlyForecastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast24hours"
     let dailyForecastURL = "http://aliv8.data.moji.com/whapi/json/aliweather/forecast15days"
