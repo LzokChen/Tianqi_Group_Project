@@ -35,7 +35,7 @@
 - (void)leftPressed;
 - (void)rightPressed;
 - (void)playPressed;
-
+@property AVAudioPlayer * tetrisAudioPlayer;
 @property (nonatomic, retain) TetrisGameViewModel *tetrisGameViewModel;
 
 @end
@@ -46,8 +46,8 @@
     [super viewDidLoad];
     
     
-    int columns = 10;
-    int rows = 15;
+    int columns = 12;
+    int rows = 20;
     self.squareBoard = [NSMutableArray array];
     for (int col = 0 ; col < columns ; col++){
         NSMutableArray *colArray = [NSMutableArray array];
@@ -67,23 +67,6 @@
     self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameViewModelwithGameBoardView:self.squareBoard ScoreText:self.scoreLabel];
     [self.tetrisGameViewModel.tetrisGameModel addObserver:self forKeyPath:@"gameState" options:NSKeyValueObservingOptionNew context:NULL];
     
-    UITapGestureRecognizer *uptap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(UpTapped:)];
-    UITapGestureRecognizer *downtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(DownTapped:)];
-    UITapGestureRecognizer *lefttap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LeftTapped:)];
-    UITapGestureRecognizer *righttap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(RightTapped:)];
-    UITapGestureRecognizer *playtap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PlayTapped:)];
-
-    _UpButton.userInteractionEnabled = YES;
-    _DownButton.userInteractionEnabled = YES;
-    _LeftButton.userInteractionEnabled = YES;
-    _RightButton.userInteractionEnabled = YES;
-    _PauseButton.userInteractionEnabled = YES;
-
-    [_UpButton addGestureRecognizer:uptap];
-    [_DownButton addGestureRecognizer:downtap];
-    [_LeftButton addGestureRecognizer:lefttap];
-    [_RightButton addGestureRecognizer:righttap];
-    [_PauseButton addGestureRecognizer:playtap];
     
     //创建并注册AudioPlayer
     NSString *path = [[NSBundle mainBundle] pathForResource:@"tetris" ofType:@"mp3"];
@@ -109,7 +92,7 @@
 }
 - (void)downPressed{
 //    NSLog(@"Down Pressed");
-    [self.tetrisGameViewModel.tetrisGameModel moveTetrominoDown];
+    [self.tetrisGameViewModel.tetrisGameModel dropTetromino];
 }
 - (void)leftPressed{
 //    NSLog(@"Left Pressed");
@@ -132,15 +115,13 @@
             case Over:
                 self.btnImageView.image = [UIImage systemImageNamed:@"goforward"];
                 break;
+            case Pause:
                 [self.tetrisAudioPlayer pause]; //游戏暂停时暂停音乐
-                self.PauseButton.image = [UIImage systemImageNamed:@"play"];
                 self.btnImageView.image = [UIImage systemImageNamed:@"play"];
-                self.PauseButton.image = [UIImage systemImageNamed:@"play"];
                 break;
+            case Running:
                 [self.tetrisAudioPlayer play]; //游戏运行时播放音乐
-                self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
                 self.btnImageView.image = [UIImage systemImageNamed:@"pause"];
-                self.PauseButton.image = [UIImage systemImageNamed:@"pause"];
                 break;
                 
         }
@@ -150,8 +131,8 @@
     [super viewDidLayoutSubviews];
     
     // Block
-    int columns = 10;
-    int rows = 15;
+    int columns = 12;
+    int rows = 20;
     [self.innerGameBoard layoutIfNeeded];
     CGFloat gameBoardWidth = self.innerGameBoard.frame.size.width;
     CGFloat gameBoardHight = self.innerGameBoard.frame.size.height;
@@ -216,14 +197,14 @@
     [self.safeArea addSubview:self.scoreBox];
     [self.scoreBox.topAnchor constraintEqualToAnchor:self.label.bottomAnchor constant:10].active = YES;
     [self.scoreBox.centerXAnchor constraintEqualToAnchor:self.safeArea.centerXAnchor].active = YES;
-    [self.scoreBox.widthAnchor constraintEqualToConstant:180].active = YES;
-    [self.scoreBox.heightAnchor constraintEqualToConstant:60].active = YES;
+    [self.scoreBox.widthAnchor constraintEqualToConstant:160].active = YES;
+    [self.scoreBox.heightAnchor constraintEqualToConstant:50].active = YES;
     
     // Score Label
     self.scoreLabel = [[UILabel alloc] init];
     self.scoreLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.scoreLabel setText:@"0"];
-    [self.scoreLabel setFont:[UIFont systemFontOfSize:32]];
+    [self.scoreLabel setFont:[UIFont systemFontOfSize:28]];
     [self.scoreLabel setTextColor:[UIColor colorNamed:@"SystemTextColor"]];
     [self.scoreBox addSubview:self.scoreLabel];
     [self.scoreLabel.centerXAnchor constraintEqualToAnchor:self.scoreBox.centerXAnchor].active = YES;
@@ -235,8 +216,8 @@
     self.leftControlBox = [[UIView alloc] init];
     self.leftControlBox.translatesAutoresizingMaskIntoConstraints = NO;
     [self.safeArea addSubview:self.leftControlBox];
-    [self.leftControlBox.widthAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.45].active = YES;
-    [self.leftControlBox.heightAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.45].active = YES;
+    [self.leftControlBox.widthAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.4].active = YES;
+    [self.leftControlBox.heightAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.4].active = YES;
     [self.leftControlBox.bottomAnchor constraintEqualToAnchor:self.safeArea.bottomAnchor].active = YES;
     [self.leftControlBox.leftAnchor constraintEqualToAnchor:self.safeArea.leftAnchor constant:10].active = YES;
     // Up
@@ -244,8 +225,8 @@
     self.upButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self SetButtonImage:@"chevron.up" button:self.upButton cons:7];
     [self.leftControlBox addSubview:self.upButton];
-    [self.upButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
-    [self.upButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
+    [self.upButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
+    [self.upButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
     [self.upButton.centerXAnchor constraintEqualToAnchor:self.leftControlBox.centerXAnchor].active = YES;
     [self.upButton.topAnchor constraintEqualToAnchor:self.leftControlBox.topAnchor].active = YES;
     // Down
@@ -253,8 +234,8 @@
     self.downButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self SetButtonImage:@"chevron.down" button:self.downButton cons:7];
     [self.leftControlBox addSubview:self.downButton];
-    [self.downButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
-    [self.downButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
+    [self.downButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
+    [self.downButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
     [self.downButton.centerXAnchor constraintEqualToAnchor:self.leftControlBox.centerXAnchor].active = YES;
     [self.downButton.bottomAnchor constraintEqualToAnchor:self.leftControlBox.bottomAnchor].active = YES;
     // Left
@@ -262,8 +243,8 @@
     self.leftButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self SetButtonImage:@"chevron.left" button:self.leftButton cons:7];
     [self.leftControlBox addSubview:self.leftButton];
-    [self.leftButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
-    [self.leftButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
+    [self.leftButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
+    [self.leftButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
     [self.leftButton.centerYAnchor constraintEqualToAnchor:self.leftControlBox.centerYAnchor].active = YES;
     [self.leftButton.leftAnchor constraintEqualToAnchor:self.leftControlBox.leftAnchor].active = YES;
     // Right
@@ -271,8 +252,8 @@
     self.rightButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self SetButtonImage:@"chevron.right" button:self.rightButton cons:7];
     [self.leftControlBox addSubview:self.rightButton];
-    [self.rightButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
-    [self.rightButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.3].active = YES;
+    [self.rightButton.widthAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
+    [self.rightButton.heightAnchor constraintEqualToAnchor:self.leftControlBox.widthAnchor multiplier:0.32].active = YES;
     [self.rightButton.centerYAnchor constraintEqualToAnchor:self.leftControlBox.centerYAnchor].active = YES;
     [self.rightButton.rightAnchor constraintEqualToAnchor:self.leftControlBox.rightAnchor].active = YES;
     
@@ -280,8 +261,8 @@
     self.rightControlBox = [[UIView alloc] init];
     self.rightControlBox.translatesAutoresizingMaskIntoConstraints = NO;
     [self.safeArea addSubview:self.rightControlBox];
-    [self.rightControlBox.widthAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.45].active = YES;
-    [self.rightControlBox.heightAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.45].active = YES;
+    [self.rightControlBox.widthAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.40].active = YES;
+    [self.rightControlBox.heightAnchor constraintEqualToAnchor:self.safeArea.widthAnchor multiplier:0.40].active = YES;
     [self.rightControlBox.bottomAnchor constraintEqualToAnchor:self.safeArea.bottomAnchor].active = YES;
     [self.rightControlBox.rightAnchor constraintEqualToAnchor:self.safeArea.rightAnchor constant:10].active = YES;
     // Play And Pause Button
@@ -310,8 +291,8 @@
     self.gameBoard = [[NeumophicInnerView alloc] init];
     self.gameBoard.translatesAutoresizingMaskIntoConstraints = NO;
     [self.safeArea addSubview:self.gameBoard];
-    [self.gameBoard.topAnchor constraintEqualToAnchor:self.scoreBox.bottomAnchor constant:20].active = YES;
-    [self.gameBoard.bottomAnchor constraintEqualToAnchor:self.rightControlBox.topAnchor constant:-30].active = YES;
+    [self.gameBoard.topAnchor constraintEqualToAnchor:self.scoreBox.bottomAnchor constant:10].active = YES;
+    [self.gameBoard.bottomAnchor constraintEqualToAnchor:self.rightControlBox.topAnchor constant:-10].active = YES;
     [self.gameBoard.leftAnchor constraintEqualToAnchor:self.safeArea.leftAnchor constant:10].active = YES;
     [self.gameBoard.rightAnchor constraintEqualToAnchor:self.safeArea.rightAnchor constant:-10].active = YES;
     
