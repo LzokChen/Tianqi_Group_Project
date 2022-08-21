@@ -1,7 +1,7 @@
 # Tianqi_Group_Project
 
 ## 第四届字节跳动青训营IOS班大项目作业
-项目报告文档：[天气组: 青训营前端结业项目答辩汇报文档](https://wcxjq4bjfu.feishu.cn/docx/doxcnpxss1QuhNb3lu33dUqUlAd#doxcnYE4eycEUqm6AoDSRcrtJnc)
+项目报告文档：[天气组: IOS青训营结业项目答辩汇报文档](https://wcxjq4bjfu.feishu.cn/docx/doxcnpxss1QuhNb3lu33dUqUlAd#doxcnYE4eycEUqm6AoDSRcrtJnc)
 ### 天气组
 | 组员       | Github链接                       |
 |----------|--------------------------------|
