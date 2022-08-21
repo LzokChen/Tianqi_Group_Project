@@ -12,6 +12,8 @@
 
 
 - (id)initGameModel {
+    self.numRows = 15;
+    self.numColumns = 10;
     self.numRows = 20;
     self.numColumns = 14;
     self.score = 0;

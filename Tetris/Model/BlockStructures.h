@@ -12,8 +12,9 @@
 @interface TetrisGameSquare : NSObject
 
 @property UIColor *color;
-
-- (id)initWithColor:(UIColor *)color;
+@property BOOL isEmpty;
+- (id)initWithColor:(UIColor *)color empty:(BOOL)empty;
+//- (id)initWithColor:(UIColor *)color;
 
 @end
 

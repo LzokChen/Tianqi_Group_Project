@@ -6,6 +6,7 @@
 //
 
 #import "TetrisGameViewModel.h"
+#import "../Views/Neumophic.h"
 
 @interface TetrisGameViewModel ()
 
@@ -15,14 +16,15 @@
 
 @implementation TetrisGameViewModel
 
-- (id)initGameViewModelwithGameBoardView:(UIView *)gameBoardView ScoreText:(UILabel *)scoreText PauseButton:(UIImageView *)pauseButton {
+- (id)initGameViewModelwithGameBoardView:(NSMutableArray *)gameBoardView ScoreText:(UILabel *)scoreText{
+//- (id)initGameViewModelwithGameBoardView:(UIView *)gameBoardView ScoreText:(UILabel *)scoreText PauseButton:(UIImageView *)pauseButton {
     self = [super init];
     self.tetrisGameModel = [[TetrisGameModel alloc] initGameModel];
     
     //用来更新UI
     self.gameBoardView = gameBoardView;
     self.scoreText = scoreText;
-    self.pauseButton = pauseButton;
+//    self.pauseButton = pauseButton;
     
     
     // 行列
@@ -34,17 +36,15 @@
     for (int col = 0; col < self.numColumns; col++){
         NSMutableArray *colArray = [NSMutableArray array];
         for (int row = 0; row < self.numRows; row++)
-            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"GameBoardColor"]]];
+            [colArray addObject:[[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"backgroundColor"] empty:true]];
         [self.gameBoardSquares addObject: colArray];
     }
-    
     
     [self.tetrisGameModel addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
     [self.tetrisGameModel addObserver:self forKeyPath:@"score" options:NSKeyValueObservingOptionNew context:NULL];
     
     //绘制游戏盘
     [self drawBoardwithGameBoardSquares:self.gameBoardSquares];
-
     // TODO: Combine - AnyCancellable
     
     return self;
@@ -56,22 +56,17 @@
     dispatch_async(mainQueue, ^{
         int columns = self.numColumns;
         int rows = self.numRows;
-        CGFloat gameBoardWidth = self.gameBoardView.frame.size.width;
-        CGFloat gameBoardHight = self.gameBoardView.frame.size.height;
-        
-        CGFloat blocksize = MIN(gameBoardWidth/columns, gameBoardHight/rows);
-        CGFloat xOffset = (gameBoardWidth - blocksize*columns)/2;
-        CGFloat yOfsset = (gameBoardHight - blocksize*rows)/2;
-        
         for (int col = 0 ; col < columns ; col++){
             for (int row = 0; row < rows; row++){
-                CGFloat x = xOffset + blocksize * col;
-                CGFloat y = gameBoardHight - yOfsset - blocksize * (row+1);
-                
-                UIView * square = [[UIView alloc] initWithFrame:CGRectMake(x, y, blocksize, blocksize)];
-                square.backgroundColor = gameBoardSquares[col][row].color;
-                
-                [self.gameBoardView addSubview:square];
+//                NeumophicView *TestBlock = self.gameBoardView[col][row];
+                UIView *TestBlock = self.gameBoardView[col][row];
+                if(!gameBoardSquares[col][row].isEmpty){
+//                    [TestBlock setNewBgColor:gameBoardSquares[col][row].color vis:false];
+                    TestBlock.hidden = false;
+                    TestBlock.backgroundColor = gameBoardSquares[col][row].color;
+                }else{
+                    TestBlock.hidden = true;
+                }
             }
         }
     });
@@ -106,7 +101,7 @@
         int tetrominoOriginY = self.tetrisGameModel.tetromino.origin.column;
         NSArray<BlockLocation *> *relativeLocation = [self.tetrisGameModel.tetromino blocks];
         for(int i = 0; i < 4; i++){
-            self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType]];
+            self.gameBoardSquares[tetrominoOriginY+relativeLocation[i].column][tetrominoOriginX+relativeLocation[i].row] = [[TetrisGameSquare alloc] initWithColor:[self getColor:tetrominoBlockType] empty:false];
         }
     }
     //绘制游戏盘
@@ -117,9 +112,9 @@
 - (TetrisGameSquare *)convertToSquare:(TetrisGameBlock *)block{
     // 判断blcok是否是TetrisGameBlock的实例化对象, block可能为空
     if([block isKindOfClass:[TetrisGameBlock class]]){
-        return [[TetrisGameSquare alloc] initWithColor:[self getColor:block.blockType]];
+        return [[TetrisGameSquare alloc] initWithColor:[self getColor:block.blockType] empty:false];
     }else{
-        return [[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"GameBoardColor"]];
+        return [[TetrisGameSquare alloc] initWithColor:[UIColor colorNamed:@"GameBoardColor"] empty:true];
     }
 }
 
@@ -182,10 +177,12 @@
             [self.tetrisGameModel newGame];
             break;
         case Pause:
+//            NSLog(@"%@", self.gameBoardView[0][0]);
             [self.tetrisGameModel resumeGame];
             break;
         case Running:
             [self.tetrisGameModel pauseGame];
+            [self UpdateGameBoard];
             break;
     }
 }

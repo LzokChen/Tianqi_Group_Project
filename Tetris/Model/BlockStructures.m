@@ -12,9 +12,10 @@
 
 @implementation TetrisGameSquare
 
-- (id)initWithColor:(UIColor *)color{
+- (id)initWithColor:(UIColor *)color empty:(BOOL)empty{
     self = [super init];
     self.color = color;
+    self.isEmpty = empty;
     return self;
 }
 
