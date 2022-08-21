@@ -58,9 +58,12 @@
         int rows = self.numRows;
         for (int col = 0 ; col < columns ; col++){
             for (int row = 0; row < rows; row++){
-                NeumophicView *TestBlock = self.gameBoardView[col][row];
+//                NeumophicView *TestBlock = self.gameBoardView[col][row];
+                UIView *TestBlock = self.gameBoardView[col][row];
                 if(!gameBoardSquares[col][row].isEmpty){
-                    [TestBlock setNewBgColor:gameBoardSquares[col][row].color vis:false];
+//                    [TestBlock setNewBgColor:gameBoardSquares[col][row].color vis:false];
+                    TestBlock.hidden = false;
+                    TestBlock.backgroundColor = gameBoardSquares[col][row].color;
                 }else{
                     TestBlock.hidden = true;
                 }
@@ -172,15 +175,14 @@
     switch(self.tetrisGameModel.gameState){
         case Over:
             [self.tetrisGameModel newGame];
-            NSLog(@"NewGame: %u", self.tetrisGameModel.gameState);
             break;
         case Pause:
+//            NSLog(@"%@", self.gameBoardView[0][0]);
             [self.tetrisGameModel resumeGame];
-            NSLog(@"ResGame: %u", self.tetrisGameModel.gameState);
             break;
         case Running:
             [self.tetrisGameModel pauseGame];
-            NSLog(@"PasGame: %u", self.tetrisGameModel.gameState);
+            [self UpdateGameBoard];
             break;
     }
 }

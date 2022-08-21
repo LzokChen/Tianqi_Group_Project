@@ -44,11 +44,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    int columns = 10;
+    int rows = 15;
+    self.squareBoard = [NSMutableArray array];
+    for (int col = 0 ; col < columns ; col++){
+        NSMutableArray *colArray = [NSMutableArray array];
+        for (int row = 0; row < rows; row++){
+            UIView *block = [[UIView alloc] init];
+            block.translatesAutoresizingMaskIntoConstraints = NO;
+            block.layer.cornerRadius = 5;
+            block.hidden = false;
+            [colArray addObject:block];
+        }
+        [self.squareBoard addObject:colArray];
+    }
+    
     [self setupView];
     [self setupButtonAction];
     
-//    self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameViewModelwithGameBoardView:self.squareBoard ScoreText:self.scoreLabel];
-//    [self.tetrisGameViewModel.tetrisGameModel addObserver:self forKeyPath:@"gameState" options:NSKeyValueObservingOptionNew context:NULL];
+    self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameViewModelwithGameBoardView:self.squareBoard ScoreText:self.scoreLabel];
+    [self.tetrisGameViewModel.tetrisGameModel addObserver:self forKeyPath:@"gameState" options:NSKeyValueObservingOptionNew context:NULL];
     
 }
 
@@ -61,31 +78,29 @@
 }
 
 - (void)upPressed{
-    NSLog(@"Up Pressed");
+//    NSLog(@"Up Pressed");
     [self.tetrisGameViewModel.tetrisGameModel rotateTetrominoWithClockwise:true];
 }
 - (void)downPressed{
-    NSLog(@"Down Pressed");
+//    NSLog(@"Down Pressed");
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoDown];
 }
 - (void)leftPressed{
-    NSLog(@"Left Pressed");
+//    NSLog(@"Left Pressed");
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoLeft];
 }
 - (void)rightPressed{
-    NSLog(@"Right Pressed");
+//    NSLog(@"Right Pressed");
     [self.tetrisGameViewModel.tetrisGameModel moveTetrominoRight];
 }
 - (void)playPressed{
-    NSLog(@"Play Pressed");
+//    NSLog(@"Play Pressed");
     [self.tetrisGameViewModel PlayAndPauseButtonClick];
 }
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"gameState"]) {
-//        NSLog(@"State Changed");
-//        NSLog(@"%u", self.tetrisGameViewModel.tetrisGameModel.gameState);
         switch(self.tetrisGameViewModel.tetrisGameModel.gameState){
             case Over:
                 self.btnImageView.image = [UIImage systemImageNamed:@"goforward"];
@@ -112,9 +127,7 @@
     CGFloat blocksize = MIN(gameBoardWidth/columns, gameBoardHight/rows);
     CGFloat xOffset = (gameBoardWidth - blocksize*columns)/2;
     CGFloat yOfsset = (gameBoardHight - blocksize*rows)/2;
-    self.squareBoard = [NSMutableArray array];
     for (int col = 0 ; col < columns ; col++){
-        NSMutableArray *colArray = [NSMutableArray array];
         for (int row = 0; row < rows; row++){
             CGFloat x = xOffset + blocksize * col;
             CGFloat y = gameBoardHight - yOfsset - blocksize * (row+1);
@@ -132,31 +145,14 @@
             [Dot.widthAnchor constraintEqualToConstant:3].active = YES;
             [Dot.heightAnchor constraintEqualToConstant:3].active = YES;
             
-//            UIView * squareBox = [[UIView alloc] init];
-//            squareBox.translatesAutoresizingMaskIntoConstraints = NO;
-//            [square addSubview:squareBox];
-//            [squareBox.topAnchor constraintEqualToAnchor:square.topAnchor].active = YES;
-//            [squareBox.bottomAnchor constraintEqualToAnchor:square.bottomAnchor].active = YES;
-//            [squareBox.leftAnchor constraintEqualToAnchor:square.leftAnchor].active = YES;
-//            [squareBox.rightAnchor constraintEqualToAnchor:square.rightAnchor].active = YES;
-            
-            NeumophicView *block = [[NeumophicView alloc] initWithValue:[UIColor colorNamed:@"LColor"] cRadius:5];
+            UIView *block = self.squareBoard[col][row];
             [square addSubview:block];
             [block.topAnchor constraintEqualToAnchor:square.topAnchor constant:2].active = YES;
             [block.bottomAnchor constraintEqualToAnchor:square.bottomAnchor constant:-2].active = YES;
             [block.leftAnchor constraintEqualToAnchor:square.leftAnchor constant:2].active = YES;
             [block.rightAnchor constraintEqualToAnchor:square.rightAnchor constant:-2].active = YES;
-            block.hidden = true;
-            [colArray addObject:block];
         }
-        [self.squareBoard addObject:colArray];
     }
-//    NeumophicView *TestBlock = self.squareBoard[0][5];
-//    TestBlock.hidden = false;
-//    TestBlock.bgColor = [UIColor colorNamed:@"OColor"];
-   
-    self.tetrisGameViewModel = [[TetrisGameViewModel alloc] initGameViewModelwithGameBoardView:self.squareBoard ScoreText:self.scoreLabel];
-    [self.tetrisGameViewModel.tetrisGameModel addObserver:self forKeyPath:@"gameState" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 
@@ -189,7 +185,7 @@
     [self.safeArea addSubview:self.scoreBox];
     [self.scoreBox.topAnchor constraintEqualToAnchor:self.label.bottomAnchor constant:10].active = YES;
     [self.scoreBox.centerXAnchor constraintEqualToAnchor:self.safeArea.centerXAnchor].active = YES;
-    [self.scoreBox.widthAnchor constraintEqualToConstant:120].active = YES;
+    [self.scoreBox.widthAnchor constraintEqualToConstant:180].active = YES;
     [self.scoreBox.heightAnchor constraintEqualToConstant:60].active = YES;
     
     // Score Label
