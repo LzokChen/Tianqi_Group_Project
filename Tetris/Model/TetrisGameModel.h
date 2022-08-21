@@ -27,12 +27,8 @@ typedef enum {
 
 @property (atomic, nullable) NSTimer *timer;
 @property (nonatomic, assign) double speed;
-@property (atomic, assign) Boolean gameIsPause;
-@property (atomic, assign) Boolean gameIsOver;
 @property (atomic, assign) GameState gameState;
 @property (nonatomic, assign) int status;
-
-//shadow
 
 - (id)initGameModel;
 - (void) newGame;
@@ -40,8 +36,6 @@ typedef enum {
 - (void)resumeGame;
 - (void)pauseGame;
 - (void)runEngine;
-
-- (TetrominoModel*)getShadow; //获取当前方块的阴影方块
 
 - (void)dropTetromino;
 - (Boolean)moveTetrominoRight;

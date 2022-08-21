@@ -16,8 +16,6 @@
     self.numColumns = 14;
     self.score = 0;
     self.speed = 0.70;
-    self.gameIsPause = true;
-    self.gameIsOver = false;
     self.gameState = (GameState) Over;
     
     self.gameBoard = [NSMutableArray array];
@@ -36,7 +34,6 @@
     self.score = 0;
     self.tetromino = nil;
     self.timer = nil;
-    self.gameIsOver = false;
     self.gameState = (GameState) Over;
     
     self.gameBoard = [NSMutableArray array];
@@ -52,7 +49,6 @@
 
 - (void)resumeGame{
     NSLog(@"Resuming Game");
-    self.gameIsPause = false;
     self.gameState = (GameState) Running;
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.speed repeats:true block:^(NSTimer * _Nonnull timer) {
@@ -62,7 +58,6 @@
 
 - (void) pauseGame{
     NSLog(@"Pausing Game");
-    self.gameIsPause = true;
     self.gameState = (GameState) Pause;
     [self.timer invalidate];
 }
@@ -88,7 +83,6 @@
             NSLog(@"Game Over! Final score: %d", self.score);
             //Todo-添加音频- 游戏结束
             [self pauseGame];
-            self.gameIsOver = true;
             self.gameState = (GameState) Over;
             
         }
@@ -104,19 +98,6 @@
     //see if we need to place the Tetromino
     NSLog(@"Placing Tetromino");
     [self placeTetromino];
-}
-
-- (TetrominoModel*)getShadow{
-    if (self.tetromino == nil){
-        return nil;
-    }
-    TetrominoModel * lastShadow = self.tetromino;
-    TetrominoModel * testShadow = lastShadow;
-    while([self isValidTetromino:testShadow]){
-        lastShadow = testShadow;
-        testShadow = [lastShadow moveByRow:-1 andByColumn:0];
-    }
-    return lastShadow;
 }
 
 - (void)dropTetromino{
