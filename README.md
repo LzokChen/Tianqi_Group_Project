@@ -13,11 +13,11 @@
 | 刘峥炫      | https://github.com/Liujony     |
 
 
-#### 拆分作业一 ：Objective-C语言基础 ：Assignment-1 https://github.com/LzokChen/Tianqi-Assignment-1
+#### 拆分作业一 ：Objective-C语言基础 ：Assignment-1 https://github.com/ByteDance-IOS-summer-camp-Tianqi/Tianqi-Assignment-1
 运行方法：Xcode中，选择项目-本机运行
 
-#### 拆分作业二 ： 简化版本的天气预报APP ：https://github.com/LzokChen/Tianqi-ClimaWeather
+#### 拆分作业二 ： 简化版本的天气预报APP ：https://github.com/ByteDance-IOS-summer-camp-Tianqi/Tianqi-ClimaWeather
 运行方法：运行方法：在项目根目录 - 打开控制台 - 运行 $pod install - 通过ClimaWeather.xcworkspace 打开项目
 
-#### 拆分作业三 ： Tetris 俄罗斯方块游戏 ：https://github.com/LzokChen/Tianqi-Tetris
+#### 拆分作业三 ： Tetris 俄罗斯方块游戏 ：https://github.com/ByteDance-IOS-summer-camp-Tianqi/Tianqi-Tetris
 运行方法：Xcode中，选择项目-运行
